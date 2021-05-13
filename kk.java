@@ -5,5 +5,6 @@ public class kk {
 	
 	public void nulla() {
 		int h = 0;
+		int f = 9;
 	}
 }
