@@ -7,6 +7,6 @@ public class kk {
 	}
 	public void nulla() {
 		int h = 0;
-		int g=1;
+		int f = 900000000000000000000000000000000;
 	}
 }
