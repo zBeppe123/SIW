@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>ABCTennis</title>
+		<link href="/css/fragments/base.css" rel="stylesheet"/>
 		<link href="/css/index.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<header>
-			<a href="/index.html">Home</a>
-			<a href="/tornei.html">Tornei</a>
-			<a href="/iscrizioneTorneo.html">Iscrizioni</a>
+		<header th:replace="fragments/base.html :: intestazione">
+			<h1>ciao mamma</h1>
 		</header>
 		<section>
 			<h1>ABCTennis</h1>
@@ -21,7 +20,7 @@
 			</p>
 		</section>
 		<footer>
-			
+			ciao
 		</footer>
 	</body>
 </html>

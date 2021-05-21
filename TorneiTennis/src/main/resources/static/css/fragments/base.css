@@ -1,11 +1,27 @@
 body {
-	
+	background-color: mediumturquoise;
+	margin: 0px;
 }
 
 header {
 	background-color: #232323;
 }
 
+#testa{
+	display: flex;
+	justify-content: space-between;
+}
+
+#sinistra{
+	display: flex;
+	justify-content: flex-start;
+}
+
+#destra{
+	display: flex;
+	justify-content: flex-end;
+}
+
 footer {
-	background-color: 
+	background-color: #dee0e1;
 }

@@ -1,22 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:fragment="headerfiles(title)">
-		<meta charset="UTF-8" />
-		<title th:text="${title}"></title>
-	</head>
-	<body>
-		<header th:fragment="intestazione">
-			
-		</header>
-	
-		<p>Go to the next page to see fragments in action</p>
-		<aside>
-			<div>This is a sidebar</div>
-		</aside>
-		<div class="another">This is another sidebar</div>
-		
-		<footer th:fragment="fondo">
-			<a th:href="@{/}">Home</a>
-		</footer>
-	</body>
+<head th:fragment="headerfiles(title)">
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+<link href="/css/fragments/base.css" rel="stylesheet" />
+</head>
+<body>
+	<header th:fragment="intestazione">
+		<div id="testa">
+			<div id="sinistra">
+				<a href="/index.html">Home</a> <a href="/tornei.html">Tornei</a> <a
+					href="/iscrizioneTorneo.html">Iscrizioni</a>
+			</div>
+			<div id="destra">
+				<span align="right"> <a href="/login.html">LogIn</a>/ <a
+					href="/Singup.html">SingUp</a>
+				</span>
+			</div>
+		</div>
+
+
+	</header>
+
+	<p>Go to the next page to see fragments in action</p>
+	<aside>
+		<div>This is a sidebar</div>
+	</aside>
+	<div class="another">This is another sidebar</div>
+
+	<footer th:fragment="fondo">
+		<a th:href="@{/}">Home</a>
+	</footer>
+</body>
 </html>
