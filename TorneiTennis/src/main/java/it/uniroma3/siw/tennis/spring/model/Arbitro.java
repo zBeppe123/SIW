@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.tennis.spring.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-
+/**
+ * Classe per l'entità arbitro
+ * un arbitro può arbitrare più tornei.
+ */
 @Entity
 public class Arbitro {
 	@Id

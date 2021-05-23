@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.tennis.spring.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
+/**
+ * Classe per l'entità tennista
+ * un tennista può iscriversi a più toreni e può aver partecipato a più partite di tornei diversi
+ */
 @Entity
 public class Tennista {
 	@Id

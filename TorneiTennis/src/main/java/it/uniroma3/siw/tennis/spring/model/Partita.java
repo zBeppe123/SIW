@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.tennis.spring.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+/**
+ * Classe per l'entità partita
+ * una partita è svolta in un toreno
+ * una partita è giocata da massimo 2 tennisti
+ */
 @Entity
 public class Partita {
 	@Id

@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.tennis.spring.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+/**
+ * Classe per l'entità torneo
+ * un toreno è arbitrato da un solo arbitro
+ * un toreno è composto da più partite
+ * ad un torneo possono partecipare un numero massimo di partecipanti
+ */
 @Entity
 public class Torneo {
 	@Id
