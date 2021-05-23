@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Registra arbitro', filecss='registraArbitro.css')"></head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<h1>Registra arbitro</h1>
+			<div>Inserisci i dati dell'arbitro:</div>
+			<form th:action="@{registraArbitro}" method="post" th:object="${arbitro}">
+				<div th:if="${#fields.hasGlobalErrors()}">
+	  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
+				</div>
+				<div id="arbitro">
+					<div>Cognome: <input type="text" th:field="*{cognome}"/></div>
+					<div>Nome: <input type="text" th:field="*{nome}"></div>
+					<div>Numero di telefono: <input type="text" th:field="*{telefono}"/></div>
+					<div>Nazionalit&agrave: <input type="text" th:field="*{nazionalita}"/></div>
+				</div>
+				<div><input type="submit" value="Registra"/></div>
+				<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></div>
+				<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+				<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+				<div th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></div>
+			</form>
+		</section>
+	</body>
+</html>

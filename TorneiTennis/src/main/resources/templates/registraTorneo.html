@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th::replace="fragments/base.html :: headerfiles(title='Registra torneo', file_css='registraTorneo.css')"></head>
+	<body>
+		<header th::replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<h1>Registra torneo</h1>
+			<div>Inserisci i dati del torneo:</div>
+			<form th:action="@{/registraTorneo}" method="post" th:object="${torneo}">
+				<div th:if="${#fields.hasGlobalErrors()}">
+	  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
+				</div>
+				<div id="torneo">
+					<div>Nome del torneo: <input type="text" th:field="*{nome}"/></div>
+					<div>Numero di partecipanti: <input type="text" th:field="*{numPartecipanti}"/></div>
+					<div>
+						Mese: 
+						<select th:field="*{mese}">
+							<option th:value=""></option>
+							<option th:value="Gennaio">Gennaio</option>
+							<option th:value="Febbraio">Febbraio</option>
+							<option th:value="Marzo">Marzo</option>
+							<option th:value="Aprile">Aprile</option>
+							<option th:value="Maggio">Maggio</option>
+							<option th:value="Giugno">Giugno</option> 
+							<option th:value="Luglio">Luglio</option>
+							<option th:value="Agosto">Agosto</option>
+							<option th:value="Settembre">Settembre</option>
+							<option th:value="Ottobre">Ottobre</option>
+							<option th:value="Novembre">Novembre</option>
+							<option th:value="Dicembre">Dicembre</option>
+						</select>
+					</div>
+					<div>Anno: <input type="text" th:field="*{anno}"/></div>
+					<div>Premio in denaro (€): <input type="text" th:field="*{premoInDenaro}"/></div>
+				</div>
+				<div><input type="submit" name="registrazioneTorneo" value="Registra"/></div>
+				<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+				<div th:if="${#fields.hasErrors('numPartecipanti')}" th:errors="*{numPartecipanti}"></div>
+				<div th:if="${#fields.hasErrors('mese')}" th:errors="*{mese}"></div>
+				<div th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></div>
+				<div th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}"></div>
+			</form>
+		</section>
+		<footer th::replace="fragments/base.html"></footer>
+	</body>
+</html>

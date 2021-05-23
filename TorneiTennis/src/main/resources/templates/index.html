@@ -1,10 +1,6 @@
-<DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>ABCTennis</title>
-		<link href="/css/fragments/base.css" rel="stylesheet"/>
-		<link href="/css/index.css" rel="stylesheet"/>
-	</head>
+	<head th:replace="/fragments/base.html :: headerfiles(title='ABCTennis',filecss='index.css')"></head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione">
 			<h1>ciao mamma</h1>
