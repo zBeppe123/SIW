@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+    <div>
+    	<h4 th:text="#{header.torneo}">Dettagli toreno</h4>
+    	
+    	<div th:if="${torneo}" th:object="${torneo}">
+			<h2 th:text="*{nome}">nome toreno</h2>
+			numero massimo di partecipanti: <span th:text="*{numeroMaxDiParteciapnti}">numero</span><br>
+			data dell'evento: <span th:text="*{mese}">mese</span>/<span th:text="*{anno}">anno</span><br>
+			premio in denaro: <span th:text="*{premioInDenaro}">premio</span><br>
+			arbitro: <a href="arbitro.html" 
+				   th:href="*{'/arbitro' + '/' + *{arbitro.id}}" 
+				   th:text="|*{arbitro.nome} *{arbitro.cognome}|">Paolo Rossi</a>
+   		</div>
+    	<div th:unless="${torneo}">Non esiste</div>
+    </div>
+    <footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
