@@ -1,5 +1,7 @@
 package it.uniroma3.siw.tennis.spring.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +16,9 @@ public class TorneoService {
 	@Transactional
 	public Torneo inserisci(Torneo toreno) {
 		return torenoRepository.save(toreno);
+	}
+	@Transactional
+	public List<Torneo> tutti() {
+		return (List<Torneo>) torenoRepository.findAll();
 	}
 }

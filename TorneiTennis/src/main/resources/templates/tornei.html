@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+    	<h4 th:text="#{header.tornei}">List of tornei</h4>
+		<ul>
+			<li th:each="torneo : ${tornei}">
+				<a href="torneo.html" 
+				   th:href="@{'/torneo' + '/' + ${toreno.id}}" 
+				   th:text="|${torneo.nome}|">nome toreno</a>
+				   <p th::text="|${torneo.getDescrizione()}|">descrizione</p>
+			</li>
+		</ul>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

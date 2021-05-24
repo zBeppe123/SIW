@@ -41,7 +41,7 @@ public class Tennista {
 	@OneToMany(mappedBy = "tennista2")
 	private List<Partita> partiteGiocateT2;
 	
-	@ManyToMany(mappedBy = "tennistiIscitti")
+	@ManyToMany(mappedBy = "tennistiIscritti")
 	private List<Torneo> torneiIscritti;
 	
 	public Tennista() {

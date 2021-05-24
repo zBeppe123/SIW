@@ -124,5 +124,7 @@ public class Torneo {
 	public void setPartite(List<Partita> partite) {
 		this.partite = partite;
 	}
-
+	public String getDescrizione() {
+		return "		premio: "+ this.premioInDenaro + "\n arbitro: " + this.arbitro.getNome() + " " + this.arbitro.getCognome();
+				}
 }
