@@ -27,7 +27,7 @@ public class CredentialsService {
 
 	@Transactional
 	public Credentials getCredentials(String email) {
-		Optional<Credentials> result = this.credentialsRepository.findByUsername(email);
+		Optional<Credentials> result = this.credentialsRepository.findByEmail(email);
 		return result.orElse(null);
 	}
 		

@@ -31,6 +31,8 @@ public class TennistaValidator implements Validator {
             errors.rejectValue("cognome", "required");
         else if (cognome.length() < MIN_NAME_LENGTH || cognome.length() > MAX_NAME_LENGTH)
             errors.rejectValue("cognome", "size");
+        
+        //TODO aggiungere if di telefono e nazionalita
     }
 
     @Override
