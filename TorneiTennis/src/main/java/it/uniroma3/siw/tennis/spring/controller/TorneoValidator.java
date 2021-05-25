@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 
 @Component
@@ -16,16 +18,35 @@ public class TorneoValidator implements Validator {
 	
     private static final Logger logger = LoggerFactory.getLogger(TorneoValidator.class);
 
+    @Override
+	public void validate(Object o, Errors errors) {
+    	logger.debug("Controllo dei dati del torneo immessi.");
+    	
+    	//Controlla i campi vuoti.
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "registra_torneo_errors");
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numeroMaxDiPartecipanti", "registra_torneo_errors");
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mese", "registra_torneo_errors");
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "anno", "registra_torneo_errors");
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "premioInDenaro", "registra_torneo_errors");
+    	
+    	if(!errors.hasErrors()) {
+    		logger.debug("Tutti dati del torneo immessi.");
+    		
+    		//Esiste gia' un torneo con lo stesso nome?
+    		if(this.torneoService.alreadyExits((Torneo) o)) {
+    			logger.debug("Torneo gia' esistente.");
+    			errors.reject("registra_torneo_errors_duplicato");
+    		}
+    	}
+    	else {
+    		logger.debug("C'e' almeno un campo vuoto in registraTorneo.html");
+    	}
+		
+	}
+    
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
-		
+		return Torneo.class.equals(clazz);
 	}
 
 }

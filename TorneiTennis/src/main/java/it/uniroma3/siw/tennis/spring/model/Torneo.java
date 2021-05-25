@@ -22,10 +22,10 @@ public class Torneo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
 	@Column(nullable = false)
-	private Integer numeroMaxDiParteciapnti;
+	private Integer numeroMaxDiPartecipanti;
 	@Column(nullable = false)
 	private String mese;
 	@Column(nullable = false)
@@ -46,7 +46,7 @@ public class Torneo {
 
 	public Torneo(String nome, Integer numeroMaxDiParteciapnti, String mese, Integer anno, Float premioInDenaro,Arbitro arbitro) {
 		this.nome = nome;
-		this.numeroMaxDiParteciapnti = numeroMaxDiParteciapnti;
+		this.numeroMaxDiPartecipanti = numeroMaxDiParteciapnti;
 		this.mese = mese;
 		this.anno = anno;
 		this.premioInDenaro = premioInDenaro;
@@ -69,12 +69,12 @@ public class Torneo {
 		this.nome = nome;
 	}
 
-	public Integer getNumeroMaxDiParteciapnti() {
-		return numeroMaxDiParteciapnti;
+	public Integer getNumeroMaxDiPartecipanti() {
+		return numeroMaxDiPartecipanti;
 	}
 
-	public void setNumeroMaxDiParteciapnti(Integer numeroMaxDiParteciapnti) {
-		this.numeroMaxDiParteciapnti = numeroMaxDiParteciapnti;
+	public void setNumeroMaxDiPartecipanti(Integer numeroMaxDiPartecipanti) {
+		this.numeroMaxDiPartecipanti = numeroMaxDiPartecipanti;
 	}
 
 	public String getMese() {

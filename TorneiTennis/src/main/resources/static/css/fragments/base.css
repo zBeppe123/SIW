@@ -7,6 +7,10 @@ header {
 	background-color: #808080;
 }
 
+section {
+	margin: 5px;
+}
+
 #testa{
 	display: flex;
 	justify-content: space-between;

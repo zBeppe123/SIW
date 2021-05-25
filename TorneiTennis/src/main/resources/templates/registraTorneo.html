@@ -1,47 +1,47 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th::replace="fragments/base.html :: headerfiles(title='Registra torneo', file_css='registraTorneo.css')"></head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Registra torneo', filecss='registraTorneo.css')"></head>
 	<body>
-		<header th::replace="fragments/base.html :: intestazione"></header>
+		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
 			<h1>Registra torneo</h1>
 			<div>Inserisci i dati del torneo:</div>
 			<form th:action="@{/registraTorneo}" method="post" th:object="${torneo}">
 				<div th:if="${#fields.hasGlobalErrors()}">
-	  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
+	  				<p> <span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</span></p>
 				</div>
 				<div id="torneo">
 					<div>Nome del torneo: <input type="text" th:field="*{nome}"/></div>
-					<div>Numero di partecipanti: <input type="text" th:field="*{numPartecipanti}"/></div>
+					<div>Numero di partecipanti: <input type="text" th:field="*{numeroMaxDiPartecipanti}"/></div>
 					<div>
 						Mese: 
 						<select th:field="*{mese}">
-							<option th:value=""></option>
-							<option th:value="Gennaio">Gennaio</option>
-							<option th:value="Febbraio">Febbraio</option>
-							<option th:value="Marzo">Marzo</option>
-							<option th:value="Aprile">Aprile</option>
-							<option th:value="Maggio">Maggio</option>
-							<option th:value="Giugno">Giugno</option> 
-							<option th:value="Luglio">Luglio</option>
-							<option th:value="Agosto">Agosto</option>
-							<option th:value="Settembre">Settembre</option>
-							<option th:value="Ottobre">Ottobre</option>
-							<option th:value="Novembre">Novembre</option>
-							<option th:value="Dicembre">Dicembre</option>
+							<option value=""></option>
+							<option value="Gennaio">Gennaio</option>
+							<option value="Febbraio">Febbraio</option>
+							<option value="Marzo">Marzo</option>
+							<option value="Aprile">Aprile</option>
+							<option value="Maggio">Maggio</option>
+							<option value="Giugno">Giugno</option> 
+							<option value="Luglio">Luglio</option>
+							<option value="Agosto">Agosto</option>
+							<option value="Settembre">Settembre</option>
+							<option value="Ottobre">Ottobre</option>
+							<option value="Novembre">Novembre</option>
+							<option value="Dicembre">Dicembre</option>
 						</select>
 					</div>
 					<div>Anno: <input type="text" th:field="*{anno}"/></div>
-					<div>Premio in denaro (€): <input type="text" th:field="*{premoInDenaro}"/></div>
+					<div>Premio in denaro (&euro;): <input type="text" th:field="*{premioInDenaro}"/></div>
 				</div>
 				<div><input type="submit" name="registrazioneTorneo" value="Registra"/></div>
-				<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-				<div th:if="${#fields.hasErrors('numPartecipanti')}" th:errors="*{numPartecipanti}"></div>
-				<div th:if="${#fields.hasErrors('mese')}" th:errors="*{mese}"></div>
-				<div th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></div>
-				<div th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}"></div>
+				<div><span class="evidenziato" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">errore-nome</span></div>
+				<div><span class="evidenziato" th:if="${#fields.hasErrors('numeroMaxDiPartecipanti')}" th:errors="*{numeroMaxDiPartecipanti}">errore-numPartecipanti</span></div>
+				<div><span class="evidenziato" th:if="${#fields.hasErrors('mese')}" th:errors="*{mese}">errore-mese</span></div>
+				<div><span class="evidenziato" th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}">errore-anno</span></div>
+				<div><span class="evidenziato" th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}">errore-premioInDenaro</span></div>
 			</form>
 		</section>
-		<footer th::replace="fragments/base.html"></footer>
+		<footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>
 </html>

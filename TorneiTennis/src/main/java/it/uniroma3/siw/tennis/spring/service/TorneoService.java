@@ -5,20 +5,33 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.repository.TorneoRepository;
 
+@Service
 public class TorneoService {
 	@Autowired
-	private TorneoRepository torenoRepository;
+	private TorneoRepository torneoRepository;
 	
 	@Transactional
 	public Torneo inserisci(Torneo toreno) {
-		return torenoRepository.save(toreno);
+		return torneoRepository.save(toreno);
 	}
+	
+	/** Restituisce una lista di tutti i tornei di ABCTennis.
+	 * @return Una lista di tutti i tornei di ABCTennis. */
 	@Transactional
 	public List<Torneo> tutti() {
-		return (List<Torneo>) torenoRepository.findAll();
+		return (List<Torneo>) torneoRepository.findAll();
+	}
+	
+	/** Verifica se esiste gia' un torneo con lo stesso nel sistema.
+	 * @param torneo Torneo per cui si vuole fare la verifica.
+	 * @return true se esiste gia' un torneo con lo stesso nome, false altrimenti. */
+	@Transactional
+	public boolean alreadyExits(Torneo torneo) {
+		return this.torneoRepository.findByNome(torneo.getNome()) != null;
 	}
 }

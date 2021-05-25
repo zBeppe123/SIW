@@ -8,8 +8,8 @@
 		<ul>
 			<li th:each="torneo : ${tornei}">
 				<a href="torneo.html" 
-				   th:href="@{'/torneo' + '/' + ${toreno.id}}" 
-				   th:text="|${torneo.nome}|">nome toreno</a>
+				   th:href="@{'/torneo' + '/' + ${torneo.id}}" 
+				   th:text="|${torneo.nome}|">nome-toreno</a>
 				   <p th::text="|${torneo.getDescrizione()}|">descrizione</p>
 			</li>
 		</ul>
