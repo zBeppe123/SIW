@@ -11,7 +11,7 @@ import it.uniroma3.siw.tennis.spring.model.Tennista;
  * Validator for Tennista
  */
 @Component
-public class UserValidator implements Validator {
+public class TennistaValidator implements Validator {
 
     final Integer MAX_NAME_LENGTH = 100;
     final Integer MIN_NAME_LENGTH = 2;
