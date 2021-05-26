@@ -76,6 +76,49 @@ public class Torneo {
 	public void setNumeroMaxDiPartecipanti(Integer numeroMaxDiPartecipanti) {
 		this.numeroMaxDiPartecipanti = numeroMaxDiPartecipanti;
 	}
+	
+	public int getMeseValore() {
+		int meseValue = -1;
+		
+		if(this.mese.equals("Gennaio")) {
+			meseValue = 1;
+		}
+		else if(this.mese.equals("Febbraio")) {
+			meseValue = 2;
+		}
+		else if(this.mese.equals("Marzo")) {
+			meseValue = 3;
+		}
+		else if(this.mese.equals("Aprile")) {
+			meseValue = 4;
+		}
+		else if(this.mese.equals("Maggio")) {
+			meseValue = 1;
+		}
+		else if(this.mese.equals("Giugno")) {
+			meseValue = 6;
+		}
+		else if(this.mese.equals("Luglio")) {
+			meseValue = 7;
+		}
+		else if(this.mese.equals("Agosto")) {
+			meseValue = 8;
+		}
+		else if(this.mese.equals("Settembre")) {
+			meseValue = 9;
+		}
+		else if(this.mese.equals("Ottobre")) {
+			meseValue = 10;
+		}
+		else if(this.mese.equals("Novembre")) {
+			meseValue = 11;
+		}
+		else if(this.mese.equals("Dicembre")) {
+			meseValue = 12;
+		}
+		
+		return meseValue;
+	}
 
 	public String getMese() {
 		return mese;

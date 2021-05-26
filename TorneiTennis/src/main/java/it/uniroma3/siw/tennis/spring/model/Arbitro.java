@@ -64,11 +64,11 @@ public class Arbitro {
 		this.cognome = cognome;
 	}
 
-	public String getNumeroTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setNumeroTelefono(String numeroTelefono) {
+	public void setTelefono(String numeroTelefono) {
 		this.telefono = numeroTelefono;
 	}
 

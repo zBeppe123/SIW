@@ -1,4 +1,6 @@
-package it.uniroma3.siw.tennis.spring.controller;
+package it.uniroma3.siw.tennis.spring.controller.validator;
+
+import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +33,19 @@ public class TorneoValidator implements Validator {
     	
     	if(!errors.hasErrors()) {
     		logger.debug("Tutti dati del torneo immessi.");
+    		Torneo torneo = (Torneo) o;
     		
     		//Esiste gia' un torneo con lo stesso nome?
-    		if(this.torneoService.alreadyExits((Torneo) o)) {
+    		if(this.torneoService.alreadyExits(torneo)) {
     			logger.debug("Torneo gia' esistente.");
     			errors.reject("registra_torneo_errors_duplicato");
+    		}
+    		
+    		//Mese e anno inseriti sono corretti?
+    		LocalDate dataOdierna = LocalDate.now();
+    		if((torneo.getMeseValore()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
+    				torneo.getAnno()<dataOdierna.getYear()) {
+    			errors.reject("registra_torneo_errors_dataErrata");
     		}
     	}
     	else {
@@ -48,5 +58,4 @@ public class TorneoValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return Torneo.class.equals(clazz);
 	}
-
 }

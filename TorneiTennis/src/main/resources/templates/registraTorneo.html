@@ -33,8 +33,15 @@
 					</div>
 					<div>Anno: <input type="text" th:field="*{anno}"/></div>
 					<div>Premio in denaro (&euro;): <input type="text" th:field="*{premioInDenaro}"/></div>
+					<div>
+						Arbitro:
+						<select th:name="${arbtr}">
+							<option value=""></option>
+							<option th:each="arbitro : ${arbitri}" th:value="${arbitro.id}" th:text="|${arbitro.cognome} ${arbitro.nome}|">cognome-nome arbitro</option>
+						</select>
+					</div>
 				</div>
-				<div><input type="submit" name="registrazioneTorneo" value="Registra"/></div>
+				<div><input type="submit" value="Registra"/></div>
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">errore-nome</span></div>
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('numeroMaxDiPartecipanti')}" th:errors="*{numeroMaxDiPartecipanti}">errore-numPartecipanti</span></div>
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('mese')}" th:errors="*{mese}">errore-mese</span></div>

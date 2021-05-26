@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
+import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 
 @Controller
@@ -20,6 +22,9 @@ public class TorneoController {
 	
 	@Autowired
 	private TorneoService torneoService;
+	
+	@Autowired
+	private ArbitroService arbitroService;
 	
     @Autowired
     private TorneoValidator torneoValidator;
@@ -29,6 +34,7 @@ public class TorneoController {
     @RequestMapping(value = "/registraTorneo", method = RequestMethod.GET)
     public String apriRegistraTorneo(Model model) {
     	model.addAttribute("torneo", new Torneo());
+    	model.addAttribute("arbitri", arbitroService.tutti());
     	return "registraTorneo.html";
     }
     

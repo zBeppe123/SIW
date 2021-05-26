@@ -13,7 +13,7 @@ import it.uniroma3.siw.tennis.spring.repository.CredentialsRepository;
 @Service
 public class CredentialsService {
 	
-    @Autowired
+    //@Autowired
     protected PasswordEncoder passwordEncoder;
 
 	@Autowired

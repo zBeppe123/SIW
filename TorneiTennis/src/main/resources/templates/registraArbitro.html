@@ -7,10 +7,9 @@
 	<section>
 		<h1>Registra arbitro</h1>
 		<div>Inserisci i dati dell'arbitro:</div>
-		<form th:action="@{registraArbitro}" method="post"
-			th:object="${arbitro}">
+		<form th:action="@{/registraArbitro}" method="post" th:object="${arbitro}">
 			<div th:if="${#fields.hasGlobalErrors()}">
-				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
+				<p><span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore</span></p>
 			</div>
 			<div id="arbitro">
 				<div>
@@ -29,12 +28,12 @@
 			<div>
 				<input type="submit" value="Registra" />
 			</div>
-			<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></div>
-			<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-			<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
-			<div th:if="${#fields.hasErrors('nazionalita')}"
-				th:errors="*{nazionalita}"></div>
+			<div><span class="evidenziato" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}">errore-su-cognome</span></div>
+			<div><span class="evidenziato" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">errore-su-nome</span></div>
+			<div><span class="evidenziato" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">errore-su-telefono</span></div>
+			<div><span class="evidenziato" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}">errore-su-nazionalita</span></div>
 		</form>
 	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
