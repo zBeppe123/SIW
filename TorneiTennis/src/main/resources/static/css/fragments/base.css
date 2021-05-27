@@ -12,21 +12,25 @@ section {
 	margin: 5px;
 }
 
-#testa{
+#testa {
 	display: flex;
 	justify-content: space-between;
 }
 
-#sinistra{
+#sinistra {
 	display: flex;
 	justify-content: flex-start;
 }
 
-#destra{
+#destra {
 	display: flex;
 	justify-content: flex-end;
 }
 
 footer {
 	background-color: #dee0e1;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 }
