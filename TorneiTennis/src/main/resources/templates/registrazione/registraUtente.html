@@ -37,14 +37,14 @@
         </tr>
         <tr>
             <td>Nazionalità</td>
-            <td><input type="text" placeholder="" required
+            <td><input type="text" placeholder="nazionalita" required
                        th:field="${tennista.nazionalita}"/></td>
             <td th:if="${#fields.hasErrors('tennista.nazionalita')}"
                 th:errors="${tennista.nazionalita}" th:style="'color:red'"></td>
         </tr>
         <tr>
             <td>Telefono</td>
-            <td><input type="text" placeholder="numero di telefono" required
+            <td><input type="number" placeholder="numero di telefono" required
                        th:field="${tennista.telefono}"/></td>
             <td th:if="${#fields.hasErrors('tennista.telefono')}"
                 th:errors="${tennista.telefono}" th:style="'color:red'"></td>

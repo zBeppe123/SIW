@@ -30,11 +30,11 @@ public class CredentialsValidator implements Validator {
         String password = credentials.getPassword().trim();
 
         if (email.isEmpty())
-            errors.rejectValue("username", "required");
+            errors.rejectValue("email", "required");
         else if (email.length() < MIN_USERNAME_LENGTH || email.length() > MAX_USERNAME_LENGTH)
-            errors.rejectValue("username", "size");
+            errors.rejectValue("email", "size");
         else if (this.credentialsService.getCredentials(email) != null)
-            errors.rejectValue("username", "duplicate");
+            errors.rejectValue("email", "duplicate");
 
         if (password.isEmpty())
             errors.rejectValue("password", "required");

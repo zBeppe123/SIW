@@ -62,11 +62,11 @@ public class Credentials {
 		this.role = role;
 	}
 
-	public Tennista getUser() {
+	public Tennista getTennista() {
 		return tennista;
 	}
 
-	public void setTEnnista(Tennista user) {
+	public void setTennista(Tennista user) {
 		this.tennista = user;
 	}
 }

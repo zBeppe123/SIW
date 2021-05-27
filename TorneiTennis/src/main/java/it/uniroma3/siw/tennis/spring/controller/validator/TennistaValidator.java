@@ -15,12 +15,15 @@ public class TennistaValidator implements Validator {
 
     final Integer MAX_NAME_LENGTH = 100;
     final Integer MIN_NAME_LENGTH = 2;
+    final Integer MIN_TELEFONO_LENGTH = 10;
 
     @Override
     public void validate(Object o, Errors errors) {
         Tennista tennista = (Tennista) o;
         String nome = tennista.getNome().trim();
         String cognome = tennista.getCognome().trim();
+        String nazionalita= tennista.getNazionalita().trim();
+        String telefono=tennista.getNazionalita().trim();
 
         if (nome.isEmpty())
             errors.rejectValue("nome", "required");
@@ -32,7 +35,14 @@ public class TennistaValidator implements Validator {
         else if (cognome.length() < MIN_NAME_LENGTH || cognome.length() > MAX_NAME_LENGTH)
             errors.rejectValue("cognome", "size");
         
-        //TODO aggiungere if di telefono e nazionalita
+        if(nazionalita.isEmpty())
+        	errors.rejectValue("nazionalita","required");
+        
+        if(telefono.isEmpty())
+        	errors.rejectValue("telefono", "required");
+        else if (telefono.length()<MIN_TELEFONO_LENGTH)
+        	errors.rejectValue("telefono","size");
+        
     }
 
     @Override
