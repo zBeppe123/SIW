@@ -58,13 +58,10 @@ public class TorneoController {
     }
     
     @RequestMapping(value="/tornei", method = RequestMethod.GET)
-    public String addToreno(Model model) {
+    public String elencoTornei(Model model) {
     	logger.debug("Lettura di tutti i tornei");
     	
-    	List<Torneo> tornei = torneoService.tutti();
-    	model.addAttribute("tornei", tornei);
+    	model.addAttribute("tornei", this.torneoService.tutti());
         return "tornei.html";
     }
-
-    
 }
