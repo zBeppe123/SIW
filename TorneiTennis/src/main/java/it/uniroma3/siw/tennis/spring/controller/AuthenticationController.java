@@ -26,7 +26,7 @@ public class AuthenticationController {
 	private CredentialsService credentialsService;
 	
 	@Autowired
-	private TennistaValidator userValidator;
+	private TennistaValidator tennistaValidator;
 	
 	@Autowired
 	private CredentialsValidator credentialsValidator;
@@ -35,7 +35,7 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("tennista", new Tennista());
 		model.addAttribute("credentials", new Credentials());
-		return "registerTennista";
+		return "registraTennista";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
@@ -60,24 +60,25 @@ public class AuthenticationController {
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") Tennista tennista,
-                 BindingResult userBindingResult,
+    public String registerUser(@ModelAttribute("tennista") Tennista tennista,
+                 BindingResult tennistaBindingResult,
                  @ModelAttribute("credentials") Credentials credentials,
                  BindingResult credentialsBindingResult,
                  Model model) {
 
         // validate user and credentials fields
-        this.userValidator.validate(tennista, userBindingResult);
+        this.tennistaValidator.validate(tennista, tennistaBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
 
         // if neither of them had invalid contents, store the User and the Credentials into the DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+        if(!tennistaBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
+        	System.out.println("ok");
             credentials.setTennista(tennista);
-            credentialsService.saveCredentials(credentials);
+            this.credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "registraTennista";
     }
 }

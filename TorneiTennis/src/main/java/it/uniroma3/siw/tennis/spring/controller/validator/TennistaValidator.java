@@ -20,10 +20,10 @@ public class TennistaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Tennista tennista = (Tennista) o;
-        String nome = tennista.getNome().trim();
-        String cognome = tennista.getCognome().trim();
-        String nazionalita= tennista.getNazionalita().trim();
-        String telefono=tennista.getNazionalita().trim();
+        String nome = tennista.getNome();
+        String cognome = tennista.getCognome();
+        String nazionalita= tennista.getNazionalita();
+        String telefono=tennista.getTelefono();
 
         if (nome.isEmpty())
             errors.rejectValue("nome", "required");
@@ -40,8 +40,8 @@ public class TennistaValidator implements Validator {
         
         if(telefono.isEmpty())
         	errors.rejectValue("telefono", "required");
-        else if (telefono.length()<MIN_TELEFONO_LENGTH)
-        	errors.rejectValue("telefono","size");
+        else if(telefono.length()<MIN_TELEFONO_LENGTH)
+        	errors.rejectValue("telefono", "size");
         
     }
 

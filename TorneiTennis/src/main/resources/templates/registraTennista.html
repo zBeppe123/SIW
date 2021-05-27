@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Registra Tennista')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis',filecss='registraTennista.css')"> </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
@@ -24,7 +24,7 @@
         <tr>
             <td>Nome</td>
             <td><input type="text" placeholder="nome" required
-                       th:field="${tennista.nome}+"/></td>
+                       th:field="${tennista.nome}"/></td>
             <td th:if="${#fields.hasErrors('tennista.nome')}"
                 th:errors="${tennista.nome}" th:style="'color:red'"></td>
         </tr>

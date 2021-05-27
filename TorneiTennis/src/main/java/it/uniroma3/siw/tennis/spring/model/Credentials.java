@@ -66,7 +66,7 @@ public class Credentials {
 		return tennista;
 	}
 
-	public void setTennista(Tennista user) {
-		this.tennista = user;
+	public void setTennista(Tennista tennista) {
+		this.tennista = tennista;
 	}
 }
