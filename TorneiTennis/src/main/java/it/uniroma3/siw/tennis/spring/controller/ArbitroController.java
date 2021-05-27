@@ -27,7 +27,7 @@ public class ArbitroController {
 	@RequestMapping(value = "/registraArbitro", method = RequestMethod.GET)
 	public String apriRegistraArbitro(Model model) {
 		model.addAttribute("arbitro", new Arbitro());
-		return "registraArbitro.html";
+		return "registrazione/registraArbitro.html";
 	}
 	
 	@RequestMapping(value = "/registraArbitro", method = RequestMethod.POST)
@@ -39,6 +39,6 @@ public class ArbitroController {
 			return "index.html";
 		}
 		
-		return "registraArbitro.html";
+		return "registrazione/registraArbitro.html";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
@@ -35,19 +36,25 @@ public class TorneoController {
     public String apriRegistraTorneo(Model model) {
     	model.addAttribute("torneo", new Torneo());
     	model.addAttribute("arbitri", arbitroService.tutti());
-    	return "registraTorneo.html";
+    	return "registrazione/registraTorneo.html";
     }
     
     @RequestMapping(value = "/registraTorneo", method = RequestMethod.POST)
-    public String registraNuovoTorneo(@ModelAttribute("torneo") Torneo torneo, Model model, BindingResult bindingResult) {
+    public String registraNuovoTorneo(@ModelAttribute("torneo") Torneo torneo, @RequestParam("arbtr") String idArbitro, Model model, BindingResult bindingResult) {
     	this.torneoValidator.validate(torneo, bindingResult);
+    	this.torneoValidator.controllaCampoIdArbitro(idArbitro, bindingResult);
     	
     	//Dati del torneo sono validi?
     	if(!bindingResult.hasErrors()) {
+    		
+    		torneo.setArbitro(arbitroService.arbitroPerId(Long.parseLong(idArbitro)));
     		this.torneoService.inserisci(torneo);
     		return "index.html";
     	}
-    	return "registraTorneo.html";
+    	else {
+    		model.addAttribute("arbitri", this.arbitroService.tutti());
+    		return "registrazione/registraTorneo.html";
+    	}
     }
     
     @RequestMapping(value="/tornei", method = RequestMethod.GET)
@@ -59,4 +66,5 @@ public class TorneoController {
         return "tornei.html";
     }
 
+    
 }

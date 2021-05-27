@@ -1,6 +1,7 @@
 package it.uniroma3.siw.tennis.spring.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -28,6 +29,13 @@ public class ArbitroService {
 	@Transactional
 	public List<Arbitro> arbitriPerNomeAndCognome(String nome,String cognome) {
 		return arbitroRepository.findByNomeAndCognome(nome,cognome);
+	}
+	
+	@Transactional
+	public Arbitro arbitroPerId(Long id) {
+		Optional<Arbitro> result = arbitroRepository.findById(id);
+		return result.orElse(null);
+		
 	}
 	
 	@Transactional

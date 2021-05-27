@@ -54,6 +54,12 @@ public class TorneoValidator implements Validator {
 		
 	}
     
+    public void controllaCampoIdArbitro(String idArbitro, Errors errors) {
+    	if(idArbitro.isEmpty()) {
+    		errors.reject("registra_torneo_errors_arbitroNonSelezionato");
+    	}
+    }
+    
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Torneo.class.equals(clazz);

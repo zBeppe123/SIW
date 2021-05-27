@@ -4,7 +4,8 @@ body {
 }
 
 header {
-	background-color: #808080;
+	background-color: silver;
+	border-bottom: 3px solid #808080;
 }
 
 section {
