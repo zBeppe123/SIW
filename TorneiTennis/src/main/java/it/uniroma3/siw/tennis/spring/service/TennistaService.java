@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.tennis.spring.model.Arbitro;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.repository.TennistaRepository;
 
@@ -38,9 +39,14 @@ public class TennistaService {
      *                              as the passed User already exists in the DB
      */
     @Transactional
-    public Tennista saveUser(Tennista tennista) {
+    public Tennista saveTennista(Tennista tennista) {
         return this.tennistaRepository.save(tennista);
     }
+    
+	@Transactional
+	public List<Tennista> tutti(){
+		return (List<Tennista>) tennistaRepository.findAll();
+	}
 
     /**
      * This method retrieves all Users from the DB.
@@ -54,4 +60,10 @@ public class TennistaService {
             result.add(tennista);
         return result;
     }
+
+	public Tennista tennistaPerId(long id) {
+		Optional<Tennista> result = tennistaRepository.findById(id);
+		return result.orElse(null);
+		
+	}
 }

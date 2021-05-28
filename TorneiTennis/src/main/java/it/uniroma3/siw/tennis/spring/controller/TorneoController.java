@@ -35,7 +35,7 @@ public class TorneoController {
     public String apriRegistraTorneo(Model model) {
     	model.addAttribute("torneo", new Torneo());
     	model.addAttribute("arbitri", arbitroService.tutti());
-    	return "registrazione/registraTorneo.html";
+    	return "registraTorneo.html";
     }
     
     @RequestMapping(value = "/registraTorneo", method = RequestMethod.POST)
@@ -58,7 +58,7 @@ public class TorneoController {
     		logger.debug("Uno o piu' campi di torneo vuoti");
     		
     		model.addAttribute("arbitri", this.arbitroService.tutti());
-    		return "registrazione/registraTorneo.html";
+    		return "registraTorneo";
     	}
     }
     

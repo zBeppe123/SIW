@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.repository.TorneoRepository;
 
@@ -27,7 +28,7 @@ public class TorneoService {
 	public List<Torneo> tutti() {
 		return (List<Torneo>) torneoRepository.findAll();
 	}
-	
+
 	/* Trova e restituisce il torneo tramite l'id.
 	 * @param id Id del torneo.
 	 * @return Torneo cercato oppure null se non esiste tale torneo con l'id specificato.*/
@@ -42,5 +43,10 @@ public class TorneoService {
 	@Transactional
 	public boolean alreadyExits(Torneo torneo) {
 		return this.torneoRepository.findByNome(torneo.getNome()) != null;
+	}
+
+	public Torneo torneoPerId(long id) {
+		Optional<Torneo> result = torneoRepository.findById(id);
+		return result.orElse(null);
 	}
 }

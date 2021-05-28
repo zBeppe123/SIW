@@ -28,7 +28,7 @@ public class ArbitroController {
 	@RequestMapping(value = "/registraArbitro", method = RequestMethod.GET)
 	public String apriRegistraArbitro(Model model) {
 		model.addAttribute("arbitro", new Arbitro());
-		return "registrazione/registraArbitro.html";
+		return "registraArbitro.html";
 	}
 	
 	@RequestMapping(value = "/registraArbitro", method = RequestMethod.POST)
@@ -43,9 +43,7 @@ public class ArbitroController {
 			arbitroService.inserisci(arbitro);
 			return "index.html";
 		}
-		
-		logger.debug("Uno o piu' campi vuoti di arbitro.");
-		return "registrazione/registraArbitro.html";
+		return "registraArbitro.html";
 	}
 	
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)

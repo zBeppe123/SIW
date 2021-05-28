@@ -18,7 +18,6 @@ public class CredentialsValidator implements Validator {
     @Autowired
     private CredentialsService credentialsService;
 
-    final Integer MAX_USERNAME_LENGTH = 20;
     final Integer MIN_USERNAME_LENGTH = 4;
     final Integer MAX_PASSWORD_LENGTH = 20;
     final Integer MIN_PASSWORD_LENGTH = 6;
@@ -31,7 +30,7 @@ public class CredentialsValidator implements Validator {
 
         if (email.isEmpty())
             errors.rejectValue("email", "required");
-        else if (email.length() < MIN_USERNAME_LENGTH || email.length() > MAX_USERNAME_LENGTH)
+        else if (email.length() < MIN_USERNAME_LENGTH)
             errors.rejectValue("email", "size");
         else if (this.credentialsService.getCredentials(email) != null)
             errors.rejectValue("email", "duplicate");

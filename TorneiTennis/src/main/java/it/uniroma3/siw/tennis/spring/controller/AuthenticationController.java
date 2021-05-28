@@ -1,6 +1,5 @@
 package it.uniroma3.siw.tennis.spring.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,6 @@ import it.uniroma3.siw.tennis.spring.controller.validator.TennistaValidator;
 import it.uniroma3.siw.tennis.spring.model.Credentials;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.service.CredentialsService;
-
-
 
 @Controller
 public class AuthenticationController {
@@ -40,6 +37,7 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
+        System.out.println("entro in login");
 		return "loginForm";
 	}
 	
@@ -50,13 +48,16 @@ public class AuthenticationController {
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
     public String defaultAfterLogin(Model model) {
-        
+        System.out.println("controllo i dettagli");
     	UserDetails tennistaDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());
+    	System.out.println("fatto");
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+    		System.out.println("sei un admin");
             return "admin/home";
         }
-        return "home";
+    	System.out.println("prego");
+        return "index.html";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
@@ -65,7 +66,6 @@ public class AuthenticationController {
                  @ModelAttribute("credentials") Credentials credentials,
                  BindingResult credentialsBindingResult,
                  Model model) {
-
         // validate user and credentials fields
         this.tennistaValidator.validate(tennista, tennistaBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
@@ -74,11 +74,15 @@ public class AuthenticationController {
         if(!tennistaBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
-        	System.out.println("ok");
             credentials.setTennista(tennista);
-            this.credentialsService.saveCredentials(credentials);
+            credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";
         }
         return "registraTennista";
     }
+    
+    @RequestMapping(value = "/index", method = RequestMethod.GET) 
+	public String showIndex (Model model) {
+		return "index";
+	}
 }
