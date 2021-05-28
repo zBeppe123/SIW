@@ -57,7 +57,7 @@ public class AuthenticationController {
             return "admin/home";
         }
     	System.out.println("prego");
-        return "index.html";
+        return "tennista";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
