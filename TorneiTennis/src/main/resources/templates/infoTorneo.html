@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis')"> </head>
-<body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-    <div>
-    	<h4 th:text="#{header.torneo}">Dettagli toreno</h4>
-    	
-    	<div th:if="${torneo}" th:object="${torneo}">
-			<h2 th:text="*{nome}">nome toreno</h2>
-			numero massimo di partecipanti: <span th:text="*{numeroMaxDiParteciapnti}">numero</span><br>
-			data dell'evento: <span th:text="*{mese}">mese</span>/<span th:text="*{anno}">anno</span><br>
-			premio in denaro: <span th:text="*{premioInDenaro}">premio</span><br>
-			arbitro: <a href="arbitro.html" 
-				   th:href="*{'/arbitro' + '/' + *{arbitro.id}}" 
-				   th:text="|*{arbitro.nome} *{arbitro.cognome}|">Paolo Rossi</a>
-   		</div>
-    	<div th:unless="${torneo}">Non esiste</div>
-    </div>
-    <footer th:replace="fragments/base.html :: fondo"></footer>
-</body>
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli torneo', filecss='infoTorneo.css')"> </head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<div>
+	    	<h1>Dettagli torneo</h1>
+	    	<div th:if="${torneo}">
+				<strong th:text="${torneo.nome}">Nome-torneo</strong>
+				<p>
+					Numero massimo di partecipanti: <span th:text="${torneo.numeroMaxDiPartecipanti}">numero</span><br>
+					Periodo dell'evento: <span th:text="${torneo.mese}">mese</span> <span th:text="${torneo.anno}">anno</span><br>
+					Premio in denaro: &euro;<span th:text="${torneo.premioInDenaro}">premio</span><br>
+					Arbitro: <a th:href="@{'/arbitro' + '/' + ${torneo.arbitro.id}}" 
+							  th:text="|${torneo.arbitro.nome} ${torneo.arbitro.cognome}|">Paolo Rossi</a>
+				</p>
+	   		</div>
+	    	<div th:unless="${torneo}">Nessun torneo selezionato o torneo inesistente.</div>
+	    </div>
+		</section>
+	    <footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
 </html>

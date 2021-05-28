@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,13 +33,26 @@ public class ArbitroController {
 	
 	@RequestMapping(value = "/registraArbitro", method = RequestMethod.POST)
 	public String registraNuovoArbitro(@ModelAttribute("arbitro") Arbitro arbitro, Model model, BindingResult bindingResult) {
+		logger.debug("registrazione nuovo arbitro.");
+		
 		this.arbitroValidator.validate(arbitro, bindingResult);
 		
 		if(!bindingResult.hasErrors()) {
+			logger.debug("Registrazione arbitro effettuta.");
+			
 			arbitroService.inserisci(arbitro);
 			return "index.html";
 		}
 		
+		logger.debug("Uno o piu' campi vuoti di arbitro.");
 		return "registrazione/registraArbitro.html";
+	}
+	
+	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)
+	public String getArbitro(@PathVariable("id") Long idArbitro, Model model) {
+		logger.debug("Lettura arbitro.");
+		
+		model.addAttribute("arbitro", this.arbitroService.arbitroPerId(idArbitro));
+		return "arbitro.html";
 	}
 }

@@ -12,7 +12,7 @@
 				</div>
 				<div id="torneo">
 					<div>Nome del torneo: <input type="text" th:field="*{nome}"/></div>
-					<div>Numero di partecipanti: <input type="text" th:field="*{numeroMaxDiPartecipanti}"/></div>
+					<div>Numero di partecipanti: <input type="number" th:field="*{numeroMaxDiPartecipanti}"/></div>
 					<div>
 						Mese: 
 						<select th:field="*{mese}">
@@ -31,8 +31,8 @@
 							<option value="Dicembre">Dicembre</option>
 						</select>
 					</div>
-					<div>Anno: <input type="text" th:field="*{anno}"/></div>
-					<div>Premio in denaro (&euro;): <input type="text" th:field="*{premioInDenaro}"/></div>
+					<div>Anno: <input type="number" th:field="*{anno}"/></div>
+					<div>Premio in denaro (&euro;): <input type="number" th:field="*{premioInDenaro}"/></div>
 					<div>
 						Arbitro:
 						<select name="arbtr">

@@ -10,7 +10,7 @@
 				<li th:each="torneo : ${tornei}">
 					<a href="torneo.html" th:href="@{'/torneo' + '/' + ${torneo.id}}" th:text="|${torneo.nome}|">nome-torneo</a>
 					<p>
-						<div th:text="|Data di svolgimento: ${torneo.mese} ${torneo.anno}|">Data di svolgimento: mese anno</div>
+						<div th:text="|Periodo dell'evento: ${torneo.mese} ${torneo.anno}|">Periodo dell'evento: mese anno</div>
 						<div th:text="|Premio della vincinta: &euro; ${torneo.premioInDenaro}|">Premio della vincita: &euro; premio</div>
 					</p>
 				</li>

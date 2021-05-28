@@ -14,6 +14,7 @@ import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 @Component
 public class ArbitroValidator implements Validator {
 	private static final Logger logger = LoggerFactory.getLogger(ArbitroValidator.class);
+	private static final int MIN_CIFRE_TELEFONO = 10;
 	
 	@Autowired
 	private ArbitroService arbitroService;
@@ -28,9 +29,14 @@ public class ArbitroValidator implements Validator {
 		if(!errors.hasErrors()) {
 			logger.debug("Tutti dati dell'arbitro inseriti non nulli.");
 			
-			if(this.arbitroService.alreadyExists((Arbitro) o)) {
+			Arbitro arbitro = (Arbitro) o;
+			if(this.arbitroService.alreadyExists(arbitro)) {
 				logger.debug("Arbitro gia' esistente.");
 				errors.reject("registra_arbitro_errors_duplicato");
+			}
+			else if(arbitro.getTelefono().length()<MIN_CIFRE_TELEFONO) {
+				logger.debug("Numero di cifre di telefono di arbitro non ha com minio 10 cifre.");
+				errors.reject("registra_arbitro_errors_telefono");
 			}
 		}
 	}

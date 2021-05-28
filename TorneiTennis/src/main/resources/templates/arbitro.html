@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis')"> </head>
-<body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-    <div>
-    	<h4 th:text="#{header.arbitro}">Dettagli arbitro</h4>
-    	
-    	<div th:if="${arbitro}" th:object="${arbitro}">
-			<span th:text="*{nome}">qui-va-nome</span>
-			<span th:text="*{cognome}">qui-va-cognome</span>
-			<span th:text="*{nazionalita}">qui-va-nazionalità</span>
-   		</div>
-    	<div th:unless="${arbitro}">Non esiste</div>
-    </div>
-    <footer th:replace="fragments/base.html :: fondo"></footer>
-</body>
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='arbitro.css')"> </head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<div>
+	    	<h1>Dettagli arbitro</h1>
+	    	<div th:if="${arbitro}">
+	    		Ecco le informazioni dell'arbitro selezionato:
+	    		<p>
+	    			Arbitro: <span th:text="${arbitro.cognome}">cognome</span> <span th:text="${arbitro.nome}">nome</span> <br>
+	    			Nazionalit&agrave;: <span th:text="${arbitro.nazionalita}">nazionalita'</span> <br>
+	    			Telefono: <span th:text="${arbitro.telefono}">telefono</span>
+	    		</p>
+	   		</div>
+	    	<div th:unless="${arbitro}">Nessun arbitro selezionato o arbitro non esistente.</div>
+	    </div>
+		</section>
+	    <footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
 </html>
