@@ -49,7 +49,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/default", method = RequestMethod.GET)
     public String defaultAfterLogin(Model model) {
     	UserDetails tennistaDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());
+    	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());    	
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
     		System.out.println("sei un admin");
             return "admin/home";
@@ -73,6 +73,7 @@ public class AuthenticationController {
         if(!tennistaBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
+        	credentials.setTennista(tennista);
             credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";
         }

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Iscrizione torneo', filecss='iscrizioneTorneo.css')"></head>
+	<body>
+		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<section>
+			<h1>Iscrizione ad un torneo</h1>
+			<div>Scegli tra uno di questi tornei disponibili:</div>
+			<form th:action="@{/iscrizioneTorneo}" method="post">
+				</div>
+				<div class="torneo" th:each="torneo : ${torneiDisp}" style="height: 77px; ">
+					<div class="radioCheckbox">
+						<input type="radio" name="torneoSelezionato" th:value="${torneo.id}" required>
+					</div>
+					<div class="info">
+						<span th:text="${torneo.nome}">nome</span> <br>
+						Premio: <span th:text="${torneo.nome}">premio</span><br>
+						Periodo dell'evento: <span th:text="${torneo.nome}">data</span><br>
+						Posti disponibili: <span th:text="${numPostiDisponibili}">numero</span>/<span th:text="${torneo.nome}">numero partecipanti</span><br>
+					</div>
+				</div>
+				<div><input type="submit" value="Registra"/></div>
+			</form>
+		</section>
+		<footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
+</html>
