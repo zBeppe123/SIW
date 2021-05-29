@@ -25,14 +25,14 @@ public class CredentialsValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Credentials credentials = (Credentials) o;
-        String email = credentials.getEmail().trim();
-        String password = credentials.getPassword().trim();
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
 
-        if (email.isEmpty())
-            errors.rejectValue("email", "required");
-        else if (email.length() < MIN_USERNAME_LENGTH)
-            errors.rejectValue("email", "size");
-        else if (this.credentialsService.getCredentials(email) != null)
+        if (username.isEmpty())
+            errors.rejectValue("username", "required");
+        else if (username.length() < MIN_USERNAME_LENGTH)
+            errors.rejectValue("username", "size");
+        else if (this.credentialsService.getCredentials(username) != null)
             errors.rejectValue("email", "duplicate");
 
         if (password.isEmpty())

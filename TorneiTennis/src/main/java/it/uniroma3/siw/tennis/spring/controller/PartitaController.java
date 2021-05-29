@@ -3,6 +3,7 @@ package it.uniroma3.siw.tennis.spring.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TennistaService;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 
+@Controller
 public class PartitaController {
 	@Autowired
 	private PartitaService partitaService;
@@ -35,10 +37,10 @@ public class PartitaController {
     public String apriRegistraPartita(Model model) {
     	System.out.println("provo");
     	model.addAttribute("partita", new Partita());
-    	model.addAttribute("toreni", torneoService.tutti());
-    	model.addAttribute("tennisti", tennistaService.tutti());
+    	model.addAttribute("tornei", torneoService.tutti());
+    	model.addAttribute("tennisti", tennistaService.tutti());			//DA CAMBIARE CON torneoService.TuttiTennisti
     	System.out.println("provo2");
-    	return "registraPartita";
+    	return "registraPartita.html";
     }
     
     @RequestMapping(value = "/registraPartita", method = RequestMethod.POST)

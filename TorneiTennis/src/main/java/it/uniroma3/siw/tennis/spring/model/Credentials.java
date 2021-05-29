@@ -19,7 +19,7 @@ public class Credentials {
 	private Long id;
 
 	@Column(nullable = false, unique = true)
-	private String email;
+	private String username;
 
 	@Column(nullable = false)
 	private String password;
@@ -38,12 +38,12 @@ public class Credentials {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setEmail(String email) {
-		this.email= email;
+	public void setUsername(String username) {
+		this.username= username;
 	}
 
 	public String getPassword() {

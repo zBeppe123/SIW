@@ -48,14 +48,14 @@ public class AuthenticationController {
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
     public String defaultAfterLogin(Model model) {
-        System.out.println("controllo i dettagli");
-    	UserDetails tennistaDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	UserDetails tennistaDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());
-    	System.out.println("fatto");
+    	
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
     		System.out.println("sei un admin");
             return "admin/home";
         }
+    	
     	System.out.println("prego");
         return "index.html";
     }

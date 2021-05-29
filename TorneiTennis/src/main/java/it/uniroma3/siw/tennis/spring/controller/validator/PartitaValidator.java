@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 import it.uniroma3.siw.tennis.spring.model.Partita;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 
+@Component
 public class PartitaValidator implements Validator {
 
 	@Autowired

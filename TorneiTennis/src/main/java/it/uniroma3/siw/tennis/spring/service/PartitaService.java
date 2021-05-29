@@ -5,10 +5,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.tennis.spring.model.Partita;
 import it.uniroma3.siw.tennis.spring.repository.PartitaRepository;
 
+@Service
 public class PartitaService {
 	@Autowired
 	private PartitaRepository partitaRepository;

@@ -24,6 +24,7 @@ public class TennistaValidator implements Validator {
         String cognome = tennista.getCognome();
         String nazionalita= tennista.getNazionalita();
         String telefono=tennista.getTelefono();
+        String email = tennista.getEmail();
 
         if (nome.isEmpty())
             errors.rejectValue("nome", "required");
@@ -42,6 +43,9 @@ public class TennistaValidator implements Validator {
         	errors.rejectValue("telefono", "required");
         else if(telefono.length()<MIN_TELEFONO_LENGTH)
         	errors.rejectValue("telefono", "size");
+        
+        if(email.isEmpty())
+        	errors.rejectValue("email", "required");
         
     }
 
