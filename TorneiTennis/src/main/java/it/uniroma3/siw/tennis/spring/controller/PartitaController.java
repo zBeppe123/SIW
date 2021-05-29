@@ -35,11 +35,10 @@ public class PartitaController {
 	
     @RequestMapping(value = "/registraPartita", method = RequestMethod.GET)
     public String apriRegistraPartita(Model model) {
-    	System.out.println("provo");
     	model.addAttribute("partita", new Partita());
     	model.addAttribute("tornei", torneoService.tutti());
     	model.addAttribute("tennisti", tennistaService.tutti());			//DA CAMBIARE CON torneoService.TuttiTennisti
-    	System.out.println("provo2");
+
     	return "registraPartita.html";
     }
     
