@@ -57,7 +57,7 @@ public class AuthenticationController {
         }
     	
     	System.out.println("prego");
-        return "index.html";
+        return "tennista";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
