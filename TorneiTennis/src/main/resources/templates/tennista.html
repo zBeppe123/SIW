@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='arbitro.css')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli tennista', filecss='tennista.css')"> </head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
@@ -11,11 +11,11 @@
 	    		<p>
 	    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
 	    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
-	    			Email: <span th:text="${tennista.email}">email</span>
+	    			Email: <span th:text="${tennista.email}">email</span> <br>
 	    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
 	    		</p>
 	   		</div>
-	    	<div th:unless="${tennista}">Nessun telefono selezionato o arbitro non esistente.</div>
+	    	<div th:unless="${tennista}">Nessun tennista selezionato o tennista non esistente.</div>
 	    </div>
 		</section>
 	    <footer th:replace="fragments/base.html :: fondo"></footer>

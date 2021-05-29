@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseUtente.html :: headerfiles(title='Home', filecss='user.css')"> </head>
+	<body>
+		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<section>
+			<div>
+	    	<h1>Dettagli Utente</h1>
+	    	<div th:if="${tennista}">
+	    		Ecco le tue informazioni:
+	    		<p>
+	    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
+	    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
+	    			Email: <span th:text="${tennista.email}">email</span> <br>
+	    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
+	    			<h2>Cosa vuoi fare?</h2>
+	    			<a th:ref="@{/iscirizoneTorneo}">Iscriviti ad un torneo</a> <br>
+	    			<a th:ref="@{/cancellaIscirizoneTorneo}">Cancella iscrizione ad un torneo</a><br>
+	    			<a th:ref="@{/tornei}">Elenco toreni</a><br>
+	    			<a th:ref="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
+	    		</p>
+	    		
+	   		</div>
+	    	<div th:unless="${tennista}">Nessun tennista selezionato o tennista non esistente.</div>
+	    </div>
+		</section>
+	    <footer th:replace="fragments/baseUtente.html :: fondo"></footer>
+	</body>
+</html>
