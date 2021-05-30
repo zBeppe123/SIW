@@ -22,9 +22,10 @@ public class PartitaValidator implements Validator {
 	@Override
 	public void validate(Object o,Errors errors) {
 		logger.debug("Controllo dei dati della partita immessi.");
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG1", "registra_partita_errors");
-    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG2", "registra_partita_errors");
+		System.out.println("controllo i valori dei punteggi");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG1", "registra_partita_errors");
+    	//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG2", "registra_partita_errors");
+    	System.out.println("controllati punteggi");
 	}
 
 	public void controllaId(String idToreno,String idTennista1, String idTennista2, Errors errors) {

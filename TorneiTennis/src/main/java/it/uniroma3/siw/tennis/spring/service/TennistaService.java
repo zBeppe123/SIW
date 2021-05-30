@@ -63,6 +63,6 @@ public class TennistaService {
 	public Tennista tennistaPerId(long id) {
 		Optional<Tennista> result = tennistaRepository.findById(id);
 		return result.orElse(null);
-		
 	}
+	
 }

@@ -15,12 +15,16 @@ import it.uniroma3.siw.tennis.spring.controller.validator.TennistaValidator;
 import it.uniroma3.siw.tennis.spring.model.Credentials;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.service.CredentialsService;
+import it.uniroma3.siw.tennis.spring.service.PartitaService;
 
 @Controller
 public class AuthenticationController {
 	
 	@Autowired
 	private CredentialsService credentialsService;
+	
+	@Autowired
+	private PartitaService partitaService;
 	
 	@Autowired
 	private TennistaValidator tennistaValidator;
@@ -51,11 +55,11 @@ public class AuthenticationController {
     	UserDetails tennistaDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());    	
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-    		System.out.println("sei un admin");
             return "admin/home";
         }
-    	model.addAttribute("tennista",credentials.getTennista());
-    	System.out.println("prego");
+    	Tennista tennista=credentials.getTennista();
+    	model.addAttribute("tennista",tennista);
+    	model.addAttribute("partite",partitaService.getPartiteByTennista(tennista.getId()));
         return "home";
     }
 	

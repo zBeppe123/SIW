@@ -16,12 +16,22 @@
 	    			<h2>Cosa vuoi fare?</h2>
 	    			<a th:ref="@{/iscirizoneTorneo}">Iscriviti ad un torneo</a> <br>
 	    			<a th:ref="@{/cancellaIscirizoneTorneo}">Cancella iscrizione ad un torneo</a><br>
-	    			<a th:ref="@{/tornei}">Elenco toreni</a><br>
+	    			<a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a><br>
 	    			<a th:ref="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
 	    		</p>
 	   		</div>
-	    	<div th:unless="${tennista}">Nessun tennista selezionato o tennista non esistente.</div>
+	   			<h2>Partite fatte: </h2>
+	   		<div th:if="${partite}">
+	   			<ul>
+				<li th:each="partita : ${partite}">
+					<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
+					<p>
+						<div th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</div>
+					</p>
+				</li>
+			</ul>
 	    </div>
+	    <div th:unless="${partite}">Nessuna partita selezionata o esistente.</div>
 		</section>
 	    <footer th:replace="fragments/baseUtente.html :: fondo"></footer>
 	</body>

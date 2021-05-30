@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.tennis.spring.controller.validator.TennistaValidator;
+import it.uniroma3.siw.tennis.spring.model.Tennista;
+import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TennistaService;
 
 @Component
@@ -15,13 +17,16 @@ public class TennistaController {
 	@Autowired
 	private TennistaService tennistaService;
 	@Autowired
+	private PartitaService partitaService;
+	@Autowired
 	private TennistaValidator tennistaValidator;
 	
-	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/tennista/{id}", method = RequestMethod.GET)
 	public String getArbitro(@PathVariable("id") Long idTennista, Model model) {
-		
+		Tennista t=this.tennistaService.tennistaPerId(idTennista);
 		model.addAttribute("tennista", this.tennistaService.tennistaPerId(idTennista));
-		return "tennista.html";
+		model.addAttribute("partite", this.partitaService.getPartiteByTennista(t.getId()));
+		return "tennista";
 	}
 	
 }

@@ -43,7 +43,9 @@ public class PartitaController {
     }
     
     @RequestMapping(value = "/registraPartita", method = RequestMethod.POST)
-    public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@ModelAttribute("torn") String idTorneo, @RequestParam("gioc1") String idTennista1, @RequestParam("gioc2") String idTennista2, Model model, BindingResult bindingResult) {
+    public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@ModelAttribute("torn") String idTorneo, @RequestParam("gioc1") String idTennista1,
+    		@RequestParam("gioc2") String idTennista2, Model model, BindingResult bindingResult) {
+    	System.out.println("entrato");
     	this.partitaValidator.validate(partita, bindingResult);
     	this.partitaValidator.controllaId(idTorneo, idTennista1, idTennista2, bindingResult);
     	
@@ -52,12 +54,15 @@ public class PartitaController {
     		
     		partita.setTorneo(torneoService.torneoPerId(Long.parseLong(idTorneo)));
     		partita.setTennista1(tennistaService.tennistaPerId(Long.parseLong(idTennista1)));
-    		partita.setTennista2(tennistaService.tennistaPerId(Long.parseLong(idTennista1)));
+    		partita.setTennista2(tennistaService.tennistaPerId(Long.parseLong(idTennista2)));
     		this.partitaService.inserisci(partita);
     		return "index.html";
     	}
     	else {
-    		model.addAttribute("arbitri", this.partitaService.tutti());
+    		
+    		model.addAttribute("partita", new Partita());
+        	model.addAttribute("tornei", torneoService.tutti());
+        	model.addAttribute("tennisti", tennistaService.tutti());			//DA CAMBIARE CON torneoService.TuttiTennisti
     		return "registraPartita";
     	}
     }

@@ -74,6 +74,14 @@ public class TorneoController {
         return "tornei.html";
     }
     
+    @RequestMapping(value="/torneiUtente", method = RequestMethod.GET)
+    public String elencoTornei2(Model model) {
+    	logger.debug("Lettura di tutti i tornei");
+    	
+    	model.addAttribute("tornei", this.torneoService.tutti());
+        return "torneiUtente";
+    }
+    
     @RequestMapping(value = "/torneo/{id}", method = RequestMethod.GET)
     public String getTorneo(@PathVariable("id") Long idTorneo, Model model) {
     	logger.debug("Lettura del torneo selezionato.");

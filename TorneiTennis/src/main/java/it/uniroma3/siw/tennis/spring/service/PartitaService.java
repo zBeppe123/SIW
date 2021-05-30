@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.tennis.spring.model.Partita;
+import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.repository.PartitaRepository;
 
 @Service
@@ -23,5 +24,10 @@ public class PartitaService {
 	@Transactional
 	public List<Partita> tutti() {
 		return (List<Partita>) partitaRepository.findAll();
+	}
+	
+	@Transactional
+	public List<Partita> getPartiteByTennista(Long id) {
+		return (List<Partita>) partitaRepository.findByTennista1EqualsIdOrTennista2EqualsId(id);
 	}
 }
