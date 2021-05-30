@@ -28,10 +28,11 @@ public class TorneoService {
 	public List<Torneo> tutti() {
 		return (List<Torneo>) torneoRepository.findAll();
 	}
-
+	
 	/* Trova e restituisce il torneo tramite l'id.
 	 * @param id Id del torneo.
 	 * @return Torneo cercato oppure null se non esiste tale torneo con l'id specificato.*/
+	@Transactional
 	public Torneo getTorneoPerId(Long id) {
 		Optional<Torneo> result = this.torneoRepository.findById(id);
 		return result.orElse(null);
@@ -52,5 +53,9 @@ public class TorneoService {
 	
 	public void iscriviTennista(Tennista tennista,Long idToreno) {
 		
+	}
+
+	public List<Integer> getPostiDisponibili() {
+		return null;//torneoRepository.findNumeroPartecipantiPerOgniTorneo();
 	}
 }

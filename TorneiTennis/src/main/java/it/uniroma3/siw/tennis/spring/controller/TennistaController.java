@@ -20,13 +20,15 @@ public class TennistaController {
 	private PartitaService partitaService;
 	@Autowired
 	private TennistaValidator tennistaValidator;
-	
+
 	@RequestMapping(value = "/tennista/{id}", method = RequestMethod.GET)
 	public String getArbitro(@PathVariable("id") Long idTennista, Model model) {
-		Tennista t=this.tennistaService.tennistaPerId(idTennista);
-		model.addAttribute("tennista", this.tennistaService.tennistaPerId(idTennista));
-		model.addAttribute("partite", this.partitaService.getPartiteByTennista(t.getId()));
+		Tennista t = this.tennistaService.tennistaPerId(idTennista);
+		if (t != null) {
+			model.addAttribute("tennista", this.tennistaService.tennistaPerId(idTennista));
+			model.addAttribute("partite", this.partitaService.getPartiteByTennista(t.getId()));
+		}
 		return "tennista";
 	}
-	
+
 }

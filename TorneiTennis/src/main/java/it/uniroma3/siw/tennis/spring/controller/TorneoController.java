@@ -3,7 +3,6 @@ package it.uniroma3.siw.tennis.spring.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +16,7 @@ import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
+import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 import it.uniroma3.siw.tennis.spring.utili.Utili;
 
@@ -29,6 +29,9 @@ public class TorneoController {
 	
 	@Autowired
 	private ArbitroService arbitroService;
+	
+	@Autowired
+	private PartitaService partitaService;
 	
     @Autowired
     private TorneoValidator torneoValidator;
@@ -88,8 +91,10 @@ public class TorneoController {
     	logger.debug("Lettura del torneo selezionato.");
     	
     	Torneo t = this.torneoService.getTorneoPerId(idTorneo);
-    	if(t != null)
+    	if(t != null) {
     		model.addAttribute("torneo", t);
+    		model.addAttribute("partite", partitaService.getPartiteByToreno(idTorneo));
+    	}
     	
     	return "infoTorneo.html";
     }
@@ -97,7 +102,7 @@ public class TorneoController {
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
     public String apriIscrizioneTorneo(Model model) {
     	model.addAttribute("torneiDisp",torneoService.tutti());
-    	model.addAttribute("numPostiDisponibili",12);
+    	model.addAttribute("numPostiDisponibili",12);//torneoService.getPostiDisponibili()
     	return "iscrizioneTorneo";
     }
     

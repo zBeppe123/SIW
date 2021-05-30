@@ -30,4 +30,8 @@ public class PartitaService {
 	public List<Partita> getPartiteByTennista(Long id) {
 		return (List<Partita>) partitaRepository.findByTennista1EqualsIdOrTennista2EqualsId(id);
 	}
+
+	public Object getPartiteByToreno(Long idTorneo) {
+		return (List<Partita>) partitaRepository.findByTorneoId(idTorneo);
+	}
 }
