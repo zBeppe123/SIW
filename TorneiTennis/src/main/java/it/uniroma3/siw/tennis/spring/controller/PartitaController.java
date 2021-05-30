@@ -33,16 +33,16 @@ public class PartitaController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-    @RequestMapping(value = "/registraPartita", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/registraPartita", method = RequestMethod.GET)
     public String apriRegistraPartita(Model model) {
     	model.addAttribute("partita", new Partita());
     	model.addAttribute("tornei", torneoService.tutti());
     	model.addAttribute("tennisti", tennistaService.tutti());			//DA CAMBIARE CON torneoService.TuttiTennisti
 
-    	return "registraPartita.html";
+    	return "admin/registraPartita.html";
     }
     
-    @RequestMapping(value = "/registraPartita", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/registraPartita", method = RequestMethod.POST)
     public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@ModelAttribute("torn") String idTorneo, @RequestParam("gioc1") String idTennista1,
     		@RequestParam("gioc2") String idTennista2, Model model, BindingResult bindingResult) {
     	System.out.println("entrato");
@@ -56,18 +56,15 @@ public class PartitaController {
     		partita.setTennista1(tennistaService.tennistaPerId(Long.parseLong(idTennista1)));
     		partita.setTennista2(tennistaService.tennistaPerId(Long.parseLong(idTennista2)));
     		this.partitaService.inserisci(partita);
-    		return "index.html";
+    		
+    		return "admin/registrazionePartitaCompletata.html";
     	}
     	else {
     		
     		model.addAttribute("partita", new Partita());
         	model.addAttribute("tornei", torneoService.tutti());
         	model.addAttribute("tennisti", tennistaService.tutti());			//DA CAMBIARE CON torneoService.TuttiTennisti
-    		return "registraPartita";
+    		return "admin/registraPartita.html";
     	}
     }
-    
-	
-	
-	
 }

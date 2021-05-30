@@ -25,13 +25,13 @@ public class ArbitroController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ArbitroController.class);
 	
-	@RequestMapping(value = "/registraArbitro", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.GET)
 	public String apriRegistraArbitro(Model model) {
 		model.addAttribute("arbitro", new Arbitro());
-		return "registraArbitro.html";
+		return "admin/registraArbitro.html";
 	}
 	
-	@RequestMapping(value = "/registraArbitro", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.POST)
 	public String registraNuovoArbitro(@ModelAttribute("arbitro") Arbitro arbitro, Model model, BindingResult bindingResult) {
 		logger.debug("registrazione nuovo arbitro.");
 		
@@ -39,11 +39,13 @@ public class ArbitroController {
 		
 		if(!bindingResult.hasErrors()) {
 			logger.debug("Registrazione arbitro effettuta.");
-			
 			arbitroService.inserisci(arbitro);
-			return "index.html";
+			
+			model.addAttribute("arbitro", arbitro);
+			return "admin/registrazioneArbitroCompletata.html";
 		}
-		return "registraArbitro.html";
+		
+		return "admin/registraArbitro.html";
 	}
 	
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)

@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Registra torneo', filecss='registraTorneo.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra torneo', filecss='admin/registraTorneo.css')"></head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
 			<h1>Registra torneo</h1>
 			<div>Inserisci i dati del torneo:</div>
-			<form th:action="@{/registraTorneo}" method="post" th:object="${torneo}">
+			<form th:action="@{/admin/registraTorneo}" method="post" th:object="${torneo}">
 				<div th:if="${#fields.hasGlobalErrors()}">
 	  				<p> <span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</span></p>
 				</div>
@@ -49,6 +49,6 @@
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}">errore-premioInDenaro</span></div>
 			</form>
 		</section>
-		<footer th:replace="fragments/base.html :: fondo"></footer>
+		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

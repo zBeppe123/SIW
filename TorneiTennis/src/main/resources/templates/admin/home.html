@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Home admin', filecss='admin/home.css')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		<section>
+			<h1>Sezione Amministratore</h1>
+			Benvenuto, qui sei nella sezione Amministratore del sistema. <br>
+			Per fare una modifica, registrazione o altro, scegli una voce tra questi elencati:
+			<ul>
+				<li> <a th:href="@{/admin/registraTorneo}">Registra un nuovo torneo</a>.
+				<li> <a th:href="@{/admin/registraArbitro}">Registra un nuovo arbitro</a>.
+				<li> <a th:href="@{/admin/registraPartita}">Registra una partita di un torneo</a>.
+				<li> <a th:href="@{/admin/modificaTorneo}">Modifica i dati di un torneo</a>.
+				<li> <a th:href="@{/admin/modificaArbitro}">Modifca i dati di un arbitro</a>.
+				<li> <a th:href="@{/admin/modificaPartita}">Modifica i dati di una partita di un torneo</a>.
+			</ul>
+		</section>
+		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
+	</body>
+</html>

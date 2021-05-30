@@ -35,14 +35,14 @@ public class TorneoController {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/registraTorneo", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/registraTorneo", method = RequestMethod.GET)
     public String apriRegistraTorneo(Model model) {
     	model.addAttribute("torneo", new Torneo());
     	model.addAttribute("arbitri", arbitroService.tutti());
-    	return "registraTorneo.html";
+    	return "admin/registraTorneo.html";
     }
     
-    @RequestMapping(value = "/registraTorneo", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/registraTorneo", method = RequestMethod.POST)
     public String registraNuovoTorneo(@ModelAttribute("torneo") Torneo torneo, @RequestParam("arbtr") String idArbitro, Model model, BindingResult bindingResult) {
     	logger.debug("Registrazione nuovo torneo.");
     	
@@ -56,13 +56,14 @@ public class TorneoController {
     		
     		logger.debug("Registrazione nuovo torneo effettuata.");
     		
-    		return "index.html";
+    		model.addAttribute("torneo", torneo);
+    		return "/admin/registrazioneTorneoCompletata.html";
     	}
     	else {
     		logger.debug("Uno o piu' campi di torneo vuoti");
     		
     		model.addAttribute("arbitri", this.arbitroService.tutti());
-    		return "registraTorneo";
+    		return "/admin/registraTorneo.html";
     	}
     }
     
