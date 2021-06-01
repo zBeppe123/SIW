@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
+import it.uniroma3.siw.tennis.spring.model.TorneoDisponibile;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
@@ -55,6 +56,7 @@ public class TorneoController {
     	//Dati del torneo sono validi?
     	if(!bindingResult.hasErrors()) {
     		torneo.setArbitro(arbitroService.arbitroPerId(Long.parseLong(idArbitro)));
+    		torneo.setNumeroPartecipanti(0);
     		this.torneoService.inserisci(torneo);
     		
     		logger.debug("Registrazione nuovo torneo effettuata.");
@@ -101,18 +103,25 @@ public class TorneoController {
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
     public String apriIscrizioneTorneo(Model model) {
-    	model.addAttribute("torneiDisp",torneoService.tutti());
-    	model.addAttribute("numPostiDisponibili",12);//torneoService.getPostiDisponibili()
+    	Long tennista=utili.getTennistaAttuale().getId();
+//    	model.addAttribute("PostiDisponibili",torneoService.getPostiDisponibili(tennista).toArray());
+    	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista));
+    	
     	return "iscrizioneTorneo";
     }
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.POST)
-    public String IscrizioneTorneo(@RequestParam("torneoSelezionato") String idTorneo,Model model) {
+    public String IscrizioneTorneo(@ModelAttribute("torneoDisponibile") Torneo torneo,Model model) {
     	Tennista tennista=utili.getTennistaAttuale();
-    	//torneoService.iscriviTennista(tennista,idToreno);
-    	
-    	model.addAttribute("torneiDisp",torneoService.tutti());
-    	model.addAttribute("numPostiDisponibili",12);
+    	System.out.println("nome torneo: " + torneo.getNome() + " anno toreno: " + torneo.getAnno() + " numeroMaxPartecipanti: " + torneo.getNumeroMaxDiPartecipanti() );
+    	if(tennista!=null) {
+    		torneo.setNumeroPartecipanti(torneo.getNumeroPartecipanti()+1);
+    		torneo.getTennistiIscritti().add(tennista);
+    		torneoService.iscriviTennista(torneo);
+    	}
+    		
+    		
+    	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
     	return "iscrizioneTorneo";
     }
     

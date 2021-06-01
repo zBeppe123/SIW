@@ -28,6 +28,8 @@ public class Torneo {
 	@Column(nullable = false)
 	private Integer numeroMaxDiPartecipanti;
 	@Column(nullable = false)
+	private Integer numeroPartecipanti;
+	@Column(nullable = false)
 	private String mese;
 	@Column(nullable = false)
 	private Integer anno;
@@ -36,6 +38,7 @@ public class Torneo {
 	@ManyToOne
 	private Arbitro arbitro;
 	@ManyToMany
+	@JoinTable(name = "tornei_tennisti")
 	private List<Tennista> tennistiIscritti;
 	@OneToMany(mappedBy="torneo")
 	private List<Partita> partite;
@@ -52,6 +55,7 @@ public class Torneo {
 		this.anno = anno;
 		this.premioInDenaro = premioInDenaro;
 		this.arbitro=arbitro;
+		this.numeroPartecipanti=0;
 	}
 
 	public Long getId() {
@@ -168,7 +172,13 @@ public class Torneo {
 	public void setPartite(List<Partita> partite) {
 		this.partite = partite;
 	}
-	public String getDescrizione() {
-		return "		premio: "+ this.premioInDenaro + "\n arbitro: " + this.arbitro.getNome() + " " + this.arbitro.getCognome();
-				}
+
+	public Integer getNumeroPartecipanti() {
+		return numeroPartecipanti;
+	}
+
+	public void setNumeroPartecipanti(Integer numeroPartecipanti) {
+		this.numeroPartecipanti = numeroPartecipanti;
+	}
+	
 }

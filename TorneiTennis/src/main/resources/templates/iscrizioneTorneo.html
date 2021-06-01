@@ -8,15 +8,15 @@
 			<div>Scegli tra uno di questi tornei disponibili:</div>
 			<form th:action="@{/iscrizioneTorneo}" method="post">
 				</div>
-				<div class="torneo" th:each="torneo : ${torneiDisp}" style="height: 77px; ">
+				<div class="torneo" th:each="torneoDisponibile : ${torneiDisponibili}" style="height: 77px; ">
 					<div class="radioCheckbox">
-						<input type="radio" name="torneoSelezionato" th:value="${torneo.id}" required>
+						<input type="radio" name="torneoSelezionato" th:value="${torneoDisponibile}" required>
 					</div>
 					<div class="info">
-						<span th:text="${torneo.nome}">nome</span> <br>
-						Premio: <span th:text="${torneo.nome}">premio</span><br>
-						Periodo dell'evento: <span th:text="${torneo.nome}">data</span><br>
-						Posti disponibili: <span th:text="${numPostiDisponibili}">numero</span>/<span th:text="${torneo.nome}">numero partecipanti</span><br>
+						<span th:text="${torneoDisponibile.nome}">nome</span> <br>
+						Premio: <span th:text="${torneoDisponibile.premioInDenaro}">premio</span><br>
+						Periodo dell'evento: <span th:text="|${torneoDisponibile.mese} ${torneoDisponibile.anno}|">data</span><br>
+						Posti disponibili: <span th:text="${torneoDisponibile.numeroMaxDiPartecipanti-torneoDisponibile.numeroPartecipanti}">numero</span>/<span th:text="${torneoDisponibile.numeroMaxDiPartecipanti}">numero partecipanti</span><br>
 					</div>
 				</div>
 				<div><input type="submit" value="Registra"/></div>

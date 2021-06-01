@@ -1,5 +1,6 @@
 package it.uniroma3.siw.tennis.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
+import it.uniroma3.siw.tennis.spring.model.TorneoDisponibile;
 import it.uniroma3.siw.tennis.spring.repository.TorneoRepository;
 
 @Service
@@ -54,8 +56,21 @@ public class TorneoService {
 	public void iscriviTennista(Tennista tennista,Long idToreno) {
 		
 	}
-
-	public List<Integer> getPostiDisponibili() {
-		return null;//torneoRepository.findNumeroPartecipantiPerOgniTorneo();
+//	@Transactional
+//	public List<Integer> getPostiDisponibili(Long id) {
+//		return (List<Integer>) torneoRepository.findNumeroPartecipantiPerOgniTorneo(id);
+//	}
+	@Transactional
+	public List<Torneo> getTorneiDisponibili(Long id) {
+		return (List<Torneo>) torneoRepository.findTorneiDisponibili(id);
 	}
+
+	public void iscriviTennista(Torneo torneo) {
+		torneoRepository.save(torneo);
+		
+	}
+
+//	public List<TorneoDisponibile> tuttiTorneiPiuIntero() {
+//		return (List<TorneoDisponibile>) torneoRepository.findTuttiTorneoPiùIntero();
+//	}
 }
