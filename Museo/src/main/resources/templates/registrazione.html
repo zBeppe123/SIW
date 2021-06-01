@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Registrazione', filecss='registrazione.css')"></head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<h1>Registrazione</h1>
+			<form th:action="@{/register}" method="post">
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td><input type="text" placeholder="Username" th:field="${credenziali.username}" required/></td>
+						<td th:if="${#fields.hasErrors('credenziali.username')}"
+                			th:errors="${credenziali.username}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" placeholder="Password" th:field="${credenziali.password}" required/></td>
+						<td th:if="${#fields.hasErrors('credenziali.password')}"
+                			th:errors="${credenziali.password}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Cognome:</td>
+						<td><input type="text" placeholder="Cognome" th:field="${utente.cognome}" required/></td>
+						<td th:if="${#fields.hasErrors('utente.cognome')}"
+                			th:errors="${utente.cognome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Nome:</td>
+						<td><input type="text" placeholder="Nome" th:field="${utente.nome}" required/></td>
+						<td th:if="${#fields.hasErrors('utente.nome')}"
+                			th:errors="${utente.nome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>E-mail:</td>
+						<td><input type="text" placeholder="E-mail" th:field="${utente.email}" required/></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="Registra"/></td>
+					<tr>
+				</table>
+			</form>
+		</section>
+		<footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
+</html>

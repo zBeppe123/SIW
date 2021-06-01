@@ -1,0 +1,27 @@
+body {
+	margin: 0px;
+	background-color: lightblue;
+}
+
+header {
+	background-color: lightgreen;
+	border-bottom: 3px solid green;
+	font-size: 12pt;
+}
+
+section {
+	margin: 5pt;
+}
+
+#corpo {
+	display: flex;
+	justify-content: space-between;
+}
+
+footer {
+	width: 100%;
+	background-color: dimgray;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+}

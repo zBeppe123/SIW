@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Museo delle belle arti', filecss='index.css')">
+	<head>
+		<title>Home</title>
+		<link rel="stylesheet" href="home.css">
 	</head>
 	<body>
-		<header th:replace="fragments/base.html :: intestazione"></header>
+		<header>
+				<a href="autori.html">Autori</a>
+				<a href="collezioni.html">Collezioni</a>
+				<a href="informazioni.html">Informazioni</a>
+		</header>
 		<section>
 			<h1>Museo delle arti moderne</h1>
 			Tre opere delle tante esposte nel museo:
@@ -22,6 +28,5 @@
 				</div>
 			</div>
 		</section>
-		<footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>
 </html>

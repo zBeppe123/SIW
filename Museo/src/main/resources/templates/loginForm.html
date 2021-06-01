@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Accedi', filecss='loginForm.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<h1>Accedi</h1>
+			<form action="g.php" method="post">
+				<div th:if="#">
+				</div>
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td><input type="text" placeholder="Username" th:field="${credenziali.username}" required/></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" placeholder="Password" th:field="${credenziali.password}" required/></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="Accedi"/></td>
+					</tr>
+				</table>
+			</form>
+		</section>
+	</body>
+</html>
