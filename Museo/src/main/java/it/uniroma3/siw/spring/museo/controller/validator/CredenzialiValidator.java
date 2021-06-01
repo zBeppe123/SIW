@@ -1,16 +1,21 @@
 package it.uniroma3.siw.spring.museo.controller.validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.spring.museo.model.Credenziali;
+import it.uniroma3.siw.spring.museo.service.CredenzialiService;
 
 @Component
 public class CredenzialiValidator implements Validator {
 	private final int MIN_USERNAME_LENGTH = 4;
 	private final int MAX_USERNAME_ACCETTABILI = 100;
-	private final int MIN_PASSWORD_LENGTH = 4;
+	private final int MIN_PASSWORD_LENGTH = 6;
+	
+	@Autowired
+	private CredenzialiService credenzialiSerive;
 	
 	@Override
 	public void validate(Object obj, Errors errors) {
@@ -22,6 +27,10 @@ public class CredenzialiValidator implements Validator {
 		}
 		if(credenziali.getPassword().length()<MIN_PASSWORD_LENGTH) {
 			errors.rejectValue("password", "size");
+		}
+		
+		if(this.credenzialiSerive.getCredenziali(credenziali.getUsername()) != null) {
+			errors.rejectValue("username", "duplicato");
 		}
 	}
 

@@ -29,7 +29,7 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String apriPaginaLogin(Model model) {
-		return "loginForm.html";
+		return "login.html";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
@@ -39,8 +39,8 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 
 	public String apriPaginaRegistrazione(Model model) {
-		model.addAttribute("user", new Utente());
-		model.addAttribute("credentials", new Credenziali());
+		model.addAttribute("utente", new Utente());
+		model.addAttribute("credenziali", new Credenziali());
 		return "registrazione.html";
 	}
 	
