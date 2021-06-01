@@ -15,7 +15,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 import static it.uniroma3.siw.spring.museo.model.Credenziali.ADMIN_ROLE;
-//import static it.uniroma3.siw.spring.model.Credentials.DEFAULT_ROLE;
 
 /**
  * The AuthConfiguration is a Spring Security Configuration.
