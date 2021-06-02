@@ -46,4 +46,9 @@ public class ArbitroService {
 		else 
 			return false;
 	}
+
+	@Transactional
+	public void modificaDatiDi(Arbitro arbitroDatiModificati) {
+		this.arbitroRepository.save(arbitroDatiModificati);
+	}
 }

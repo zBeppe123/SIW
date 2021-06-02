@@ -3,6 +3,7 @@ package it.uniroma3.siw.tennis.spring.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import it.uniroma3.siw.tennis.spring.controller.validator.ArbitroValidator;
 import it.uniroma3.siw.tennis.spring.model.Arbitro;
@@ -46,6 +49,42 @@ public class ArbitroController {
 		}
 		
 		return "admin/registraArbitro.html";
+	}
+	
+	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.GET)
+	public String apriSceltaArbitroPerModifica(Model model) {
+		model.addAttribute("arbitri", this.arbitroService.tutti());
+		return "admin/sceltaArbitroPerModifica.html";
+	}
+	
+	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.POST)
+	public String sceltoArbitroPerModifica(@SessionAttribute(name = "idArbitroDaModificare") Long idArbitroDaModificare, @RequestParam("arbitroSelezionato") Long idArbitro, Model model) {
+		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
+		
+		//Nessun arbitro?
+		if(arbitro == null) {
+			//model.addAttribute("arbitri", this.arbitroService.tutti());
+			//return "admin/sceltaArbitroPerModifica.html";
+			return "redirect:/admin/sceltaArbitroPerModifica";
+		}
+		
+		//model.addAttribute("arbitro", arbitro);
+		//return "admin/modificaArbitro.html";
+		@SessionAttribute(name = "idArbitroDaModificare", value="")
+		idArbitroDaModificare = idArbitro;
+		return "redirect:/admin/modificaArbitro";
+	}
+	
+	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.GET)
+	public String apriModificaArbitro(Model model) {
+		model.addAttribute("arbitro", this.arbitroService.arbitroPerId(idArbitro));
+		return "admin/modificaArbitro.html";
+	}
+	
+	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.POST)
+	public String modificaDatiArbitro(@ModelAttribute("arbitro") Arbitro arbitroModificato, Model model) {
+		this.arbitroService.modificaDatiDi(arbitroModificato);
+		return "/admin/modificaArbitroCompletata.html";
 	}
 	
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)

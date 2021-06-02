@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Modifica dati torneo', filecss='modificaTorneo.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Modifica dati di un torneo</h1>
+			<form th:action="@{/modificaTorneo}" method="post" th:object="${torneo}">
+				<table>
+					
+				</table>
+			</form>
+		</section>
+	</body>
+</html>
