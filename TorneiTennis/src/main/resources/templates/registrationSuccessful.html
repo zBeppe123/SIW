@@ -6,6 +6,7 @@
 	<div>
     	<h4 th:text="#{header.registra}">Registrazione</h4>
 		<h1>Congratulazioni ti sei registrato!</h1>
+		Clicca <a th:href="@{/login}">qui</a> per fare il login, oppure <a th:href="@{/index}">qui</a> per tornare alla pagina iniziale.	
 	</div>
     <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
