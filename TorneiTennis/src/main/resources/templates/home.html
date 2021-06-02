@@ -14,10 +14,10 @@
 	    			Email: <span th:text="${tennista.email}">email</span> <br>
 	    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
 	    			<h2>Cosa vuoi fare?</h2>
-	    			<a th:ref="@{/iscirizoneTorneo}">Iscriviti ad un torneo</a> <br>
-	    			<a th:ref="@{/cancellaIscirizoneTorneo}">Cancella iscrizione ad un torneo</a><br>
+	    			<a th:href="@{/iscrizioneTorneo}">Iscriviti ad un torneo</a> <br>
+	    			<a th:href="@{/cancellaIscrizioneTorneo}">Cancella iscrizione ad un torneo</a><br>
 	    			<a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a><br>
-	    			<a th:ref="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
+	    			<a th:href="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
 	    		</p>
 	   		</div>
 	   			<h2>Partite fatte: </h2>

@@ -43,7 +43,7 @@ public class TorneoValidator implements Validator {
     		
     		//Mese e anno inseriti sono corretti?
     		LocalDate dataOdierna = LocalDate.now();
-    		if((torneo.getMeseValore()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
+    		if((torneo.getMese()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
     				torneo.getAnno()<dataOdierna.getYear()) {
     			errors.reject("registra_torneo_errors_dataErrata");
     		}

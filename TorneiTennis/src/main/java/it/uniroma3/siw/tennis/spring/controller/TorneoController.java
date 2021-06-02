@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
-import it.uniroma3.siw.tennis.spring.model.TorneoDisponibile;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
@@ -104,7 +103,6 @@ public class TorneoController {
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
     public String apriIscrizioneTorneo(Model model) {
     	Long idTennista=utili.getTennistaAttuale().getId();
-//    	model.addAttribute("PostiDisponibili",torneoService.getPostiDisponibili(tennista).toArray());
     	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(idTennista));
     	model.addAttribute("torneoSelez",new Torneo());
     	return "iscrizioneTorneo";
@@ -116,16 +114,39 @@ public class TorneoController {
     	System.out.println("id torneo= " + idTorneo);
     	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
     	System.out.println("nome torneo: " + torneoSelez.getNome() + " anno toreno: " + torneoSelez.getAnno() + " numeroMaxPartecipanti: " + torneoSelez.getNumeroMaxDiPartecipanti() );
-    	if(tennista!=null) {
+    	if(tennista!=null && torneoSelez!=null) {
     		torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()+1);
     		torneoSelez.getTennistiIscritti().add(tennista);
     		torneoService.iscriviTennista(torneoSelez);
+    		model.addAttribute("torneo", torneoSelez);
     		return "iscrizioneTorneoCompletata";
     	}
+    	else if(torneoSelez==null) {
+        	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
+        	return "iscrizioneTorneo";
+    	}
+    	return "index";
     	
-    	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
-    	return "iscrizioneTorneo";
     }
     
+    @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.GET)
+    public String apriCancellaIscrizioneTorneo(Model model) {
+    	Long idTennista=utili.getTennistaAttuale().getId();
+    	System.out.println(torneoService.getTorneiIscrittiDaTennista(idTennista).size());
+    	model.addAttribute("tornei",torneoService.getTorneiIscrittiDaTennista(idTennista));
+    	return "cancellaIscrizioneTorneo";
+    }
+    
+    @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.POST)
+    public String cancellaIscrizioneTorneo(@RequestParam("torneoSelezionato") Long idTorneo,Model model) {
+    	Tennista tennista=utili.getTennistaAttuale();
+    	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
+    	tennista.getTorneiIscritti().remove(torneoSelez);
+    	torneoSelez.getTennistiIscritti().remove(tennista);
+    	torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()-1);
+    	torneoService.inserisci(torneoSelez);
+    	model.addAttribute("torneo",torneoSelez);
+    	return "cancellazioneIscrizioneCompletata";
+    }
     
 }
