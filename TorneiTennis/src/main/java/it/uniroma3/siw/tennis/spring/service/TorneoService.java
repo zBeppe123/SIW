@@ -61,8 +61,8 @@ public class TorneoService {
 //		return (List<Integer>) torneoRepository.findNumeroPartecipantiPerOgniTorneo(id);
 //	}
 	@Transactional
-	public List<Torneo> getTorneiDisponibili(Long id) {
-		return (List<Torneo>) torneoRepository.findTorneiDisponibili(id);
+	public List<Torneo> getTorneiDisponibili(Long idTennista) {
+		return (List<Torneo>) torneoRepository.findTorneiDisponibili(idTennista);
 	}
 
 	public void iscriviTennista(Torneo torneo) {

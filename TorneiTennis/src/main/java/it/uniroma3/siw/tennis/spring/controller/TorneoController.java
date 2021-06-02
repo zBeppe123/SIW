@@ -103,24 +103,26 @@ public class TorneoController {
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
     public String apriIscrizioneTorneo(Model model) {
-    	Long tennista=utili.getTennistaAttuale().getId();
+    	Long idTennista=utili.getTennistaAttuale().getId();
 //    	model.addAttribute("PostiDisponibili",torneoService.getPostiDisponibili(tennista).toArray());
-    	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista));
-    	
+    	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(idTennista));
+    	model.addAttribute("torneoSelez",new Torneo());
     	return "iscrizioneTorneo";
     }
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.POST)
-    public String IscrizioneTorneo(@ModelAttribute("torneoDisponibile") Torneo torneo,Model model) {
+    public String IscrizioneTorneo(@RequestParam("torneoSelezionato") Long idTorneo,Model model) {
     	Tennista tennista=utili.getTennistaAttuale();
-    	System.out.println("nome torneo: " + torneo.getNome() + " anno toreno: " + torneo.getAnno() + " numeroMaxPartecipanti: " + torneo.getNumeroMaxDiPartecipanti() );
+    	System.out.println("id torneo= " + idTorneo);
+    	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
+    	System.out.println("nome torneo: " + torneoSelez.getNome() + " anno toreno: " + torneoSelez.getAnno() + " numeroMaxPartecipanti: " + torneoSelez.getNumeroMaxDiPartecipanti() );
     	if(tennista!=null) {
-    		torneo.setNumeroPartecipanti(torneo.getNumeroPartecipanti()+1);
-    		torneo.getTennistiIscritti().add(tennista);
-    		torneoService.iscriviTennista(torneo);
+    		torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()+1);
+    		torneoSelez.getTennistiIscritti().add(tennista);
+    		torneoService.iscriviTennista(torneoSelez);
+    		return "iscrizioneTorneoCompletata";
     	}
-    		
-    		
+    	
     	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
     	return "iscrizioneTorneo";
     }

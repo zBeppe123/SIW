@@ -46,6 +46,7 @@ public class Torneo {
 	public Torneo() {
 		tennistiIscritti = new ArrayList<Tennista>();
 		partite = new ArrayList<Partita>();
+		this.numeroPartecipanti=0;
 	}
 
 	public Torneo(String nome, Integer numeroMaxDiParteciapnti, String mese, Integer anno, Float premioInDenaro,Arbitro arbitro) {

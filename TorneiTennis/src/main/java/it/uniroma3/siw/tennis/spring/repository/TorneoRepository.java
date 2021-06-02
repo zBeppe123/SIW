@@ -21,8 +21,8 @@ public interface TorneoRepository extends CrudRepository<Torneo,Long>{
 //			+ "					  ON tor.id=tt.tornei_iscritti_id \r\n"
 //			+ "					  WHERE tt.tennisti_iscritti_id=2 \r\n"
 //			+ "					  GROUP BY(tor))",nativeQuery=true)
-	@Query (value="SELECT tor FROM Torneo as tor LEFT JOIN tor.tennistiIscritti WHERE tor NOT IN (SELECT t FROM Torneo as t LEFT JOIN t.tennistiIscritti as te WHERE te.id=:id GROUP BY(t)) AND tor.numeroPartecipanti<tor.numeroMaxDiPartecipanti")
-	public List<Torneo> findTorneiDisponibili(Long id); 
+	@Query (value="SELECT tor FROM Torneo as tor LEFT JOIN tor.tennistiIscritti WHERE tor NOT IN (SELECT t FROM Torneo as t LEFT JOIN t.tennistiIscritti as te WHERE te.id=:idTennista GROUP BY(t)) AND tor.numeroPartecipanti<tor.numeroMaxDiPartecipanti GROUP BY(tor)")
+	public List<Torneo> findTorneiDisponibili(Long idTennista); 
 	
 	//SELECT COUNT(tt.tennisti_iscritti_id) FROM Torneo tor LEFT JOIN Torneo_tennisti_iscritti tt on tor.id=tt.tornei_iscritti_id WHERE tt.tornei_iscritti_id=:id GROUP BY(tt.tornei_iscritti_id) ORDER BY(tt.tornei_iscritti_id)
 	//@Query(value="SELECT (tor.numeroMaxDiPartecipanti-COUNT(ten)) AS numPostiDisponibili FROM Torneo as tor LEFT JOIN tor.tennistiIscritti as ten WHERE ten.getId()!=:id AND numPostiDisponibili>0 GROUP BY(tor.id) ORDER BY(tor.id)")

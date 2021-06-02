@@ -10,7 +10,7 @@
 				</div>
 				<div class="torneo" th:each="torneoDisponibile : ${torneiDisponibili}" style="height: 77px; ">
 					<div class="radioCheckbox">
-						<input type="radio" name="torneoSelezionato" th:value="${torneoDisponibile}" required>
+						<input type="radio" name="torneoSelezionato" th:value="${torneoDisponibile.id}" required>
 					</div>
 					<div class="info">
 						<span th:text="${torneoDisponibile.nome}">nome</span> <br>
