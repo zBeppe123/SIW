@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Cancellazione iscrizione toreno completata', filecss='cancellazioneIscrizioneAlTorenoCompletata.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Cancellazione iscrizione torneo completata', filecss='cancellazioneIscrizioneAlTorenoCompletata.css')"></head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
-			<h1>Cancellazione dell'iscrizione al toreno completata.</h1>
+			<h1>Cancellazione dell'iscrizione al torneo completata.</h1>
 			Hai cancellato la tua iscrizione al torneo: <span th:text="${torneo.nome}">nome toreno</span> <br>
 			E' stato liberato un posto, puoi iscriverti nuovamente entro il primo giorno del: <span th:text="|${torneo.mese}/${torneo.anno}|">MM/YEAR</span> <br>
 			ATTENZIONE: se i posti per le iscrizioni al torneo finiscono, rimarrai escluso fino a quando non se ne liberera' uno nuovo <br>

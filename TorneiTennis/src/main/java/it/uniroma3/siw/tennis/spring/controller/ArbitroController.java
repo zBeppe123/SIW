@@ -1,5 +1,7 @@
 package it.uniroma3.siw.tennis.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,7 @@ public class ArbitroController {
 	}
 	
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.POST)
-	public String sceltoArbitroPerModifica(@SessionAttribute(name = "idArbitroDaModificare") Long idArbitroDaModificare, @RequestParam("arbitroSelezionato") Long idArbitro, Model model) {
+	public String sceltoArbitroPerModifica(@RequestParam("arbitroSelezionato") Long idArbitro, Model model, HttpSession sessione) {
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
 		
 		//Nessun arbitro?
@@ -70,21 +72,33 @@ public class ArbitroController {
 		
 		//model.addAttribute("arbitro", arbitro);
 		//return "admin/modificaArbitro.html";
-		@SessionAttribute(name = "idArbitroDaModificare", value="")
-		idArbitroDaModificare = idArbitro;
+		sessione.setAttribute("arbitroPerModifica", arbitro);
 		return "redirect:/admin/modificaArbitro";
 	}
 	
 	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.GET)
-	public String apriModificaArbitro(Model model) {
-		model.addAttribute("arbitro", this.arbitroService.arbitroPerId(idArbitro));
+	public String apriModificaArbitro(Model model, HttpSession sessione) {
+		Arbitro a = (Arbitro) sessione.getAttribute("arbitroPerModifica");
+		
+		model.addAttribute("arbitro", a);
 		return "admin/modificaArbitro.html";
 	}
 	
 	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.POST)
-	public String modificaDatiArbitro(@ModelAttribute("arbitro") Arbitro arbitroModificato, Model model) {
-		this.arbitroService.modificaDatiDi(arbitroModificato);
-		return "/admin/modificaArbitroCompletata.html";
+	public String modificaDatiArbitro(@ModelAttribute("arbitro") Arbitro arbitroModificato, Model model, BindingResult bindingResult ,HttpSession sessione) {
+		this.arbitroValidator.validate(arbitroModificato, bindingResult);
+		
+		if(!bindingResult.hasErrors()) {
+			Arbitro a = (Arbitro) sessione.getAttribute("arbitroPerModifica");
+			arbitroModificato.setId(a.getId());
+			this.arbitroService.modificaDatiDi(arbitroModificato);
+			
+			sessione.removeAttribute("arbitroPerModifica");
+			
+			return "/admin/modificaArbitroCompletata.html";
+		}
+		
+		return "/admin/modificaArbitro.html";
 	}
 	
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)
