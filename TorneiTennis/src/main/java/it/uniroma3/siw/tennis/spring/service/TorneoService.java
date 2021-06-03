@@ -79,7 +79,7 @@ public class TorneoService {
 
 	@Transactional
 	public List<Torneo> getTorneiIscrittiDaTennista(Long idTennista) {
-		return (List<Torneo>) torneoRepository.findTorneiIscritti(idTennista);
+		return (List<Torneo>) torneoRepository.findTorneiIscritti(idTennista,this.getMese(),this.getAnno());
 	}
 	@Transactional
 	public List<Torneo> getTorneiCancellabili() {

@@ -131,8 +131,11 @@ public class TorneoController {
     
     @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.GET)
     public String apriCancellaIscrizioneTorneo(Model model) {
+    	System.out.println("prendo tennista");
     	Long idTennista=utili.getTennista().getId();
+    	System.out.println("prendo torneo");
     	model.addAttribute("tornei",torneoService.getTorneiIscrittiDaTennista(idTennista));
+    	System.out.println("entro in html");
     	return "cancellaIscrizioneTorneo";
     }
     

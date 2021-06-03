@@ -30,7 +30,7 @@ public interface TorneoRepository extends CrudRepository<Torneo,Long>{
 	public List<Torneo> findTorneiDisponibili(Long idTennista, Integer mese, Integer anno);
 
 	@Query (value="SELECT tor FROM Torneo as tor LEFT JOIN tor.tennistiIscritti as te WHERE te.id=:idTennista AND NOT(tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno)")
-	public List<Torneo> findTorneiIscritti(Long idTennista);
+	public List<Torneo> findTorneiIscritti(Long idTennista,Integer mese,Integer anno);
 	
 	@Query (value="SELECT tor FROM Torneo as tor WHERE NOT( tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno)")
 	public List<Torneo> findTorneiCancellabili(Integer mese,Integer anno);
