@@ -21,14 +21,13 @@
 	   			<ul>
 				<li th:each="partita : ${partite}">
 					<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
-					<p>
 						<div th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</div>
-					</p>
 				</li>
 			</ul>
 	    </div>
 	    	<div th:unless="${partite}">Nessuna partita fatta.</div>
 	    </div>
+	    <div th:unless="${torneo}">Toreno non esistente.</div>
 		</section>
 	    <footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>

@@ -102,7 +102,7 @@ public class TorneoController {
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
     public String apriIscrizioneTorneo(Model model) {
-    	Long idTennista=utili.getTennistaAttuale().getId();
+    	Long idTennista=utili.getTennista().getId();
     	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(idTennista));
     	model.addAttribute("torneoSelez",new Torneo());
     	return "iscrizioneTorneo";
@@ -110,7 +110,7 @@ public class TorneoController {
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.POST)
     public String IscrizioneTorneo(@RequestParam("torneoSelezionato") Long idTorneo,Model model) {
-    	Tennista tennista=utili.getTennistaAttuale();
+    	Tennista tennista=utili.getTennista();
     	System.out.println("id torneo= " + idTorneo);
     	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
     	System.out.println("nome torneo: " + torneoSelez.getNome() + " anno toreno: " + torneoSelez.getAnno() + " numeroMaxPartecipanti: " + torneoSelez.getNumeroMaxDiPartecipanti() );
@@ -131,15 +131,14 @@ public class TorneoController {
     
     @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.GET)
     public String apriCancellaIscrizioneTorneo(Model model) {
-    	Long idTennista=utili.getTennistaAttuale().getId();
-    	System.out.println(torneoService.getTorneiIscrittiDaTennista(idTennista).size());
+    	Long idTennista=utili.getTennista().getId();
     	model.addAttribute("tornei",torneoService.getTorneiIscrittiDaTennista(idTennista));
     	return "cancellaIscrizioneTorneo";
     }
     
     @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.POST)
     public String cancellaIscrizioneTorneo(@RequestParam("torneoSelezionato") Long idTorneo,Model model) {
-    	Tennista tennista=utili.getTennistaAttuale();
+    	Tennista tennista=utili.getTennista();
     	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
     	tennista.getTorneiIscritti().remove(torneoSelez);
     	torneoSelez.getTennistiIscritti().remove(tennista);
@@ -149,4 +148,14 @@ public class TorneoController {
     	return "cancellazioneIscrizioneCompletata";
     }
     
+    @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.GET)
+    public String apriCancellaToreno(Model model) {
+    	model.addAttribute("tornei",torneoService.getTorneiCancellabili());
+    	return "/admin/cancellaTorneo";
+    }
+    @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.POST)
+    public String CancellaToreno(@RequestParam("torenoSelezionato") Long idTorneo) {
+    	this.torneoService.eliminaTroeno(idTorneo);
+    	return "/admin/cancellazioneTorneoCompletata";
+    }
 }

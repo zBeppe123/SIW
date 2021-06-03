@@ -79,7 +79,6 @@ public class ArbitroController {
 	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.GET)
 	public String apriModificaArbitro(Model model, HttpSession sessione) {
 		Arbitro a = (Arbitro) sessione.getAttribute("arbitroPerModifica");
-		
 		model.addAttribute("arbitro", a);
 		return "admin/modificaArbitro.html";
 	}
@@ -108,4 +107,16 @@ public class ArbitroController {
 		model.addAttribute("arbitro", this.arbitroService.arbitroPerId(idArbitro));
 		return "arbitro.html";
 	}
+	
+	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.GET)
+	public String apriCancellaArbitro(Model model) {
+		model.addAttribute("arbitri",this.arbitroService.arbitriNonImpegnati());
+		return "admin/cancellaArbitro";
+	}
+	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.POST)
+	public String cancellaArbitro(@RequestParam("arbitroSelezionato") Long idArbitro,Model model,HttpSession sessione) {
+		this.arbitroService.cancellaArbitro(idArbitro);
+		return "admin/cancellazioneArbitroCompletata";
+	}
+
 }

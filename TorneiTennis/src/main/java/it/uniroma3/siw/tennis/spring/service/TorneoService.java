@@ -67,10 +67,8 @@ public class TorneoService {
 
 	@Transactional
 	public List<Torneo> getTorneiDisponibili(Long idTennista) {
-		LocalDate dataOdierna = LocalDate.now();
-		Integer mese=dataOdierna.getMonthValue();
-		Integer anno=dataOdierna.getYear();
-		return (List<Torneo>) torneoRepository.findTorneiDisponibili(idTennista,mese,anno);
+
+		return (List<Torneo>) torneoRepository.findTorneiDisponibili(idTennista,this.getMese(),this.getAnno());
 	}
 
 	@Transactional
@@ -83,6 +81,19 @@ public class TorneoService {
 	public List<Torneo> getTorneiIscrittiDaTennista(Long idTennista) {
 		return (List<Torneo>) torneoRepository.findTorneiIscritti(idTennista);
 	}
-
-
+	@Transactional
+	public List<Torneo> getTorneiCancellabili() {
+		return torneoRepository.findTorneiCancellabili(this.getMese(),this.getAnno());
+	}
+	@Transactional
+	public void eliminaTroeno(Long idTorneo) {
+		torneoRepository.deleteById(idTorneo);		
+	}
+	private Integer getMese() {
+		return LocalDate.now().getMonthValue();
+	}
+	private Integer getAnno() {
+		return LocalDate.now().getYear();
+	}
+	
 }

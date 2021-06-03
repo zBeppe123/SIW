@@ -6,8 +6,8 @@
 		<section>
 			<h1>Iscrizione ad un torneo</h1>
 			<div>Scegli tra uno di questi tornei disponibili:</div>
+			<div th:unless=${#lists.isEmpty(torneiDisponibili)}>
 			<form th:action="@{/iscrizioneTorneo}" method="post">
-				</div>
 				<div class="torneo" th:each="torneoDisponibile : ${torneiDisponibili}" style="height: 77px; ">
 					<div class="radioCheckbox">
 						<input type="radio" name="torneoSelezionato" th:value="${torneoDisponibile.id}" required>
@@ -21,6 +21,8 @@
 				</div>
 				<div><input type="submit" value="Registra"/></div>
 			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(torneiDisponibili)}><h2>Nessun toreno disponibile</h2></div>
 		</section>
 		<footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>

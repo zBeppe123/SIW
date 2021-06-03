@@ -8,12 +8,18 @@
 			Benvenuto, qui sei nella sezione Amministratore del sistema. <br>
 			Per fare una modifica, registrazione o altro, scegli una voce tra questi elencati:
 			<ul>
+			<h2>Registra:</h2>
 				<li> <a th:href="@{/admin/registraTorneo}">Registra un nuovo torneo</a>.
 				<li> <a th:href="@{/admin/registraArbitro}">Registra un nuovo arbitro</a>.
 				<li> <a th:href="@{/admin/registraPartita}">Registra una partita di un torneo</a>.
+			<h2>Modifica:</h2>
 				<li> <a th:href="@{/admin/modificaTorneo}">Modifica i dati di un torneo</a>.
 				<li> <a th:href="@{/admin/sceltaArbitroPerModifica}">Modifca i dati di un arbitro</a>.
 				<li> <a th:href="@{/admin/modificaPartita}">Modifica i dati di una partita di un torneo</a>.
+			<h2>Cancella:</h2>
+				<li> <a th:href="@{/admin/cancellaTorneo}">cancella un torneo dal database</a>.
+				<li> <a th:href="@{/admin/cancellaArbitro}">cancella un arbitro dal database</a>.
+				<li> <a th:href="@{/admin/selezionaTorenoPerCancellarePartita}">cancella una partita dal database</a>.
 			</ul>
 		</section>
 		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>

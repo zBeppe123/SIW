@@ -14,10 +14,22 @@ public class Utili {
 	
 	@Autowired
 	private CredentialsService credentialsService;
-	
-	public 	Tennista getTennistaAttuale(){
-		UserDetails tennistaDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());
-    	return credentials.getTennista();
+	/*
+	 * Ritorna il tennista attualmente loggato
+	 */
+	public Tennista getTennista(){
+    	return credentialsService.getCredentials(this.getUserDetails().getUsername()).getTennista();
+	}
+	/*
+	 * Ritorna Le credenziali dell'utente attualmente loggato
+	 */
+	public Credentials getCredentials() {
+		return credentialsService.getCredentials(this.getUserDetails().getUsername());
+	}
+	/*
+	 * Ritorna i UserDetails attualmente loggato
+	 */
+	private UserDetails getUserDetails() {
+		return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

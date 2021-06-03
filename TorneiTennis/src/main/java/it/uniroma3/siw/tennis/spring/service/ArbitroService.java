@@ -51,4 +51,12 @@ public class ArbitroService {
 	public void modificaDatiDi(Arbitro arbitroDatiModificati) {
 		this.arbitroRepository.save(arbitroDatiModificati);
 	}
+	@Transactional
+	public void cancellaArbitro(Long idArbitro) {
+		this.arbitroRepository.deleteById(idArbitro);
+	}
+
+	public List<Arbitro> arbitriNonImpegnati() {
+		return (List<Arbitro>) this.arbitroRepository.arbitriNonImpegnati();
+	}
 }

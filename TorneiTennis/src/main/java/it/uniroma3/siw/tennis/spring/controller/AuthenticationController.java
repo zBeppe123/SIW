@@ -1,5 +1,7 @@
 package it.uniroma3.siw.tennis.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +18,12 @@ import it.uniroma3.siw.tennis.spring.model.Credentials;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.service.CredentialsService;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
+import it.uniroma3.siw.tennis.spring.utili.Utili;
 
 @Controller
 public class AuthenticationController {
+	@Autowired
+	private Utili utili;
 	
 	@Autowired
 	private CredentialsService credentialsService;
@@ -51,9 +56,9 @@ public class AuthenticationController {
 	}
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
-    public String defaultAfterLogin(Model model) {
-    	UserDetails tennistaDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(tennistaDetails.getUsername());    	
+    public String defaultAfterLogin(Model model,HttpSession sessione) {
+    	Credentials credentials = utili.getCredentials();
+    	sessione.setAttribute("tennistaCorrente", credentials.getTennista());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
@@ -72,13 +77,14 @@ public class AuthenticationController {
         // validate user and credentials fields
         this.tennistaValidator.validate(tennista, tennistaBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
-
+        
         // if neither of them had invalid contents, store the User and the Credentials into the DB
         if(!tennistaBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
         	credentials.setTennista(tennista);
             credentialsService.saveCredentials(credentials);
+            
             return "registrationSuccessful";
         }
         return "registraTennista";
