@@ -1,4 +1,4 @@
-+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione torneo completata.', filecss='admin/registrazioneTorneoCompletata.css')"></head>
 	<body>
@@ -8,6 +8,5 @@
 			Registrazione del torneo <span th:text="${torneo.nome}">nome-torneo</span> completata. <br>
 			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
 		</section>
-		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

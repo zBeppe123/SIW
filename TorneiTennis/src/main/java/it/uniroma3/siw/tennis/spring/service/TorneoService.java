@@ -48,6 +48,11 @@ public class TorneoService {
 		Optional<Torneo> result = this.torneoRepository.findById(id);
 		return result.orElse(null);
 	}
+	
+	@Transactional
+	public Torneo torneoPerNome(String nome) {
+		return this.torneoRepository.findByNome(nome);
+	}
 
 	/**
 	 * Verifica se esiste gia' un torneo con lo stesso nel sistema.
@@ -56,13 +61,13 @@ public class TorneoService {
 	 * @return true se esiste gia' un torneo con lo stesso nome, false altrimenti.
 	 */
 	@Transactional
-	public boolean alreadyExits(Torneo torneo) {
+	public boolean alreadyExists(Torneo torneo) {
 		return this.torneoRepository.findByNome(torneo.getNome()) != null;
 	}
-
-	public Torneo torneoPerId(long id) {
-		Optional<Torneo> result = torneoRepository.findById(id);
-		return result.orElse(null);
+	
+	@Transactional
+	public void modificaDatiDiTorneo(Torneo torneoModificato) {
+		this.torneoRepository.save(torneoModificato);
 	}
 
 	@Transactional
@@ -74,7 +79,6 @@ public class TorneoService {
 	@Transactional
 	public void iscriviTennista(Torneo torneo) {
 		torneoRepository.save(torneo);
-
 	}
 
 	@Transactional
@@ -85,13 +89,16 @@ public class TorneoService {
 	public List<Torneo> getTorneiCancellabili() {
 		return torneoRepository.findTorneiCancellabili(this.getMese(),this.getAnno());
 	}
+	
 	@Transactional
 	public void eliminaTroeno(Long idTorneo) {
 		torneoRepository.deleteById(idTorneo);		
 	}
+	
 	private Integer getMese() {
 		return LocalDate.now().getMonthValue();
 	}
+	
 	private Integer getAnno() {
 		return LocalDate.now().getYear();
 	}

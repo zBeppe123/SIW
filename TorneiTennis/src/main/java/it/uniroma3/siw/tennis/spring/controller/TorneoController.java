@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.tennis.spring.controller.validator.TorneoModificatoValidator;
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
+import it.uniroma3.siw.tennis.spring.model.Arbitro;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
@@ -35,6 +37,9 @@ public class TorneoController {
 	
     @Autowired
     private TorneoValidator torneoValidator;
+    
+    @Autowired
+    private TorneoModificatoValidator torneoModificatoValidator;
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -70,6 +75,38 @@ public class TorneoController {
     		return "/admin/registraTorneo.html";
     	}
     }
+    
+    @RequestMapping(value = "/admin/sceltaTorneoPerModifica", method = RequestMethod.GET)
+	public String apriSceltaTorneoPerModifica(Model model) {
+		model.addAttribute("tornei", this.torneoService.tutti());
+		return "admin/sceltaTorneoPerModifica.html";
+	}
+	
+	@RequestMapping(value = "/admin/sceltaTorneoPerModifica", method = RequestMethod.POST)
+	public String sceltoArbitroPerModifica(@RequestParam("torneoSelezionato") Long idTorneo, Model model) {
+		Torneo torneo = this.torneoService.getTorneoPerId(idTorneo);
+		
+		model.addAttribute("torneo", torneo);
+		model.addAttribute("arbitri", this.arbitroService.tutti());
+		return "/admin/modificaTorneo.html";
+	}
+	
+	@RequestMapping(value = "/admin/modificaTorneo", method = RequestMethod.POST)
+	public String modificaDatiArbitro(@RequestParam("arbtr") Long idArbitro, @ModelAttribute("torneo") Torneo torneoModificato, 
+									  Model model, BindingResult bindingResult) {
+		this.torneoModificatoValidator.validate(torneoModificato, bindingResult);
+		
+		if(!bindingResult.hasErrors()) {
+			torneoModificato.setArbitro(this.arbitroService.arbitroPerId(idArbitro));
+			torneoModificato.setNumeroPartecipanti(this.torneoService.getTorneoPerId(torneoModificato.getId()).getNumeroPartecipanti());
+			
+			this.torneoService.modificaDatiDiTorneo(torneoModificato);
+			
+			return "/admin/modificaTorneoCompletata.html";
+		}
+		
+		return "/admin/modificaTorneo.html";
+	}
     
     @RequestMapping(value="/tornei", method = RequestMethod.GET)
     public String elencoTornei(Model model) {

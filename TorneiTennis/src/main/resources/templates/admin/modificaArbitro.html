@@ -16,6 +16,9 @@
 				</div>
 				<table>
 					<tr>
+						<td><input type="hidden" th:field="*{id}" th:value="*{id}"/></td>
+					</tr>
+					<tr>
 						<td>Cognome:</td>
 						<td><input type="text" placeholder="Cognome" th:field="*{cognome}" th:value="*{cognome}" required/></td>
 					</tr>
@@ -28,7 +31,7 @@
 						<td><input type="text" placeholder="Telefono" th:field="*{telefono}" th:value="*{telefono}" required/></td>
 					</tr>
 					<tr>
-						<td>Nazionalit&grave;:</td>
+						<td>Nazionalit&agrave;:</td>
 						<td><input type="text" placeholder="Nazionalità" th:field="*{nazionalita}" th:value="*{nazionalita}" required/></td>
 					</tr>
 				</table>

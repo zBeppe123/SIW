@@ -27,8 +27,9 @@ public class ArbitroService {
 	}
 	
 	@Transactional
-	public List<Arbitro> arbitriPerNomeAndCognome(String nome,String cognome) {
-		return arbitroRepository.findByNomeAndCognome(nome,cognome);
+	public Arbitro arbitroPerNomeAndCognome(String nome,String cognome) {
+		Optional<Arbitro> result = arbitroRepository.findByNomeAndCognome(nome,cognome);
+		return result.orElse(null);
 	}
 	
 	@Transactional
@@ -40,15 +41,11 @@ public class ArbitroService {
 	
 	@Transactional
 	public boolean alreadyExists(Arbitro arbitro) {
-		List<Arbitro> arbitri = this.arbitroRepository.findByNomeAndCognome(arbitro.getNome(),arbitro.getCognome());
-		if (arbitri.size() > 0)
-			return true;
-		else 
-			return false;
+		return this.arbitroPerNomeAndCognome(arbitro.getNome(), arbitro.getCognome())!=null;
 	}
 
 	@Transactional
-	public void modificaDatiDi(Arbitro arbitroDatiModificati) {
+	public void modificaDatiDiArbitro(Arbitro arbitroDatiModificati) {
 		this.arbitroRepository.save(arbitroDatiModificati);
 	}
 	@Transactional

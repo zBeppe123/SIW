@@ -36,12 +36,12 @@ public class TorneoValidator implements Validator {
     		Torneo torneo = (Torneo) o;
     		
     		//Esiste gia' un torneo con lo stesso nome?
-    		if(this.torneoService.alreadyExits(torneo)) {
+    		if(this.torneoService.alreadyExists(torneo)) {
     			logger.debug("Torneo gia' esistente.");
     			errors.reject("registra_torneo_errors_duplicato");
     		}
     		
-    		//Mese e anno inseriti sono corretti?
+    		//Mese e anno sono corretti?
     		LocalDate dataOdierna = LocalDate.now();
     		if((torneo.getMese()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
     				torneo.getAnno()<dataOdierna.getYear()) {

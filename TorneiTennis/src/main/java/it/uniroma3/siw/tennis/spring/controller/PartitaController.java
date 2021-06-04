@@ -52,7 +52,7 @@ public class PartitaController {
     	//I dati sono validi?
     	if(!bindingResult.hasErrors()) {
     		
-    		partita.setTorneo(torneoService.torneoPerId(Long.parseLong(idTorneo)));
+    		partita.setTorneo(torneoService.getTorneoPerId(Long.parseLong(idTorneo)));
     		partita.setTennista1(tennistaService.tennistaPerId(Long.parseLong(idTennista1)));
     		partita.setTennista2(tennistaService.tennistaPerId(Long.parseLong(idTennista2)));
     		this.partitaService.inserisci(partita);
