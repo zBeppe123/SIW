@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='')"> </head>
 	<body>
-		<div th:if="${amministratore}">
-		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		<div th:if="${utente == 'admin'}">
+			<header  th:replace="fragments/baseAdmin.html :: intestazione"></header>
 		</div>
-		<div th:if="${utente}">
-		<header  th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<div th:if="${utente == 'tennista'}">
+			<header  th:replace="fragments/baseUtente.html :: intestazione"></header>
 		</div>
-		<div th:if="${nessuno}">
-		<header  th:replace="fragments/base.html :: intestazione"></header>
+		<div th:if="${utente == 'anonimo'}">
+			<header  th:replace="fragments/base.html :: intestazione"></header>
 		</div>
 		<section>
 			<div>
@@ -19,7 +19,7 @@
 	    		<p>
 	    			Arbitro: <span th:text="${arbitro.cognome}">cognome</span> <span th:text="${arbitro.nome}">nome</span> <br>
 	    			Nazionalit&agrave;: <span th:text="${arbitro.nazionalita}">nazionalita'</span> <br>
-	    			<span th:if="${amministratore}">
+	    			<span th:if="${utente == 'admin'}">
 	    				Telefono: <span th:text="${arbitro.telefono}">telefono</span>
 	    			</span>
 	    		</p>

@@ -92,18 +92,23 @@ public class ArbitroController {
 		logger.debug("Lettura arbitro.");
 		
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
-		String s=utili.getCredentials().getRole();
+		
 		
 		model.addAttribute("arbitro", arbitro);
 		if(arbitro!=null)
 			model.addAttribute("tornei", arbitro.getTornei());
-		if(s.equals(Credentials.ADMIN_ROLE))
-			model.addAttribute("amministratre", "admin");
-		else if(s.equals(Credentials.DEFAULT_ROLE))
-			model.addAttribute("utente", "user");
-		else
-			model.addAttribute("nessuno", "anonimo");
 		
+		try {
+			String s=utili.getCredentials().getRole();
+			
+			if(s.equals(Credentials.ADMIN_ROLE))
+				model.addAttribute("utente", "admin");
+			else
+				model.addAttribute("utente", "tennista");
+		}
+		catch(ClassCastException e) {
+			model.addAttribute("utente", "anonimo");
+		}
 		
 		return "arbitro.html";
 	}
