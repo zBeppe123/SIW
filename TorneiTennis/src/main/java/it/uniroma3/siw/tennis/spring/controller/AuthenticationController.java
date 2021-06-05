@@ -57,7 +57,7 @@ public class AuthenticationController {
     public String defaultAfterLogin(Model model,HttpSession sessione) {
     	Credentials credentials = utili.getCredentials();
     	sessione.setAttribute("tennistaCorrente", credentials.getTennista());
-    	if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
+    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
     	Tennista tennista=credentials.getTennista();

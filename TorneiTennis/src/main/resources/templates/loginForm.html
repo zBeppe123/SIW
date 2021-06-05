@@ -7,19 +7,19 @@
 		<h1>Login</h1>
 	</div>
 	<form th:action="@{/login}" method="post">
-		<div>
-			<div>
-				<span>Email:</span>
-				<span><input name="username" type="text" required /></span>
-			</div>		
-			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
-			</div>
-			<div>
-				<span><button type="submit">Login</button></span>
-			</div>
-		</div>
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input name="username" type="text" required /></td>
+			</tr>		
+			<tr>
+				<td>Password:</td>
+				<td><input name="password" type="password" required /></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Login</button></td>
+			</tr>
+		</table>
 	</form>
 </body>
 </html>

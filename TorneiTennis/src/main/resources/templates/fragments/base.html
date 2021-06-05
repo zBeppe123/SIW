@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title,filecss)">
-<meta charset="UTF-8" />
-<title th:text="${title}">Titolo</title>
-<link href="/css/fragments/base.css" rel="stylesheet" />
-<link th:if="${filecss!=''}" th:href="@{'/css/' + ${filecss}}" rel="stylesheet" />
+	<meta charset="UTF-8" />
+	<title th:text="${title}">Titolo</title>
+	<link href="/css/fragments/base.css" rel="stylesheet" />
+	<link th:if="${filecss!=''}" th:href="@{'/css/' + ${filecss}}"
+		rel="stylesheet" />
 </head>
 <body>
 	<header th:fragment="intestazione">
@@ -14,7 +15,7 @@
 			</div>
 			<div id="destra">
 				<span> <a th:href="@{/login}">LogIn</a>/<a
-					th:href="@{/register}">SingUp</a>
+					th:href="@{/register}">SignUp</a>
 				</span>
 			</div>
 		</div>

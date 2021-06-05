@@ -35,20 +35,19 @@ public class PartitaController {
 	@RequestMapping(value = "/admin/selezionaTorneoPerRPartita", method = RequestMethod.GET)
     public String apriSelezionaTorenoPerRPartita(Model model) {
     	model.addAttribute("tornei", torneoService.getTorneiDisponibili());
-    	return "admin/registra/selezionaTorneoPerRPartita";
+    	return "/admin/registra/selezionaTorneoPerRPartita";
     }
 	@RequestMapping(value = "/admin/selezionaTorneoPerRPartita", method = RequestMethod.POST)
     public String apriSelezionaTorenoPerRPartita(@RequestParam("torneoSelezionato") Long idTorneo, Model model) {
 		model.addAttribute("idTorneo",idTorneo);
 		model.addAttribute("tennisti",torneoService.getTorneoPerId(idTorneo).getTennistiIscritti());
 		model.addAttribute("partita",new Partita());
-    	return "admin/registra/registraPartita";
+    	return "/admin/registra/registraPartita";
     }
     
     @RequestMapping(value = "/admin/registraPartita", method = RequestMethod.POST)
     public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@RequestParam("torn") Long idTorneo, @RequestParam("gioc1") Long idTennista1,
     		@RequestParam("gioc2") Long idTennista2, Model model, BindingResult bindingResult) {
-    	System.out.println("entrato");
     	this.partitaValidator.validate(partita, bindingResult);
     	this.partitaValidator.controllaId(idTennista1, idTennista2, bindingResult);
     	

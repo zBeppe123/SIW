@@ -1,53 +1,92 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra torneo', filecss='')"></head>
-	<body>
-		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
-		<section>
-			<h1>Registra torneo</h1>
-			<div>Inserisci i dati del torneo:</div>
-			<form th:action="@{/admin/registraTorneo}" method="post" th:object="${torneo}">
-				<div th:if="${#fields.hasGlobalErrors()}">
-	  				<p> <span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</span></p>
-				</div>
-				<div id="torneo">
-					<div>Nome del torneo: <input type="text" th:field="*{nome}"/></div>
-					<div>Numero di partecipanti: <input type="number" th:field="*{numeroMaxDiPartecipanti}"/></div>
-					<div>
-						Mese: 
-						<select th:field="*{mese}">
+<head
+	th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra torneo', filecss='')"></head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<section>
+		<h1>Registra torneo</h1>
+		<div>Inserisci i dati del torneo:</div>
+		<form th:action="@{/admin/registraTorneo}" method="post"
+			th:object="${torneo}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p>
+					<span class="evidenziato" th:each="err : ${#fields.globalErrors()}"
+						th:text="${err}">errori</span>
+				</p>
+			</div>
+			<table>
+				<tr>
+					<td>Nome del torneo:</td>
+					<td><input type="text" th:field="*{nome}" /></td>
+				</tr>
+				<tr>
+					<td>Numero di partecipanti:</td>
+					<td><input type="number" th:field="*{numeroMaxDiPartecipanti}" /></td>
+				</tr>
+				<tr>
+					<td>Mese:</td>
+					<td><select th:field="*{mese}">
 							<option value=""></option>
 							<option value="1">Gennaio</option>
 							<option value="2">Febbraio</option>
 							<option value="3">Marzo</option>
 							<option value="4">Aprile</option>
 							<option value="5">Maggio</option>
-							<option value="6">Giugno</option> 
+							<option value="6">Giugno</option>
 							<option value="7">Luglio</option>
 							<option value="8">Agosto</option>
 							<option value="9">Settembre</option>
 							<option value="10">Ottobre</option>
 							<option value="11">Novembre</option>
 							<option value="12">Dicembre</option>
-						</select>
-					</div>
-					<div>Anno: <input type="number" th:field="*{anno}"/></div>
-					<div>Premio in denaro (&euro;): <input type="number" th:field="*{premioInDenaro}"/></div>
-					<div>
-						Arbitro:
-						<select name="arbtr">
+					</select></td>
+				</tr>
+				<tr>
+					<td>Anno:</td>
+					<td><input type="number" th:field="*{anno}" /></td>
+				<tr>
+					<td>Premio in denaro (&euro;):</td>
+					<td><input type="number" th:field="*{premioInDenaro}" /></td>
+				</tr>
+				<tr>
+					<td>Arbitro:</td>
+					<td><select name="arbtr">
 							<option value=""></option>
-							<option th:each="arbitro : ${arbitri}" th:value="${arbitro.id}" th:text="|${arbitro.cognome} ${arbitro.nome}|">cognome-nome arbitro</option>
-						</select>
-					</div>
-				</div>
-				<div><input type="submit" value="Registra"/></div>
-				<div><span class="evidenziato" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">errore-nome</span></div>
-				<div><span class="evidenziato" th:if="${#fields.hasErrors('numeroMaxDiPartecipanti')}" th:errors="*{numeroMaxDiPartecipanti}">errore-numPartecipanti</span></div>
-				<div><span class="evidenziato" th:if="${#fields.hasErrors('mese')}" th:errors="*{mese}">errore-mese</span></div>
-				<div><span class="evidenziato" th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}">errore-anno</span></div>
-				<div><span class="evidenziato" th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}">errore-premioInDenaro</span></div>
-			</form>
-		</section>
-	</body>
+							<option th:each="arbitro : ${arbitri}" th:value="${arbitro.id}"
+								th:text="|${arbitro.cognome} ${arbitro.nome}|">cognome-nome
+								arbitro</option>
+					</select></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Registra" /></td>
+				</tr>
+			</table>
+			<div>
+				<span class="evidenziato" th:if="${#fields.hasErrors('nome')}"
+					th:errors="*{nome}">errore-nome</span>
+			</div>
+			<div>
+				<span class="evidenziato"
+					th:if="${#fields.hasErrors('numeroMaxDiPartecipanti')}"
+					th:errors="*{numeroMaxDiPartecipanti}">errore-numPartecipanti</span>
+			</div>
+			<div>
+				<span class="evidenziato" th:if="${#fields.hasErrors('mese')}"
+					th:errors="*{mese}">errore-mese</span>
+			</div>
+			<div>
+				<span class="evidenziato" th:if="${#fields.hasErrors('anno')}"
+					th:errors="*{anno}">errore-anno</span>
+			</div>
+			<div>
+				<span class="evidenziato"
+					th:if="${#fields.hasErrors('premioInDenaro')}"
+					th:errors="*{premioInDenaro}">errore-premioInDenaro</span>
+			</div>
+		</form>
+	</section>
+</body>
 </html>
