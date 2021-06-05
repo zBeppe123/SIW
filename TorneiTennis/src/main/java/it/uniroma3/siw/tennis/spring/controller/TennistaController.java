@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import it.uniroma3.siw.tennis.spring.controller.validator.TennistaValidator;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TennistaService;
@@ -18,9 +17,7 @@ public class TennistaController {
 	private TennistaService tennistaService;
 	@Autowired
 	private PartitaService partitaService;
-	@Autowired
-	private TennistaValidator tennistaValidator;
-
+	
 	@RequestMapping(value = "/tennista/{id}", method = RequestMethod.GET)
 	public String getTennista(@PathVariable("id") Long idTennista, Model model) {
 		Tennista t = this.tennistaService.tennistaPerId(idTennista);

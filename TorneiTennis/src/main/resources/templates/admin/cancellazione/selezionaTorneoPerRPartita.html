@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Scelta torneo per partita', filecss='admin/sceltaTorneoPerModifica.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Scelta torneo per inserire una partita</h1>
+			Ecco la lista di tutti i tornei di ABCTennis di questo mese. <br>
+			Scegli uno tra questi elencati per aggiungerne una partita:<br>
+			<div th:unless=${#lists.isEmpty(tornei)}>
+			<form th:action="@{/admin/selezionaTorneoPerRPartita}" method="post">
+				<table>
+					<tr th:each="torneo : ${tornei}">
+						<td><input type="radio" name="torneoSelezionato" th:value="${torneo.id}" required/></td>
+						<td>
+							Torneo: <span th:text="${torneo.nome}">Nome-torneo</span> <br>
+							Periodo dell'evento: <span th:text="|${torneo.mese}/${torneo.anno}|">09/2021</span> <br>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Avanti"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(tornei)}><h2>Nessun torneo disponibile per l'aggiunta delle partite</h2></div>
+		</section>
+	</body>
+</html>

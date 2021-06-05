@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoModificatoValidator;
 import it.uniroma3.siw.tennis.spring.controller.validator.TorneoValidator;
-import it.uniroma3.siw.tennis.spring.model.Arbitro;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
@@ -47,7 +46,7 @@ public class TorneoController {
     public String apriRegistraTorneo(Model model) {
     	model.addAttribute("torneo", new Torneo());
     	model.addAttribute("arbitri", arbitroService.tutti());
-    	return "admin/registraTorneo.html";
+    	return "admin/registra/registraTorneo";
     }
     
     @RequestMapping(value = "/admin/registraTorneo", method = RequestMethod.POST)
@@ -66,20 +65,18 @@ public class TorneoController {
     		logger.debug("Registrazione nuovo torneo effettuata.");
     		
     		model.addAttribute("torneo", torneo);
-    		return "/admin/registrazioneTorneoCompletata.html";
+    		return "/admin/registra/registrazioneTorneoCompletata";
     	}
-    	else {
-    		logger.debug("Uno o piu' campi di torneo vuoti");
-    		
-    		model.addAttribute("arbitri", this.arbitroService.tutti());
-    		return "/admin/registraTorneo.html";
-    	}
+    	
+    	logger.debug("Uno o piu' campi di torneo vuoti");
+    	model.addAttribute("arbitri", this.arbitroService.tutti());
+    	return "/admin/registra/registraTorneo";
     }
     
     @RequestMapping(value = "/admin/sceltaTorneoPerModifica", method = RequestMethod.GET)
 	public String apriSceltaTorneoPerModifica(Model model) {
 		model.addAttribute("tornei", this.torneoService.tutti());
-		return "admin/sceltaTorneoPerModifica.html";
+		return "admin/modifica/sceltaTorneoPerModifica";
 	}
 	
 	@RequestMapping(value = "/admin/sceltaTorneoPerModifica", method = RequestMethod.POST)
@@ -88,7 +85,7 @@ public class TorneoController {
 		
 		model.addAttribute("torneo", torneo);
 		model.addAttribute("arbitri", this.arbitroService.tutti());
-		return "/admin/modificaTorneo.html";
+		return "/admin/modifica/modificaTorneo";
 	}
 	
 	@RequestMapping(value = "/admin/modificaTorneo", method = RequestMethod.POST)
@@ -102,10 +99,10 @@ public class TorneoController {
 			
 			this.torneoService.modificaDatiDiTorneo(torneoModificato);
 			
-			return "/admin/modificaTorneoCompletata.html";
+			return "/admin/modifica/modificaTorneoCompletata";
 		}
 		
-		return "/admin/modificaTorneo.html";
+		return "/admin/modifica/modificaTorneo";
 	}
     
     @RequestMapping(value="/tornei", method = RequestMethod.GET)
@@ -113,7 +110,7 @@ public class TorneoController {
     	logger.debug("Lettura di tutti i tornei");
     	
     	model.addAttribute("tornei", this.torneoService.tutti());
-        return "tornei.html";
+        return "tornei";
     }
     
     @RequestMapping(value="/torneiUtente", method = RequestMethod.GET)
@@ -121,7 +118,7 @@ public class TorneoController {
     	logger.debug("Lettura di tutti i tornei");
     	
     	model.addAttribute("tornei", this.torneoService.tutti());
-        return "torneiUtente";
+        return "/utente/torneiUtente";
     }
     
     @RequestMapping(value = "/torneo/{id}", method = RequestMethod.GET)
@@ -134,7 +131,7 @@ public class TorneoController {
     		model.addAttribute("partite", partitaService.getPartiteByToreno(idTorneo));
     	}
     	
-    	return "infoTorneo.html";
+    	return "infoTorneo";
     }
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.GET)
@@ -142,38 +139,33 @@ public class TorneoController {
     	Long idTennista=utili.getTennista().getId();
     	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(idTennista));
     	model.addAttribute("torneoSelez",new Torneo());
-    	return "iscrizioneTorneo";
+    	return "/utente/gestioneIscrizione/iscrizioneTorneo";
     }
     
     @RequestMapping(value = "/iscrizioneTorneo", method = RequestMethod.POST)
     public String IscrizioneTorneo(@RequestParam("torneoSelezionato") Long idTorneo,Model model) {
     	Tennista tennista=utili.getTennista();
-    	System.out.println("id torneo= " + idTorneo);
     	Torneo torneoSelez = this.torneoService.getTorneoPerId(idTorneo);
-    	System.out.println("nome torneo: " + torneoSelez.getNome() + " anno toreno: " + torneoSelez.getAnno() + " numeroMaxPartecipanti: " + torneoSelez.getNumeroMaxDiPartecipanti() );
     	if(tennista!=null && torneoSelez!=null) {
     		torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()+1);
     		torneoSelez.getTennistiIscritti().add(tennista);
     		torneoService.iscriviTennista(torneoSelez);
     		model.addAttribute("torneo", torneoSelez);
-    		return "iscrizioneTorneoCompletata";
+    		return "/utente/gestioneIscrizione/iscrizioneTorneoCompletata";
     	}
     	else if(torneoSelez==null) {
         	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
-        	return "iscrizioneTorneo";
+        	return "/utente/gestioneIscrizione/iscrizioneTorneo";
     	}
-    	return "index";
+    	return "/utente/home";
     	
     }
     
     @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.GET)
     public String apriCancellaIscrizioneTorneo(Model model) {
-    	System.out.println("prendo tennista");
     	Long idTennista=utili.getTennista().getId();
-    	System.out.println("prendo torneo");
     	model.addAttribute("tornei",torneoService.getTorneiIscrittiDaTennista(idTennista));
-    	System.out.println("entro in html");
-    	return "cancellaIscrizioneTorneo";
+    	return "/utente/gestioneIscrizione/cancellaIscrizioneTorneo";
     }
     
     @RequestMapping(value = "/cancellaIscrizioneTorneo", method = RequestMethod.POST)
@@ -185,17 +177,17 @@ public class TorneoController {
     	torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()-1);
     	torneoService.inserisci(torneoSelez);
     	model.addAttribute("torneo",torneoSelez);
-    	return "cancellazioneIscrizioneCompletata";
+    	return "/utente/gestioneIscrizione/cancellazioneIscrizioneCompletata";
     }
     
     @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.GET)
     public String apriCancellaToreno(Model model) {
     	model.addAttribute("tornei",torneoService.getTorneiCancellabili());
-    	return "/admin/cancellaTorneo";
+    	return "/admin/cancella/cancellaTorneo";
     }
     @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.POST)
     public String CancellaToreno(@RequestParam("torenoSelezionato") Long idTorneo) {
     	this.torneoService.eliminaTroeno(idTorneo);
-    	return "/admin/cancellazioneTorneoCompletata";
+    	return "/admin/cancella/cancellazioneTorneoCompletata";
     }
 }

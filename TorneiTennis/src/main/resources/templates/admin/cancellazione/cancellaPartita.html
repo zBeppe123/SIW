@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Scelta partita da cancellare', filecss='admin/sceltaArbitroPerModifica.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Scelta partita da cancellare</h1>
+			Ecco la lista di tutti le partite del torneo selezionato <br>
+			Scegline una tra queste elencate per cancellare una partita dal database:<br>
+			ATTENZIONE: questa operazione non può essere modificata! <br>
+			<div th:unless=${#lists.isEmpty(partite)}>
+			<form th:action="@{/admin/cancellaPartita}" method="post">
+				<table>
+					<tr th:each="partita : ${partite}">
+						<td><input type="radio" name="partitaSel" th:value="${partita.id}" required/></td>
+						<td>
+							<span th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</span>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Cancella"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(partite)}><h2>Nessuna partita disponibile per la cancellazione</h2></div>
+		</section>
+	</body>
+</html>

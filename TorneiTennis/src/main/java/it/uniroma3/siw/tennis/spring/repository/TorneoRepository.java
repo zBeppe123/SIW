@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import it.uniroma3.siw.tennis.spring.utili.Utili;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 
 public interface TorneoRepository extends CrudRepository<Torneo,Long>{
@@ -34,6 +33,12 @@ public interface TorneoRepository extends CrudRepository<Torneo,Long>{
 	
 	@Query (value="SELECT tor FROM Torneo as tor WHERE NOT( tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno)")
 	public List<Torneo> findTorneiCancellabili(Integer mese,Integer anno);
+	
+	@Query	(value="SELECT tor FROM Torneo as tor WHERE ( tor.mese=:mese AND tor.anno=:anno)")
+	public List<Torneo> findTorneiDisponibiliAttuali(Integer mese, Integer anno);
+	
+	@Query	(value="SELECT tor FROM Torneo as tor WHERE ( tor.mese<=:mese AND tor.anno=:anno OR tor.anno<:anno)")
+	public List<Torneo> findTorneiDisponibiliAttualiEFiniti(Integer mese, Integer anno);
 	
 	
 

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.tennis.spring.model.Partita;
-import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.repository.PartitaRepository;
 
 @Service
@@ -30,8 +29,12 @@ public class PartitaService {
 	public List<Partita> getPartiteByTennista(Long id) {
 		return (List<Partita>) partitaRepository.findByTennista1EqualsIdOrTennista2EqualsId(id);
 	}
-
-	public Object getPartiteByToreno(Long idTorneo) {
+	@Transactional
+	public List<Partita> getPartiteByToreno(Long idTorneo) {
 		return (List<Partita>) partitaRepository.findByTorneoId(idTorneo);
+	}
+	@Transactional
+	public void eliminaPartita(Long idPartita) {
+		partitaRepository.deleteById(idPartita);
 	}
 }

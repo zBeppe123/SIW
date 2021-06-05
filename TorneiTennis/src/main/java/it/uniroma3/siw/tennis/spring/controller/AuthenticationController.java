@@ -3,8 +3,6 @@ package it.uniroma3.siw.tennis.spring.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,13 +57,13 @@ public class AuthenticationController {
     public String defaultAfterLogin(Model model,HttpSession sessione) {
     	Credentials credentials = utili.getCredentials();
     	sessione.setAttribute("tennistaCorrente", credentials.getTennista());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+    	if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
             return "admin/home";
         }
     	Tennista tennista=credentials.getTennista();
     	model.addAttribute("tennista",tennista);
     	model.addAttribute("partite",partitaService.getPartiteByTennista(tennista.getId()));
-        return "home";
+        return "/utente/home";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
@@ -89,10 +87,5 @@ public class AuthenticationController {
         }
         return "registraTennista";
     }
-    
-    @RequestMapping(value = "/index", method = RequestMethod.GET) 
-	public String showIndex (Model model) {
-		return "index";
-	}
     
 }

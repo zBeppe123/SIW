@@ -11,14 +11,14 @@
 			<h2>Registra:</h2>
 				<li> <a th:href="@{/admin/registraTorneo}">Registra un nuovo torneo</a>.
 				<li> <a th:href="@{/admin/registraArbitro}">Registra un nuovo arbitro</a>.
-				<li> <a th:href="@{/admin/registraPartita}">Registra una partita di un torneo</a>.
+				<li> <a th:href="@{/admin/selezionaTorneoPerRPartita}">Registra una partita di un torneo</a>.
 			<h2>Modifica:</h2>
 				<li> <a th:href="@{/admin/sceltaTorneoPerModifica}">Modifica i dati di un torneo</a>.
 				<li> <a th:href="@{/admin/sceltaArbitroPerModifica}">Modifca i dati di un arbitro</a>.
 			<h2>Cancella:</h2>
 				<li> <a th:href="@{/admin/cancellaTorneo}">cancella un torneo dal database</a>.
 				<li> <a th:href="@{/admin/cancellaArbitro}">cancella un arbitro dal database</a>.
-				<li> <a th:href="@{/admin/selezionaTorenoPerCancellarePartita}">cancella una partita dal database</a>.
+				<li> <a th:href="@{/admin/selezionaTorneoPerCPartita}">cancella una partita dal database</a>.
 			</ul>
 		</section>
 		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>

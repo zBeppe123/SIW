@@ -1,7 +1,7 @@
 package it.uniroma3.siw.tennis.spring.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.siw.tennis.spring.model.Tennista;
+
 import it.uniroma3.siw.tennis.spring.model.Torneo;
-import it.uniroma3.siw.tennis.spring.model.TorneoDisponibile;
 import it.uniroma3.siw.tennis.spring.repository.TorneoRepository;
 
 @Service
@@ -101,6 +100,14 @@ public class TorneoService {
 	
 	private Integer getAnno() {
 		return LocalDate.now().getYear();
+	}
+	@Transactional
+	public List<Torneo> getTorneiDisponibili() {
+		return (List<Torneo>) torneoRepository.findTorneiDisponibiliAttuali(this.getMese(),this.getAnno());
+	}
+	@Transactional
+	public Object getTorneiDisponibiliEFiniti() {
+		return (List<Torneo>) torneoRepository.findTorneiDisponibiliAttualiEFiniti(this.getMese(),this.getAnno());
 	}
 	
 }

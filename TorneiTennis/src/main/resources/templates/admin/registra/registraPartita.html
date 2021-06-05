@@ -13,31 +13,27 @@
 			</div>
 			<div id="partita">
 				<div>
-					Torneo in cui si è svolta:
-					<select name="torn">
-						<option value=""></option>
-						<option th:each="torneo : ${tornei}" th:value="${torneo.id}" th:text="|${torneo.nome}|">nome torneo</option>
-					</select>
+				<input type="hidden" name="torn" th:value="${idTorneo}">
 				</div>
 				<div>
 					Primo tennista:
-					<select name="gioc1">
+					<select name="gioc1" required>
 						<option value=""></option>
 						<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista1</option>
 					</select>
 				</div>
 				<div>
 					Secondo tennista:
-					<select name="gioc2">
+					<select name="gioc2" required>
 						<option value=""></option>
 						<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista2</option>
 					</select>
 				</div>
 				<div>
-					Punteggio primo tennista: <input type="number" th:field="*{punteggioG1}"/>
+					Punteggio primo tennista: <input type="number" th:field="*{punteggioG1}" required/>
 				</div>
 				<div>
-					Punteggio secondo tennista: <input type="number" th:field="*{punteggioG2}"/>
+					Punteggio secondo tennista: <input type="number" th:field="*{punteggioG2}" required/>
 				</div>
 			</div>
 			<div>

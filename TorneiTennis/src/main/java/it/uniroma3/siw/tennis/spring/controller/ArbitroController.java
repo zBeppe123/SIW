@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import it.uniroma3.siw.tennis.spring.controller.validator.ArbitroModificatoValidator;
 import it.uniroma3.siw.tennis.spring.controller.validator.ArbitroValidator;
@@ -37,7 +36,7 @@ public class ArbitroController {
 	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.GET)
 	public String apriRegistraArbitro(Model model) {
 		model.addAttribute("arbitro", new Arbitro());
-		return "admin/registraArbitro.html";
+		return "admin/registra/registraArbitro";
 	}
 	
 	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.POST)
@@ -51,33 +50,23 @@ public class ArbitroController {
 			arbitroService.inserisci(arbitro);
 			
 			model.addAttribute("arbitro", arbitro);
-			return "admin/registrazioneArbitroCompletata.html";
+			return "admin/registra/registrazioneArbitroCompletata";
 		}
 		
-		return "admin/registraArbitro.html";
+		return "admin/registra/registraArbitro";
 	}
 	
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.GET)
 	public String apriSceltaArbitroPerModifica(Model model) {
 		model.addAttribute("arbitri", this.arbitroService.tutti());
-		return "admin/sceltaArbitroPerModifica.html";
+		return "admin/modifica/sceltaArbitroPerModifica.html";
 	}
 	
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.POST)
 	public String sceltoArbitroPerModifica(@RequestParam("arbitroSelezionato") Long idArbitro, Model model) {
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
-		
-		//Nessun arbitro?
-		if(arbitro == null) {
-			//model.addAttribute("arbitri", this.arbitroService.tutti());
-			//return "admin/sceltaArbitroPerModifica.html";
-			return "redirect:/default";
-		}
-		
-		//model.addAttribute("arbitro", arbitro);
-		//return "admin/modificaArbitro.html";
 		model.addAttribute("arbitro", arbitro);
-		return "/admin/modificaArbitro.html";
+		return "/admin/modifica/modificaArbitro";
 	}
 	
 	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.POST)
@@ -87,10 +76,10 @@ public class ArbitroController {
 		if(!bindingResult.hasErrors()) {
 			this.arbitroService.modificaDatiDiArbitro(arbitroModificato);
 			
-			return "/admin/modificaArbitroCompletata.html";
+			return "/admin/modifica/modificaArbitroCompletata";
 		}
 		
-		return "/admin/modificaArbitro.html";
+		return "/admin/modifica/modificaArbitro";
 	}
 	
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)
@@ -109,13 +98,13 @@ public class ArbitroController {
 	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.GET)
 	public String apriCancellaArbitro(Model model) {
 		model.addAttribute("arbitri",this.arbitroService.arbitriNonImpegnati());
-		return "admin/cancellaArbitro";
+		return "admin/cancella/cancellaArbitro";
 	}
 	
 	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.POST)
 	public String cancellaArbitro(@RequestParam("arbitroSelezionato") Long idArbitro,Model model,HttpSession sessione) {
 		this.arbitroService.cancellaArbitro(idArbitro);
-		return "admin/cancellazioneArbitroCompletata";
+		return "admin/cancella/cancellazioneArbitroCompletata";
 	}
 
 }
