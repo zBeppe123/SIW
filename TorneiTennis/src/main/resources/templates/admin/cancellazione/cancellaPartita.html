@@ -9,7 +9,7 @@
 			<h1>Scelta partita da cancellare</h1>
 			Ecco la lista di tutti le partite del torneo selezionato <br>
 			Scegline una tra queste elencate per cancellare una partita dal database:<br>
-			ATTENZIONE: questa operazione non può essere modificata! <br>
+			ATTENZIONE: questa operazione non pu&ograve; essere modificata! <br>
 			<div th:unless=${#lists.isEmpty(partite)}>
 			<form th:action="@{/admin/cancellaPartita}" method="post">
 				<table>
