@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.tennis.spring.controller.validator.ArbitroModificatoValidator;
 import it.uniroma3.siw.tennis.spring.controller.validator.ArbitroValidator;
 import it.uniroma3.siw.tennis.spring.model.Arbitro;
+import it.uniroma3.siw.tennis.spring.model.Credentials;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
+import it.uniroma3.siw.tennis.spring.utili.Utili;
 
 @Controller
 public class ArbitroController {
@@ -30,6 +32,9 @@ public class ArbitroController {
 	
 	@Autowired
 	private ArbitroModificatoValidator arbitroModificatoValidator;
+	
+	@Autowired
+	Utili utili;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ArbitroController.class);
 	
@@ -87,10 +92,18 @@ public class ArbitroController {
 		logger.debug("Lettura arbitro.");
 		
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
+		String s=utili.getCredentials().getRole();
 		
 		model.addAttribute("arbitro", arbitro);
 		if(arbitro!=null)
 			model.addAttribute("tornei", arbitro.getTornei());
+		if(s.equals(Credentials.ADMIN_ROLE))
+			model.addAttribute("amministratre", "admin");
+		else if(s.equals(Credentials.DEFAULT_ROLE))
+			model.addAttribute("utente", "user");
+		else
+			model.addAttribute("nessuno", "anonimo");
+		
 		
 		return "arbitro.html";
 	}

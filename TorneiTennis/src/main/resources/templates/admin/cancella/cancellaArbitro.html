@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Scelta arbitro da cancellare', filecss='')">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Scelta arbitro da cancellare', filecss='tableRadio.css')">
 	</head>
 	<body>
 		<header th:replace="fragments/baseAdmin.html :: intestazione">
@@ -10,7 +10,7 @@
 			Ecco la lista di tutti gli arbitri iscritti ad ABCTennis. <br>
 			Scegli uno tra questi elencati per cancellare un arbitro dal database:<br>
 			ATTENZIONE: se un arbitro &egrave; impegnato non pu&ograve; essere cancellato <br>
-			questa operazione non può essere modificata! <br>
+			questa operazione non pu&ograve; essere modificata! <br>
 			<div th:unless=${#lists.isEmpty(arbitri)}>
 			<form th:action="@{/admin/cancellaArbitro}" method="post">
 				<table>
