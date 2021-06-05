@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.tennis.spring.model.Credentials;
 import it.uniroma3.siw.tennis.spring.model.Tennista;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 import it.uniroma3.siw.tennis.spring.service.TennistaService;
+import it.uniroma3.siw.tennis.spring.utili.Utili;
 
 @Controller
 public class TennistaController {
@@ -18,6 +20,9 @@ public class TennistaController {
 	@Autowired
 	private PartitaService partitaService;
 	
+	@Autowired
+	Utili utili;
+	
 	@RequestMapping(value = "/tennista/{id}", method = RequestMethod.GET)
 	public String getTennista(@PathVariable("id") Long idTennista, Model model) {
 		Tennista t = this.tennistaService.tennistaPerId(idTennista);
@@ -25,6 +30,18 @@ public class TennistaController {
 			model.addAttribute("tennista", this.tennistaService.tennistaPerId(idTennista));
 			model.addAttribute("partite", this.partitaService.getPartiteByTennista(t.getId()));
 		}
+		try {
+			String s=utili.getCredentials().getRole();
+			
+			if(s.equals(Credentials.ADMIN_ROLE))
+				model.addAttribute("utente", "admin");
+			else
+				model.addAttribute("utente", "tennista");
+		}
+		catch(ClassCastException e) {
+			model.addAttribute("utente", "anonimo");
+		}
+		
 		return "tennista";
 	}
 

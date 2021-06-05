@@ -44,7 +44,6 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
-        System.out.println("entro in login");
 		return "loginForm";
 	}
 	

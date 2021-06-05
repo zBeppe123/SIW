@@ -20,9 +20,10 @@
 	   		<div th:if="${partite}">
 	   			<ul>
 				<li th:each="partita : ${partite}">
-					<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
-						<div th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</div>
-				</li>
+					<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista1.id}}" th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}|">nome cognome</a>
+						:<span th:text="|${partita.punteggioG1} - ${partita.punteggioG2} ">: punteggio1 - punteggio2 :</span>:
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista2.id}}" th:text="|${partita.tennista2.nome} ${partita.tennista2.cognome}|">nome cognome</a></li>
 			</ul>
 	    </div>
 	    	<div th:unless="${partite}">Nessuna partita fatta.</div>

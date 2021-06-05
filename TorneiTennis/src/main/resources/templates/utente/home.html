@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseUtente.html :: headerfiles(title='Home Utente', filecss='')"> </head>
+	<head th:replace="fragments/baseUtente.html :: headerfiles(title='Home Utente', filecss='home.css')"> </head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
 			<div>
 	    		<h1>Dettagli Utente</h1>
 		    	<div th:if="${tennista}">
-		    		Ecco le tue informazioni:
-		    		<p>
-		    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
-		    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
-		    			Email: <span th:text="${tennista.email}">email</span> <br>
-		    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
-		    			<h2>Cosa vuoi fare?</h2>
-		    			<a th:href="@{/iscrizioneTorneo}">Iscriviti ad un torneo</a> <br>
-		    			<a th:href="@{/cancellaIscrizioneTorneo}">Cancella iscrizione ad un torneo</a><br>
-		    			<a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a><br>
-		    			<a th:href="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
-		    		</p>
+		    		<h2>Ecco le tue informazioni:</h2>
+		    		Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
+		    		Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
+		    		Email: <span th:text="${tennista.email}">email</span> <br>
+		   			Telefono: <span th:text="${tennista.telefono}">telefono</span>
+		   			<h2>Cosa vuoi fare?</h2>
+		   			<ul>
+		   			<li><a th:href="@{/iscrizioneTorneo}">Iscriviti ad un torneo</a>
+		   			<li><a th:href="@{/cancellaIscrizioneTorneo}">Cancella iscrizione ad un torneo</a>
+	    			<li><a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a>
+		    		</ul>
 	   			</div>
 	   		</div>
 	   		<h2>Partite fatte: </h2>
 	   		<div th:if="${partite}">
 	   			<ul>
 					<li th:each="partita : ${partite}">
-						<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
-						<p>
-							<span th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</span>
-						</p>
+						<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista1.id}}" th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}|">nome cognome</a>
+						:<span th:text="|${partita.punteggioG1} - ${partita.punteggioG2} ">: punteggio1 - punteggio2 :</span>:
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista2.id}}" th:text="|${partita.tennista2.nome} ${partita.tennista2.cognome}|">nome cognome</a>
 					</li>
 				</ul>
 	    	</div>
-	    <div th:unless="${partite}">Nessuna partita selezionata o esistente.</div>
+	    <div th:unless="${partite}">Nessuna partita fatta</div>
 		</section>
 	</body>
 </html>

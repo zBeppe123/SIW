@@ -1,13 +1,11 @@
 section {
-	margin: 3px;
+	margin: 2px;
 	text-align: center;
-}
-
-h1 {
-	font-size: 25pt;
 }
 
 img {
 	margin-top: 2px;
+	border: 10px solid 	#7fffd4;
+	border-style: ridge;
 }
 

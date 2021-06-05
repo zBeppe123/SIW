@@ -15,7 +15,7 @@
 			<div>
 	    	<h1>Dettagli arbitro</h1>
 	    	<div th:if="${arbitro}">
-	    		Ecco le informazioni dell'arbitro selezionato:
+	    		<h3>Ecco le informazioni dell'arbitro selezionato:</h3>
 	    		<p>
 	    			Arbitro: <span th:text="${arbitro.cognome}">cognome</span> <span th:text="${arbitro.nome}">nome</span> <br>
 	    			Nazionalit&agrave;: <span th:text="${arbitro.nazionalita}">nazionalita'</span> <br>
@@ -23,7 +23,7 @@
 	    				Telefono: <span th:text="${arbitro.telefono}">telefono</span>
 	    			</span>
 	    		</p>
-    			Elenco di tutti i tornei che ha arbitrato:
+    			<h3>Elenco di tutti i tornei che ha arbitrato e che arbitrer&agrave;:</h3>
     			<div th:unless="${#lists.isEmpty(tornei)}"></div>
 	    			<ul>
 	    				<li th:each="torneo : ${tornei}"> 
