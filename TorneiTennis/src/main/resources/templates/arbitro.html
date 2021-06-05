@@ -13,6 +13,19 @@
 	    			Nazionalit&agrave;: <span th:text="${arbitro.nazionalita}">nazionalita'</span> <br>
 	    			Telefono: <span th:text="${arbitro.telefono}">telefono</span>
 	    		</p>
+    			Elenco di tutti i tornei che ha arbitrato:
+    			<div th:unless="${#lists.isEmpty(tornei)}"></div>
+	    			<ul>
+	    				<li th:each="torneo : ${tornei}"> 
+	    					Torneo: <a th:href="@{'/torneo/' + ${torneo.id}}" th:text="${torneo.nome}">Nome-torneo</a> <br>
+	    					Periodo dell'evento <span th:text="|${torneo.mese}/${torneo.anno}|">09/2022</span>
+	    				</li>
+	    			</ul>
+	    		<div th:if="${#lists.isEmpty(tornei)}">
+	    			<ul>
+	    				<li>Nessun torneo</li>
+	    			</ul>
+	    		</div>
 	   		</div>
 	    	<div th:unless="${arbitro}">Nessun arbitro selezionato o arbitro non esistente.</div>
 	    </div>

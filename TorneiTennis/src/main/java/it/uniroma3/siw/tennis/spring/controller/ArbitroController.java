@@ -97,7 +97,12 @@ public class ArbitroController {
 	public String getArbitro(@PathVariable("id") Long idArbitro, Model model) {
 		logger.debug("Lettura arbitro.");
 		
-		model.addAttribute("arbitro", this.arbitroService.arbitroPerId(idArbitro));
+		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
+		
+		model.addAttribute("arbitro", arbitro);
+		if(arbitro!=null)
+			model.addAttribute("tornei", arbitro.getTornei());
+		
 		return "arbitro.html";
 	}
 	
