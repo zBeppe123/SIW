@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html ::  headerfiles(title='ABCTennis',filecss='registrationSuccesful.css')"> </head>
+<head th:replace="fragments/base.html ::  headerfiles(title='ABCTennis', filecss='')"> </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
@@ -8,6 +8,5 @@
 		<h1>Congratulazioni ti sei registrato!</h1>
 		Clicca <a th:href="@{/login}">qui</a> per fare il login, oppure <a th:href="@{/index}">qui</a> per tornare alla pagina iniziale.	
 	</div>
-    <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

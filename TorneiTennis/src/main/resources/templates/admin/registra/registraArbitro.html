@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head
-		th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra arbitro', filecss='admin/registraArbitro.css')"></head>
+		th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra arbitro', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
 		<section>
@@ -34,6 +34,5 @@
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}">errore-su-nazionalita</span></div>
 			</form>
 		</section>
-		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

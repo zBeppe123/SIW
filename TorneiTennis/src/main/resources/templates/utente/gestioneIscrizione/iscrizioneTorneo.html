@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Iscrizione torneo', filecss='iscrizioneTorneo.css')"></head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Iscrizione torneo', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
@@ -24,6 +24,5 @@
 			</div>
 			<div th:if=${#lists.isEmpty(torneiDisponibili)}><h2>Nessun toreno disponibile</h2></div>
 		</section>
-		<footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>
 </html>

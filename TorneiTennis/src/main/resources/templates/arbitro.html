@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='arbitro.css')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='')"> </head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
@@ -30,6 +30,5 @@
 	    	<div th:unless="${arbitro}">Nessun arbitro selezionato o arbitro non esistente.</div>
 	    </div>
 		</section>
-	    <footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>
 </html>

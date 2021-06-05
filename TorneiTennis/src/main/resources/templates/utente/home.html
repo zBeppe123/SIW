@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseUtente.html :: headerfiles(title='Home', filecss='user.css')"> </head>
+	<head th:replace="fragments/baseUtente.html :: headerfiles(title='Home Utente', filecss='')"> </head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
@@ -33,6 +33,5 @@
 	    </div>
 	    <div th:unless="${partite}">Nessuna partita selezionata o esistente.</div>
 		</section>
-	    <footer th:replace="fragments/baseUtente.html :: fondo"></footer>
 	</body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis',filecss='registraTennista.css')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Registrazione', filecss='')"> </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
-    	<h4 th:text="#{header.registra}">Registrazione</h4>
+    	<h1>Registrazione</h1>
 	<form th:action="@{/register}" method="POST">
     <table>
         <tr>
@@ -64,6 +64,5 @@
     </table>
 	</form>
 	</div>
-    <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

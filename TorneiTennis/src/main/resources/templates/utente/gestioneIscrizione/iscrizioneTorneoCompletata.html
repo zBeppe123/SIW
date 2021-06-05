@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione al torneo completata.', filecss='registrazioneAlTorenoCompletata.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione al torneo completata.', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
@@ -10,6 +10,5 @@
 			Per maggiori informazioni contattaci a questa email: ABCtennistornei@gmail.com <br>
 			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
 		</section>
-		<footer th:replace="fragments/baseUtente.html :: fondo"></footer>
 	</body>
 </html>

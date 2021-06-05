@@ -3,7 +3,7 @@
 	<head th:fragment="headerfiles(title,filecss)">
 		<title th:text="${title}">Titolo</title>
 		<link href="/css/fragments/base.css" rel="stylesheet"/>
-		<link th:href="@{'/css/' + ${filecss}}" rel="stylesheet"/>
+		<link th:if="${filecss!=''}" th:href="@{'/css/' + ${filecss}}" rel="stylesheet"/>
 	</head>
 	<body>
 		<header th:fragment="intestazione">

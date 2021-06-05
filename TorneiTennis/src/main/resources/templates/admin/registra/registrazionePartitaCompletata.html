@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione partita completata.', filecss='admin/registrazionePartitaCompletata.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione partita completata.', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseAdmin :: intestazione"></header>
 		<section>
@@ -8,6 +8,5 @@
 			Registrazione della partita completata. <br>
 			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
 		</section>
-		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

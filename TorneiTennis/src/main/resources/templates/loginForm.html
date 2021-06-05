@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='ABCTennis',filecss='login.css')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Login', filecss='')"> </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
-		<h4>Login</h4>
+		<h1>Login</h1>
 	</div>
 	<form th:action="@{/login}" method="post">
 		<div>
@@ -21,6 +21,5 @@
 			</div>
 		</div>
 	</form>
-    <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

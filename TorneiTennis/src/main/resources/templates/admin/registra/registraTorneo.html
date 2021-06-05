@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra torneo', filecss='admin/registraTorneo.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra torneo', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
 		<section>
@@ -49,6 +49,5 @@
 				<div><span class="evidenziato" th:if="${#fields.hasErrors('premioInDenaro')}" th:errors="*{premioInDenaro}">errore-premioInDenaro</span></div>
 			</form>
 		</section>
-		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

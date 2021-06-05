@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli torneo', filecss='infoTorneo.css')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli torneo', filecss='')"> </head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
@@ -29,6 +29,5 @@
 	    </div>
 	    <div th:unless="${torneo}">Toreno non esistente.</div>
 		</section>
-	    <footer th:replace="fragments/base.html :: fondo"></footer>
 	</body>
 </html>

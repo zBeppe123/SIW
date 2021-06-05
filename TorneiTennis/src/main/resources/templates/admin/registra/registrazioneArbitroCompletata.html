@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione arbitro completata.', filecss='admin/registrazioneArbitroCompletata.css')"></head>
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione arbitro completata.', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/baseAdmin :: intestazione"></header>
 		<section>
@@ -8,6 +8,5 @@
 			Registrazione dell'arbitro <span th:text="|${arbitro.cognome} ${arbitro.nome}">cognome nome</span> completata. <br>
 			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
 		</section>
-		<footer th:replace="fragments/baseAdmin.html :: fondo"></footer>
 	</body>
 </html>

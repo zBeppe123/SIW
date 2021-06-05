@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Tornei', filecss='tornei.css')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Tornei da utente', filecss='tornei.css', filecss='')"> </head>
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
@@ -16,6 +16,5 @@
 				</li>
 			</ul>
 		</section>
-		<footer th:replace="fragments/baseUtente.html :: fondo"></footer>
 	</body>
 </html>
