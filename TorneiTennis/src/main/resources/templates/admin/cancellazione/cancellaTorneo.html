@@ -9,8 +9,8 @@
 			<h1>Scelta arbitro da cancellare</h1>
 			Ecco la lista di tutti i toreni disponibili di ABCTennis. <br>
 			Scegli uno tra questi elencati per cancellarlo dal database:<br>
-			ATTENZIONE: se un torneo è già iniziato non può essere cancellato <br>
-			questa operazione non può essere modificata!
+			ATTENZIONE: se un torneo &egrave; gi&agrave; iniziato non pu&ograve; essere cancellato <br>
+			questa operazione non pu&ograve; essere modificata!
 			<div th:unless=${#lists.isEmpty(tornei)}>
 			<form th:action="@{/admin/cancellaTorneo}" method="post">
 				<table>
