@@ -5,32 +5,33 @@
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
 			<div>
-	    	<h1>Dettagli Utente</h1>
-	    	<div th:if="${tennista}">
-	    		Ecco le tue informazioni:
-	    		<p>
-	    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
-	    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
-	    			Email: <span th:text="${tennista.email}">email</span> <br>
-	    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
-	    			<h2>Cosa vuoi fare?</h2>
-	    			<a th:href="@{/iscrizioneTorneo}">Iscriviti ad un torneo</a> <br>
-	    			<a th:href="@{/cancellaIscrizioneTorneo}">Cancella iscrizione ad un torneo</a><br>
-	    			<a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a><br>
-	    			<a th:href="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
-	    		</p>
+	    		<h1>Dettagli Utente</h1>
+		    	<div th:if="${tennista}">
+		    		Ecco le tue informazioni:
+		    		<p>
+		    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
+		    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
+		    			Email: <span th:text="${tennista.email}">email</span> <br>
+		    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
+		    			<h2>Cosa vuoi fare?</h2>
+		    			<a th:href="@{/iscrizioneTorneo}">Iscriviti ad un torneo</a> <br>
+		    			<a th:href="@{/cancellaIscrizioneTorneo}">Cancella iscrizione ad un torneo</a><br>
+		    			<a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a><br>
+		    			<a th:href="@{/elencoPartiteTennista}">Elenco partite fatte</a><br>
+		    		</p>
+	   			</div>
 	   		</div>
-	   			<h2>Partite fatte: </h2>
+	   		<h2>Partite fatte: </h2>
 	   		<div th:if="${partite}">
 	   			<ul>
-				<li th:each="partita : ${partite}">
-					<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
-					<p>
-						<div th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</div>
-					</p>
-				</li>
-			</ul>
-	    </div>
+					<li th:each="partita : ${partite}">
+						<a href=".html" th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a>
+						<p>
+							<span th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}: ${partita.punteggioG1} - ${partita.punteggioG2} :${partita.tennista2.nome} ${partita.tennista2.cognome}|">Mario Rossi: 15 - 30 :Luigi Verdi</span>
+						</p>
+					</li>
+				</ul>
+	    	</div>
 	    <div th:unless="${partite}">Nessuna partita selezionata o esistente.</div>
 		</section>
 	</body>
