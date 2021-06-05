@@ -11,34 +11,38 @@
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
 			</div>
-			<div id="partita">
-				<div>
-				<input type="hidden" name="torn" th:value="${idTorneo}">
-				</div>
-				<div>
-					Primo tennista:
-					<select name="gioc1" required>
-						<option value=""></option>
-						<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista1</option>
-					</select>
-				</div>
-				<div>
-					Secondo tennista:
-					<select name="gioc2" required>
-						<option value=""></option>
-						<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista2</option>
-					</select>
-				</div>
-				<div>
-					Punteggio primo tennista: <input type="number" th:field="*{punteggioG1}" required/>
-				</div>
-				<div>
-					Punteggio secondo tennista: <input type="number" th:field="*{punteggioG2}" required/>
-				</div>
-			</div>
-			<div>
-				<input type="submit" value="Registra" />
-			</div>
+			<table>
+				<tr><td><input type="hidden" name="torn" th:value="${idTorneo}"></td></tr>
+				<tr>
+					<td>Primo tennista:</td>
+					<td>
+						<select name="gioc1" required>
+							<option value=""></option>
+							<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista1</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Secondo tennista:</td>
+					<td>
+						<select name="gioc2" required>
+							<option value=""></option>
+							<option th:each="tennista : ${tennisti}" th:value="${tennista.id}" th:text="|${tennista.cognome} ${tennista.nome}|">cognome-nome tennista2</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Punteggio primo tennista:</td>
+					<td><input type="number" th:field="*{punteggioG1}" required/></td>
+				</tr>
+				<tr>
+					<td>Punteggio secondo tennista:</td>
+					<td><input type="number" th:field="*{punteggioG2}" required/></td>
+				</tr>
+				<tr>
+					<td></td><td><input type="submit" value="Registra" /></td>
+				</tr>
+			</table>
 			<div th:if="${#fields.hasErrors('punteggioG1')}"
 				th:errors="*{punteggioG1}"></div>
 			<div th:if="${#fields.hasErrors('punteggioG2')}"
