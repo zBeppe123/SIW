@@ -11,7 +11,7 @@
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</p>
 			</div>
-			<table>
+			<table class="form_dati">
 				<tr><td><input type="hidden" name="torn" th:value="${idTorneo}"></td></tr>
 				<tr>
 					<td>Primo tennista:</td>

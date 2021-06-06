@@ -11,7 +11,7 @@
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p><span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore</span></p>
 				</div>
-				<table>
+				<table class="form_dati">
 					<tr><td>
 						Cognome: </td><td><input type="text" th:field="*{cognome}" /></td>
 					</tr>
