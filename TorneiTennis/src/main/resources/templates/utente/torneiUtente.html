@@ -6,7 +6,7 @@
 		<section>
 			<h1>Tornei</h1>
 			Qui c'&egrave; l'elenco di tutti di tornei di ABCTennis: <br>
-			<ul>
+			<ul th:unelss=${#lists.isEmpty(tornei)}>
 				<li th:each="torneo : ${tornei}">
 					<a href="torneo.html" th:href="@{'/torneo' + '/' + ${torneo.id}}" th:text="|${torneo.nome}|">nome-torneo</a>
 					<p>
@@ -15,6 +15,7 @@
 					</p>
 				</li>
 			</ul>
+			<div th:if=${#lists.isEmpty(tornei)}>nessun torneo disponibile per la visualizzazione</div>
 		</section>
 	</body>
 </html>

@@ -28,7 +28,7 @@
 	    	<div th:unless="${tennista}">Nessun tennista selezionato o tennista non esistente.</div>
 	    </div>
 	    <h2>Partite fatte: </h2>
-	   		<div th:if="${partite}">
+	   		<div th:unless=${#lists.isEmpty(partite)}>
 	   			<ul>
 				<li th:each="partita : ${partite}">
 					<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
@@ -38,7 +38,7 @@
 				</li>
 			</ul>
 	    </div>
-	    <div th:unless="${partite}">Nessuna partita svolta in alcun torneo.</div>
+	    <div th:if=${#lists.isEmpty(partite)}>Nessuna partita svolta in alcun torneo.</div>
 		</section>
 	</body>
 </html>

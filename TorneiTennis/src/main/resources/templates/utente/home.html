@@ -4,9 +4,9 @@
 	<body>
 		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
 		<section>
-			<div>
 	    		<h1>Dettagli Utente</h1>
-		    	<div th:if="${tennista}">
+	    		<div th:if="${tennista}">
+		    	<div>
 		    		<h2>Ecco le tue informazioni:</h2>
 		    		Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
 		    		Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
@@ -19,9 +19,8 @@
 	    			<li><a th:href="@{/torneiUtente}">Elenco di toreni finiti e disponibili</a>
 		    		</ul>
 	   			</div>
-	   		</div>
 	   		<h2>Partite fatte: </h2>
-	   		<div th:if="${partite}">
+	   		<div th:unless=${#lists.isEmpty(partite)}>
 	   			<ul>
 					<li th:each="partita : ${partite}">
 						<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
@@ -31,7 +30,9 @@
 					</li>
 				</ul>
 	    	</div>
-	    <div th:unless="${partite}">Nessuna partita fatta</div>
+	    <div th:if=${#lists.isEmpty(partite)}>Nessuna partita fatta</div>
+	    </div>
+	    <div th:unless="${tennista}">Nessun tennista deisponibile</div>
 		</section>
 	</body>
 </html>
