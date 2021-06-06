@@ -8,7 +8,7 @@
 		<header th:fragment="intestazione">
 			<div id="corpo">
 				<div id="parte_sinistra">
-					<a href="informazioni.html">Informazioni</a>
+					<a th:href="@{/informazioni}">Informazioni</a>
 				</div>
 				<div id="parte_destra">
 					<a th:href="@{/login}">Accedi</a> / <a th:href="@{/register}">Registrati</a>
@@ -16,6 +16,6 @@
 			</div>
 		</header>
 		<section>Corpo della pagina</section>
-		<footer th:fragment = "fondo"><a th:href="@{'/'}">Home</a></footer>
+		<footer th:fragment = "fondo"><a th:href="@{/}">Home</a></footer>
 	</body>
 </html>
