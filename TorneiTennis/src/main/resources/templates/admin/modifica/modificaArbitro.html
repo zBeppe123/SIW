@@ -7,9 +7,11 @@
 		</header>
 		<section>
 			<h1>Modifica dati di un arbitro</h1>
+			<div class="centrato">
 			Nei campi sono presenti i dati dell'arbitro selezionato, <br>
 			puoi modificare un o pi&ugrave; campi per modificare uno o pi&ugrave;  dati corrispondenti dell'arbitro, <br>
 			poi per confermare la modifica premi il pulsate "Modifica".
+			</div>
 			<form th:action="@{/admin/modificaArbitro}" method="post" th:object="${arbitro}">
 				<div th:if="${#fields.hasGlobalErrors()}">
 	  				<p> <span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</span></p>

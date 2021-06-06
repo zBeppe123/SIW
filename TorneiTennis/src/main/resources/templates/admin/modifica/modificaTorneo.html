@@ -7,12 +7,16 @@
 		</header>
 		<section>
 			<h1>Modifica dati di un torneo</h1>
+			<div class="centrato">
 			Nei campi sono presenti i dati del torneo selezionato, <br>
 			puoi modificare un o pi&ugrave; campi per modificare uno o pi&ugrave;  dati corrispondenti del torneo, <br>
 			poi per confermare la modifica premi il pulsate "Modifica".
+			</div>
 			<form th:action="@{/admin/modificaTorneo}" method="post" th:object="${torneo}">
-				<div th:if="${#fields.hasGlobalErrors()}">
-	  				<p> <span class="evidenziato" th:each="err : ${#fields.globalErrors()}" th:text="${err}">errori</span></p>
+				<div class="centrato" th:if="${#fields.hasGlobalErrors()}">
+	  				<p> <span th:each="err : ${#fields.globalErrors()}"> <span class="evidenziato"  th:text="${err}">errori</span><br>
+	  				</span>
+	  				</p>
 				</div>
 				<table class="form_dati">
 					<tr>
@@ -29,7 +33,7 @@
 					<tr>
 						<td>Mese:</td>
 						<td>
-							<select th:field="*{mese}">
+							<select th:field="*{mese}" required>
 								<option value="1">Gennaio</option>
 								<option value="2">Febbraio</option>
 								<option value="3">Marzo</option>
