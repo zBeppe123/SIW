@@ -48,7 +48,6 @@ public class PartitaController {
     @RequestMapping(value = "/admin/registraPartita", method = RequestMethod.POST)
     public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@RequestParam("torn") Long idTorneo, @RequestParam("gioc1") Long idTennista1,
     		@RequestParam("gioc2") Long idTennista2, Model model, BindingResult bindingResult) {
-    	this.partitaValidator.validate(partita, bindingResult);
     	this.partitaValidator.controllaId(idTennista1, idTennista2, bindingResult);
     	
     	//I dati sono validi?
@@ -64,7 +63,7 @@ public class PartitaController {
     	
     	model.addAttribute("idTorneo",idTorneo);
     	model.addAttribute("tennisti",torneoService.getTorneoPerId(idTorneo).getTennistiIscritti());
-    	model.addAttribute("partita",new Partita());			
+    	//model.addAttribute("partita",new Partita());			
     	return "admin/registra/registraPartita";
     }
     

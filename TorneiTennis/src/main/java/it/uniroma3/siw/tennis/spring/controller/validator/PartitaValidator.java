@@ -12,29 +12,10 @@ import it.uniroma3.siw.tennis.spring.model.Partita;
 import it.uniroma3.siw.tennis.spring.service.PartitaService;
 
 @Component
-public class PartitaValidator implements Validator {
-
-
-	private static final Logger logger = LoggerFactory.getLogger(PartitaValidator.class);
-
-	@Override
-	public void validate(Object o,Errors errors) {
-		logger.debug("Controllo dei dati della partita immessi.");
-		System.out.println("controllo i valori dei punteggi");
-		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG1", "registra_partita_errors");
-    	//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "punteggioG2", "registra_partita_errors");
-    	System.out.println("controllati punteggi");
-	}
-
+public class PartitaValidator{
 	public void controllaId(Long idTennista1, Long idTennista2, Errors errors) {
 		if(idTennista1.equals(idTennista2)) {
 			errors.reject("registra_partita_errors_SelezionatiTennistiUguali");
 		}
 	}
-
-	@Override
-	public boolean supports(Class<?> clazz) {
-		return Partita.class.equals(clazz);
-	}
-
 }
