@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Artista {
 	@Id
@@ -22,20 +24,25 @@ public class Artista {
 	private String nazionalita;
 	
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
 	
 	@Column(nullable = false)
 	private String cittaNascita;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataMorte;
 	
 	private String cittaMorte;
+	
+	@Lob
+	private String biografia;
 	
 	@OneToMany(mappedBy = "artista")
 	private List<Opera> opere;
 
 	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, String cittaNascita, 
-			LocalDate dataMorte, String cittaMorte, List<Opera> opere) {
+			LocalDate dataMorte, String cittaMorte, String biografia, List<Opera> opere) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.nazionalita = nazionalita;
@@ -43,11 +50,12 @@ public class Artista {
 		this.cittaNascita = cittaNascita;
 		this.dataMorte = dataMorte;
 		this.cittaMorte = cittaMorte;
+		this.biografia = biografia;
 		this.opere = opere;
 	}
 	
-	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, String cittaNascita, List<Opera> opere) {
-		this(nome, cognome, nazionalita, dataNascita, cittaNascita, null, null, opere);
+	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, String cittaNascita, List<Opera> opere, String biografia) {
+		this(nome, cognome, nazionalita, dataNascita, cittaNascita, null, null, biografia, opere);
 	}
 	
 	public Artista() {
@@ -118,12 +126,19 @@ public class Artista {
 		this.cittaMorte = cittaMorte;
 	}
 
+	public String getBiografia() {
+		return this.biografia;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
+	}
+
 	public List<Opera> getOpere() {
 		return this.opere;
 	}
-
-
+	
 	public void setOpere(List<Opera> opere) {
 		this.opere = opere;
-	}	
+	}
 }

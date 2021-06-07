@@ -13,6 +13,28 @@ section {
 	margin: 5px;
 }
 
+.titolo_centrato {
+	text-align: center;
+	font-size: 28pt;
+}
+
+.testo_centrato {
+	text-align: center;
+}
+
+.table_dati {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.evidenziato {
+	background-color: yellow;
+}
+
+.messaggio_reg_compl {
+	font-size: 20pt;
+}
+
 #corpo {
 	display: flex;
 	justify-content: space-between;
@@ -24,9 +46,4 @@ footer {
 	position: fixed;
 	bottom: 0;
 	text-align: center;
-}
-
-.titolo_centrato {
-	text-align: center;
-	font-size: 28pt;
 }

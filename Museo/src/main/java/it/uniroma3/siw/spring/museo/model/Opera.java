@@ -13,7 +13,7 @@ public class Opera {
 	
 	private Integer anno;
 	
-	@Column(length = 2000)
+	@Column(length = 5000)
 	private String descrizione;
 	
 	@ManyToOne
