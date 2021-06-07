@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Collezione</title>
-		<link rel="stylesheet" href="collezione.css"/>
-	</head>
-	<body>
-		<header> <a href="home.html">Home</a> </header>
-		<section>
-			<h1>Nome collezione</h1>
-			Questa collezione del museo viene gestita da <strong>Giovanni Belli</strong>. Le opere presenti qui sono: <br>
-			<ul>
-				<li> <a href="notte_stellata.html">Notte stellata</a> di <a href="van_gogh.html">Vincent van Gogh</a>.
-				<li> <a href="camera_di_vincent.html">La camera di Vincent ad Arles</a> di <a href="van_gogh.html">Vincent van Gogh</a>.
-				<li> <a href="guernica.html">Guernica</a> di <a href="pablo_picasso.html">Pablo Picasso</a>.
-			</ul>
-		</section>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragment/base.html :: headerfiles(title='Collezione',filecss='')">
+</head>
+<body>
+	<header th:replace="fragments/base_utente.html :: intestazione">
+	</header>
+	<section>
+		<h1 th:text="${collezione.nome}">Nome collezione</h1>
+		Questa collezione del museo viene gestita da <strong
+			th:text="|${collezione.curatore.nome} ${collezione.curatore.cognome}">Giovanni
+			Belli</strong>. Le opere presenti qui sono: <br>
+		<ul>
+			<li th:each="opera : ${opere}"><a
+				th:href="@{'/opera' + '/' + ${opera.id}" th:text="${opera.nome}">Notte
+					stellata </a> di <a
+				th:href="@{'/opera.artista' + '/' + ${opera.artista.id}"
+				th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent
+					van Gogh</a>.
+		</ul>
+	</section>
+</body>
 </html>

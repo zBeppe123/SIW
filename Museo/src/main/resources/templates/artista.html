@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Artista</title>
-		<link rel="stylesheet" href="artista.css">
-	</head>
-	<body>
-		<header>
-			<a href="home.html">Home</a>
-		</header>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragment/base.html :: headerfiles(title='Artista',filecss='')">
+</head>
+<body>
+	<header th:replace="fragments/base_utente.html :: intestazione">
+	</header>
 		<section>
-			<h1>Vincent van Gogh</h1>
-			<strong>Vincent van Gogh</strong> e' nato a <em>Zundert (Paesi Bassi)</em> nel <em>30 marzo 1853</em> ed e' morto a <em>Auvers-sur-Oise</em> nel <em>29 luglio 1890</em> fu un pittore.
+			<h1 th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</h1>
+			<strong th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</strong>
+			 e' nato a <a th:href="https://it.wikipedia.org/wiki/${artista.cittaNascita}" th:text="${artista.cittaNascita}">Zundert (Paesi Bassi)</a> nel <em th:text="${artista.dataNascita}">30 marzo 1853</em>
+			 <span th:if="${artista.dataMorte}">
+			 ed e' morto a <a th:href="https://it.wikipedia.org/wiki/${artista.cittaMorte}" th:text="${artista.cittaMorte}">Auvers-sur-Oise</a> nel <em th:text="${artista.dataMorte}">29 luglio 1890</em>
+			 </span>
 			<h2>Biografia</h2>
+			<section th:text="${Biografia}">
 			<p>
 				La vita di van Gogh è stata funestata dal malessere psichico. Non si sa ancora con certezza quale fosse la malattia che lo affliggesse, 
 				quel che è certo è che l’artista soffriva di attacchi di panico e allucinazioni alle quali reagiva con atti di violenza e tentativi di suicidio, 
@@ -67,12 +70,13 @@
 				al tiro al bersaglio con una pistola. L’ipotesi è che l’artista possa essere stato ferito da uno di quei proiettili, per poi trascinarsi, 
 				ferito e sanguinante, nella sua camera. La comunità accademica tuttavia non ha accolto questa ipotesi.
 			</p>
+			</section>
 			<h2>Opere</h2>
 			Le opere di Vincent van Gough sono:
 			<ul>
-				<li> <a href="Notte stella.html">Notte stella</a>
-				<li> <a href="La camera di Vincent ad Arles.html">La camera di Vincent ad Arles.html</a>
-				<li> Altre opere...
+				<li th:each="opera : ${opere}"><a
+				th:href="@{'/opera' + '/' + ${opera.id}" th:text="${opera.nome}">Notte
+					stellata </a>
 			</ul>
 		</section>
 	</body>
