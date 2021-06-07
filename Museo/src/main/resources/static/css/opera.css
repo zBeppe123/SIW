@@ -1,26 +1,17 @@
-body {
-	margin: 0px;
-	background-color: lightblue;
+#opera {
+	display: flex;
 }
 
-header {
-	background-color: lightgreen;
-	border-bottom: 3px solid green;
-	font-size: 12pt;
+#immagine_opera {
+	width: 50%;
 }
 
-section {
-	margin: 5px;
-}
-
-h1 {
-	text-align: center;
-	font-size: 25pt;
+#info_opera {
+	width: 50%;
 }
 
 img {
 	margin: 5px;
 	border: 2px solid black;
-	width: 30%;
+	width: 80%;
 }
-

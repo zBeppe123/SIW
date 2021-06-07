@@ -24,31 +24,30 @@ public class Artista {
 	@Column(nullable = false)
 	private LocalDate dataNascita;
 	
+	@Column(nullable = false)
+	private String cittaNascita;
+	
 	private LocalDate dataMorte;
 	
-	@ManyToOne
-	private Citta luogoDiNascitaArtista;
-	
-	@ManyToOne
-	private Citta luogoDiMorteArtista;
+	private String cittaMorte;
 	
 	@OneToMany(mappedBy = "artista")
 	private List<Opera> opere;
 
-	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, Citta luogoDiNascita, 
-			LocalDate dataMorte, Citta luogoDiMorte, List<Opera> opere) {
+	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, String cittaNascita, 
+			LocalDate dataMorte, String cittaMorte, List<Opera> opere) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.nazionalita = nazionalita;
 		this.dataNascita = dataNascita;
-		this.luogoDiMorteArtista = luogoDiNascita;
+		this.cittaNascita = cittaNascita;
 		this.dataMorte = dataMorte;
-		this.luogoDiMorteArtista = luogoDiMorte;
+		this.cittaMorte = cittaMorte;
 		this.opere = opere;
 	}
 	
-	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, Citta luogoDiNascita, List<Opera> opere) {
-		this(nome, cognome, nazionalita, dataNascita, luogoDiNascita, null, null, opere);
+	public Artista(String nome, String cognome, String nazionalita, LocalDate dataNascita, String cittaNascita, List<Opera> opere) {
+		this(nome, cognome, nazionalita, dataNascita, cittaNascita, null, null, opere);
 	}
 	
 	public Artista() {
@@ -94,13 +93,13 @@ public class Artista {
 	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-	
-	public Citta getLuogoDiNascitaArtista() {
-		return this.luogoDiNascitaArtista;
+
+	public String getCittaNascita() {
+		return this.cittaNascita;
 	}
-	
-	public void setLuogoDiNascitaArtista(Citta luogoDiNascitaArtista) {
-		this.luogoDiNascitaArtista = luogoDiNascitaArtista;
+
+	public void setCittaNascita(String cittaNascita) {
+		this.cittaNascita = cittaNascita;
 	}
 
 	public LocalDate getDataMorte() {
@@ -111,14 +110,14 @@ public class Artista {
 		this.dataMorte = dataMorte;
 	}
 	
-	public Citta getLuogoDiMorteArtista() {
-		return this.luogoDiMorteArtista;
+	public String getCittaMorte() {
+		return this.cittaMorte;
 	}
 
-	public void setLuogoDiMorteArtista(Citta luogoDiMorteArtista) {
-		this.luogoDiMorteArtista = luogoDiMorteArtista;
+	public void setCittaMorte(String cittaMorte) {
+		this.cittaMorte = cittaMorte;
 	}
-	
+
 	public List<Opera> getOpere() {
 		return this.opere;
 	}

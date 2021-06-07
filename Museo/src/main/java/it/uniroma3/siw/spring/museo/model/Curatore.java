@@ -30,8 +30,8 @@ public class Curatore {
 	@Column(unique = true, nullable = false)
 	private Long matricola;
 	
-	@ManyToOne
-	private Citta luogoDiNascitaCuratore;
+	@Column(nullable = false)
+	private String cittaNascita;
 	
 	@OneToMany(mappedBy = "curatore")
 	private List<Collezione> collezioniGestite;
@@ -40,12 +40,12 @@ public class Curatore {
 		this.collezioniGestite = new ArrayList<>();
 	}
 
-	public Curatore(String nome, String cognome, LocalDate dataNascita, Citta luogoDiNascita, String email, String numeroTelefono, 
+	public Curatore(String nome, String cognome, LocalDate dataNascita, String cittaNascita, String email, String numeroTelefono, 
 			Long matricola, List<Collezione> collezioniGestite) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.luogoDiNascitaCuratore = luogoDiNascita;
+		this.cittaNascita = cittaNascita;
 		this.email = email;
 		this.numeroTelefono = numeroTelefono;
 		this.matricola = matricola;
@@ -84,12 +84,12 @@ public class Curatore {
 		this.dataNascita = dataNascita;
 	}
 	
-	public Citta getLuogoDiNascitaCuratore() {
-		return this.luogoDiNascitaCuratore;
+	public String getCittaNascita() {
+		return this.cittaNascita;
 	}
 
-	public void setLuogoDiNascitaCuratore(Citta luogoDiNascitaCuratore) {
-		this.luogoDiNascitaCuratore = luogoDiNascitaCuratore;
+	public void setCittaNascita(String cittaNascita) {
+		this.cittaNascita = cittaNascita;
 	}
 
 	public String getEmail() {

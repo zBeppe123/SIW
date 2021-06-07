@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base_utente.html :: headerfiles(title='Opera', filecss='opera.css')">
+	<head th:replace="fragments/base_utente.html :: headerfiles(title=${opera.titolo}, filecss='opera.css')">
 	</head>
 	<body>
 		<header th:replace="fragments/base_utente.html :: intestazione">
 		</header>
 		<section>
-			<h1 th:text="${opera.nome}">Notte stellata</h1>
-			<img src="images/van_gogh_notte_stellata.jpg"/> <br>
-			<strong>Titolo opera:</strong> Notte stellata <br>
-			<strong>Descrizione:</strong> questa e' una descrizione.<br>
-			<strong>Autore:</strong> <a href="van_gogh.html">Vincent van Gogh</a>
+			<h1 class="titolo_centrato" th:text="${opera.titolo}">Notte stellata</h1>
+			<div id="opera">
+				<div id="immagine_opera">
+					<img src="images/van_gogh_notte_stellata.jpg"/> <br>
+				</div>
+				<div id="info_opera">
+					<strong>Titolo opera:</strong> <span th:text="${opera.titolo}">Notte stellata</span> <br>
+					<strong>Autore:</strong> <a th:href="@{'/artista/' + ${opera.artista.id}}"
+												th:text="|${opera.artista.cognome} {opera.artista.nome}|">Vincent van Gogh</a> <br>
+					<strong>Descrizione:</strong> <span th:text="${opera.descrizione}">descrizione dell'opera.</span><br>
+				</div>
+			</div>
 		</section>
 	</body>
 </html>
