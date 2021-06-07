@@ -9,7 +9,7 @@
 		<form th:action="@{/admin/registraOpera}" method="post" th:object="${opera}" enctype="multipart/form-data">
 			<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
 				<p>
-					<span th:each="err:${#field.globalErrors()}">
+					<span th:each="err:${#fields.globalErrors()}">
 					<span class="evidenziato" th:text="${err}">errori</span><br>
 					</span>
 				</p>

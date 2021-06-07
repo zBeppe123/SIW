@@ -69,7 +69,7 @@ public class OperaController {
 			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
 			System.out.println(fileName);
 	        opera.setImg(fileName);
-	        String uploadDir = "src/main/resources/static/images" + opera.getId();
+	        String uploadDir = "src/main/resources/static/images";// + opera.getId();
 	        System.out.println(uploadDir);
 	        FileUploadUtil.saveFile(uploadDir, fileName, img);
 			
