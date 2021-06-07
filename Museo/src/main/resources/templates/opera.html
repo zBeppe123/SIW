@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Opera</title>
-		<link rel="stylesheet" href="opera.css"/>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base_utente.html :: headerfiles(title='Opera', filecss='opera.css')">
 	</head>
 	<body>
-		<header> <a href="home.html">Home</a> </header>
+		<header th:replace="fragments/base_utente.html :: intestazione">
+		</header>
 		<section>
-			<h1>Notte stellata</h1>
+			<h1 th:text="${opera.nome}">Notte stellata</h1>
 			<img src="images/van_gogh_notte_stellata.jpg"/> <br>
 			<strong>Titolo opera:</strong> Notte stellata <br>
 			<strong>Descrizione:</strong> questa e' una descrizione.<br>

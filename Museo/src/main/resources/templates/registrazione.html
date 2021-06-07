@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Registrazione', filecss='registrazione.css')"></head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Registrazione', filecss='')"></head>
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
-			<h1>Registrazione</h1>
+			<h1 class="titolo_centrato">Registrazione</h1>
 			<form th:action="@{/register}" method="post">
 				<table>
 					<tr>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Home admin', filecss='admin/home.css')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		<section>
+			<h1>Sezione Amministratore</h1>
+			Benvenuto, qui sei nella sezione Amministratore del sistema. <br>
+			Per fare una modifica, registrazione o altro, scegli una voce tra questi elencati:
+			<h2>Registra:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/registraTorneo}">Registra un nuovo torneo</a>.
+				<li> <a th:href="@{/admin/registraArbitro}">Registra un nuovo arbitro</a>.
+				<li> <a th:href="@{/admin/selezionaTorneoPerRPartita}">Registra una partita di un torneo</a>.
+			</ul>
+			<h2>Modifica:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/sceltaTorneoPerModifica}">Modifica i dati di un torneo</a>.
+				<li> <a th:href="@{/admin/sceltaArbitroPerModifica}">Modifca i dati di un arbitro</a>.
+			</ul>
+			<h2>Cancella:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/cancellaTorneo}">Cancella un torneo dal database</a>.
+				<li> <a th:href="@{/admin/cancellaArbitro}">Cancella un arbitro dal database</a>.
+				<li> <a th:href="@{/admin/selezionaTorneoPerCPartita}">Cancella una partita dal database</a>.
+			</ul>
+		</section>
+	</body>
+</html>

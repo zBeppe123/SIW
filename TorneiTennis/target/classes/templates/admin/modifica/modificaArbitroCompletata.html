@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Modica dati arbitro completata', filecss='')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		<section>
+			<h1>Modica dati arbitro completata.</h1>
+			La modifica dei dati dell'arbitro selezionato &egrave; andata a buon fine. <br>
+			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
+		</section>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Scelta torneo da cancellare', filecss='admin/sceltaTorenoPerModifica.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Scelta arbitro da cancellare</h1>
+			Ecco la lista di tutti i toreni disponibili di ABCTennis. <br>
+			Scegli uno tra questi elencati per cancellarlo dal database:<br>
+			ATTENZIONE: se un torneo è già iniziato non può essere cancellato <br>
+			questa operazione non può essere modificata!
+			<div th:unless=${#lists.isEmpty(tornei)}>
+			<form th:action="@{/admin/cancellaTorneo}" method="post">
+				<table>
+					<tr th:each="torneo : ${tornei}">
+						<td><input type="radio" name="torenoSelezionato" th:value="${torneo.id}" required/></td>
+						<td>
+							<strong th:text="${torneo.nome}">Nome-torneo</strong>
+							Numero massimo di partecipanti: <span th:text="${torneo.numeroMaxDiPartecipanti}">numero</span><br>
+							Periodo dell'evento: <span th:text="${torneo.mese}">mese</span> <span th:text="${torneo.anno}">anno</span><br>
+							Premio in denaro: &euro;<span th:text="${torneo.premioInDenaro}">premio</span><br>
+							Arbitro: <a th:href="@{'/arbitro' + '/' + ${torneo.arbitro.id}}" th:text="|${torneo.arbitro.nome} ${torneo.arbitro.cognome}|">Paolo Rossi</a>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Cancella"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(tornei)}><h2>Nessun torneo disponibile per la cancellazione</h2></div>
+		</section>
+	</body>
+</html>

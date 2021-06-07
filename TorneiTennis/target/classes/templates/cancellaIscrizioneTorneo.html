@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Cancella iscrizione torneo', filecss='iscrizioneTorneo.css')"></head>
+	<body>
+		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<section>
+			<h1>Cancella l'iscrizione ad un torneo</h1>
+			ATTENZIONE: se vuoi cancellare la tua iscrizione ad un torneo gia iniziato contattaci al numero che ti è stato inviato sull'email di parteciapzione<br>
+			<div>Scegli tra uno di questi tornei a cui sei iscritto:</div>
+			<div th:unless=${#lists.isEmpty(tornei)}>
+			<form th:action="@{/cancellaIscrizioneTorneo}" method="post">
+				<div class="torneo" th:each="torneoDaCancellare : ${tornei}" style="height: 77px; ">
+					<div class="radioCheckbox">
+						<input type="radio" name="torneoSelezionato" th:value="${torneoDaCancellare.id}" required>
+					</div>
+					<div class="info">
+						<span th:text="${torneoDaCancellare.nome}">nome</span> <br>
+						Premio: <span th:text="${torneoDaCancellare.premioInDenaro}">premio</span><br>
+						Periodo dell'evento: <span th:text="|${torneoDaCancellare.mese} ${torneoDaCancellare.anno}|">data</span><br>
+					</div>
+				</div>
+				<div><input type="submit" value="Registra"/></div>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(tornei)}><h2>Nessun sei iscritto ad alcun torneo</h2></div>
+		</section>
+		<footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
+</html>
