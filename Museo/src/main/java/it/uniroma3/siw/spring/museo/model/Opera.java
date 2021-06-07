@@ -16,6 +16,9 @@ public class Opera {
 	@Column(length = 5000)
 	private String descrizione;
 	
+	@Column(nullable=false)
+	private String img;
+	
 	@ManyToOne
 	private Artista artista;
 	
@@ -24,16 +27,17 @@ public class Opera {
 	
 	public Opera() {}
 	
-	public Opera(String titolo, Integer anno, String descrizione, Artista artista, Collezione collezione) {
+	public Opera(String titolo, Integer anno, String descrizione, String img, Artista artista, Collezione collezione) {
 		this.titolo = titolo;
 		this.anno = anno;
 		this.descrizione = descrizione;
+		this.img=img;
 		this.artista = artista;
 		this.collezione = collezione;
 	}
 	
-	public Opera(String titolo, Artista artista, Collezione collezione) {
-		this(titolo, null, null, artista, collezione);
+	public Opera(String titolo, String img, Artista artista, Collezione collezione) {
+		this(titolo, null, null, img, artista, collezione);
 	}
 
 	public Long getId() {
@@ -66,6 +70,14 @@ public class Opera {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public Artista getArtista() {

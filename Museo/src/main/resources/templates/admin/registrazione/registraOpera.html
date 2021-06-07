@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base_admin.html :: headerfiles(title='Registra opera', filecss='')"></head>
+	<body>
+	<section>
+		<h1>Registra Opera</h1>
+		<div class="testo_centrato">inserisci i dati dell'opera:</div>
+		<form th:action="@{/admin/registraOpera}" method="post" th:object="${opera}" enctype="multipart/form-data">
+			<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
+				<p>
+					<span th:each="err:${#field.globalErrors()}">
+					<span class="evidenziato" th:text="${err}">errori</span><br>
+					</span>
+				</p>
+			</div>
+			<table class="table_dati">
+				<tr>
+					<td>Titolo opera: </td>
+					<td><input type="text" th:field="*{titolo}" required/></td>
+				</tr>
+				<tr>
+					<td>Anno di completamento: </td>
+					<td><input type="number" th:field="*{anno}" required/></td>
+				</tr>
+				<tr>
+					<td>Autore: </td>
+					<td><select name="autor" required>
+							<option value=""></option>
+							<option th:each="artista : ${artisti}" th:value="${artista.id}"
+									th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|">nome-cognome-data Artista</option>
+				</select></td>
+				</tr>
+				<tr>
+					<td>Descrizione: </td>
+					<td><textarea placeholder="Descrizione" th:field="*{descrizione}" rows="10" cols="50" maxlength="5000" required></textarea></td>
+				</tr>
+				<tr>
+					<td>Immagine: </td>
+					<td><input type="file" name="immagine" accept="image/png, image/jpeg" required/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Registra" /></td>
+				</tr>
+			</table>
+			<div class="testo_centrato">
+				<div>
+					<span class="evidenziato" th:if="${#fields.hasErrors('titolo')}"
+						th:errors="*{nome}">errore-titolo</span>
+				</div>
+				<div>
+					<span class="evidenziato" th:if="${#fields.hasErrors('anno')}"
+						th:errors="*{anno}">errore-titolo</span>
+				</div>
+				<div>
+					<span class="evidenziato" th:if="${#fields.hasErrors('descrizione')}"
+						th:errors="*{descrizione}">errore-titolo</span>
+				</div>
+			</div>
+		</form>
+	</section>
+	</body>
+<footer th:replace="fragments/base_admin.html :: fondo"></footer>
+</html>
