@@ -3,14 +3,18 @@ package it.uniroma3.siw.spring.museo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.museo.controller.validator.CollezioneValidator;
-
 import it.uniroma3.siw.spring.museo.model.Collezione;
+import it.uniroma3.siw.spring.museo.model.Curatore;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
+import it.uniroma3.siw.spring.museo.service.CuratoreService;
 
 @Controller
 public class CollezioneController {
@@ -18,13 +22,43 @@ public class CollezioneController {
 	private CollezioneService collezioneService;
 	@Autowired
 	private CollezioneValidator collezioneValidator;
+	@Autowired
+	private CuratoreService curatoreService;
+	
+	@RequestMapping(value = "/admin/registraCollezione", method =RequestMethod.GET)
+	public String apriRegistraCollezione(Model model) {
+		model.addAttribute("curatori", curatoreService.tutti());
+		model.addAttribute("collezione", new Collezione());
+		return "admin/registrazione/registraCollezione";
+	}
+	
+	@RequestMapping(value = "/admin/registraCollezione", method = RequestMethod.POST)
+	public String registraNuovaCollezione(Model model, @ModelAttribute("collezione") Collezione collezione,@RequestParam("curatr") Long idCuratore, BindingResult bindingResult) {
+		this.collezioneValidator.validate(collezione, bindingResult);
+		
+		if(!bindingResult.hasErrors()) {
+			collezione.setCuratore(curatoreService.curatorePerId(idCuratore));
+			this.collezioneService.saveCollezione(collezione);
+			
+			model.addAttribute("collezione", collezione);
+			return "admin/registrazione/registraCollezioneCompletata";
+		}
+		
+		return "admin/registrazione/registraCollezione";
+	}
 	
 	@RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
-	public String getArtista(@PathVariable("id") Long idCollezione, Model model) {
+	public String getCollezione(@PathVariable("id") Long idCollezione, Model model) {
 		Collezione c=this.collezioneService.collezionePerId(idCollezione);
 		if(c!=null) {
 			model.addAttribute("collezione",c);
 		}
 		return "collezione";
+	}
+	
+	@RequestMapping(value = "/collezioni", method = RequestMethod.GET)
+	public String apriCollezioni(Model model){
+		model.addAttribute("collezione",collezioneService.getCollezioniOrdinatePerNome());
+		return "collezioni";
 	}
 }

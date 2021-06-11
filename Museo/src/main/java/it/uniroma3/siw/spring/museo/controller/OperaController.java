@@ -71,12 +71,8 @@ public class OperaController {
 		
 		if (!bindingResult.hasErrors()) {
 			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-			System.out.println(fileName);
-	        opera.setImg(fileName);
-	        String uploadDir = PATH_SAVE_IMAGES;// + opera.getId();
-	        System.out.println(uploadDir);
+			String uploadDir = PATH_SAVE_IMAGES;// + opera.getId();
 	        FileUploadUtil.saveFile(uploadDir, fileName, img);
-			
 			opera.setArtista(artistaService.artistaPerId(idArtista));
 			this.operaService.inserisci(opera);
 			model.addAttribute("opera", opera);

@@ -31,7 +31,7 @@ public class ArtistaService {
 		Optional<Artista> result=artistaRepository.findById(idArtista);
 		return result.orElse(null);
 	}
-	
+	@Transactional
 	public List<Artista> tutti() {
 		return (List<Artista>) this.artistaRepository.findAll();
 	}

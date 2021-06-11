@@ -22,4 +22,13 @@ public class CollezioneService {
 		return result.orElse(null);
 	}
 
+	public List<Collezione> getCollezioniOrdinatePerNome() {
+		return (List<Collezione>) collezioneRepository.findAllByOrderByNome();
+	}
+
+	public void saveCollezione(Collezione collezione) {
+		this.collezioneRepository.save(collezione);
+	}
+	
+	
 }
