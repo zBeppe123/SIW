@@ -1,0 +1,28 @@
+#corpo_info_museo {
+	display: flex;
+	flex-direction: row;
+}
+
+#immagine_museo {
+	width: 40%;
+}
+
+img {
+	margin: 5px;
+	border: 2px solid black;
+	width: 95%;
+	height: 80%;
+}
+
+#info_museo {
+	width: 50%;
+	text-align: center;
+}
+
+#info_museo > div {
+	margin: 10px 0px;
+}
+
+#nome_museo {
+	font-size: 17pt;
+}

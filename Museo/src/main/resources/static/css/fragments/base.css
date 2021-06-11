@@ -41,6 +41,10 @@ section {
 	justify-content: space-between;
 }
 
+#corpo_utente {
+	margin: 0px 3px;
+}
+
 footer {
 	width: 100%;
 	background-color: dimgray;

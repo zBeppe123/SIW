@@ -26,6 +26,7 @@ import it.uniroma3.siw.spring.museo.service.OperaService;
 @Controller
 public class OperaController {
 	private static final Logger logger = LoggerFactory.getLogger(OperaController.class);
+	private final String PATH_SAVE_IMAGES = "src/main/resources/static/images/opere/";
 	
 	@Autowired
 	private OperaService operaService;
@@ -72,7 +73,7 @@ public class OperaController {
 			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
 			System.out.println(fileName);
 	        opera.setImg(fileName);
-	        String uploadDir = "src/main/resources/static/images";// + opera.getId();
+	        String uploadDir = PATH_SAVE_IMAGES;// + opera.getId();
 	        System.out.println(uploadDir);
 	        FileUploadUtil.saveFile(uploadDir, fileName, img);
 			

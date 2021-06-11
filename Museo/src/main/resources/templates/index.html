@@ -5,7 +5,7 @@
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
-			<h1>Museo delle arti moderne</h1>
+			<h1 th:text="#{museo.nome}">Museo</h1>
 			Tre opere delle tante esposte nel museo:
 			<div id="opere_esposte">
 				<div id="prima_opera">
