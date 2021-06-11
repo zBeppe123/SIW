@@ -3,14 +3,15 @@
 <head
 	th:replace="fragments/base_admin.html :: headerfiles(title='Registra opera', filecss='')"></head>
 	<body>
+	<header th:replace="fragments/base_admin.html :: intestazione"></header>
 	<section>
-		<h1>Registra Opera</h1>
-		<div class="testo_centrato">inserisci i dati dell'opera:</div>
+		<h1 class="titolo_centrato">Registra Opera</h1>
+		<div class="testo_centrato">Inserisci i dati dell'opera:</div>
 		<form th:action="@{/admin/registraOpera}" method="post" th:object="${opera}" enctype="multipart/form-data">
 			<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
 				<p>
 					<span th:each="err:${#fields.globalErrors()}">
-					<span class="evidenziato" th:text="${err}">errori</span><br>
+						<span class="evidenziato" th:text="${err}">errori</span><br>
 					</span>
 				</p>
 			</div>

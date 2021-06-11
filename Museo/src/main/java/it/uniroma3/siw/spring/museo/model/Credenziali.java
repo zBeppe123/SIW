@@ -3,8 +3,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 @Entity
@@ -24,9 +22,6 @@ public class Credenziali {
 	
 	@Column(nullable = false)
 	private String role;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Utente utente;
 
 	public Credenziali() {}
 	
@@ -60,13 +55,5 @@ public class Credenziali {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
 	}
 }

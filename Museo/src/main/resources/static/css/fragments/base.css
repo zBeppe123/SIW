@@ -31,11 +31,12 @@ section {
 	background-color: yellow;
 }
 
-.messaggio_reg_compl {
+.messaggio_reg_compl, .messaggio_errore {
 	font-size: 20pt;
 }
 
 #corpo {
+	margin: 0px 3px;
 	display: flex;
 	justify-content: space-between;
 }

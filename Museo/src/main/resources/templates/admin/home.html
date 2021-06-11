@@ -1,9 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Home amministratore</title>
+	<head th:replace="fragments/base_admin.html :: headerfiles(title='Aamin Home', filecss='admin/home.css')">
 	</head>
 	<body>
-		<h1>Acceduto come amministratore</h1>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1 class="titolo_centrato">Sezione Amministratore</h1>
+			Benvenuto Amministratore, qui puoi fare operazioni come registrare un nuovo artista, una nuova opera e cos&igrave; via. <br>
+			Scegli una di queste opzioni elencate: <br>
+			<h2>Registrazione:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/registraArtista}">Registra un nuovo artista</a>.
+				<li> <a th:href="@{/admin/registraOpera}">Registra una nuova opera</a>.
+				<li> <a th:href="@{/admin/registraCuratore}">Registra un nuovo curatore</a>.
+				<li> <a th:href="@{/admin/registraCollezione}">Registra una nuova collezione</a>.
+			</ul>
+		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo">
+		</footer>
 	</body>
 </html>

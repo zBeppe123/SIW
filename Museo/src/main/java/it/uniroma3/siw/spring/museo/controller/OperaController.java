@@ -1,10 +1,9 @@
 package it.uniroma3.siw.spring.museo.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,8 @@ import it.uniroma3.siw.spring.museo.service.OperaService;
 
 @Controller
 public class OperaController {
+	private static final Logger logger = LoggerFactory.getLogger(OperaController.class);
+	
 	@Autowired
 	private OperaService operaService;
 	@Autowired
@@ -47,9 +48,11 @@ public class OperaController {
 	@RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
 	public String getArtista(@PathVariable("id") Long idOpera, Model model) {
 		Opera o = this.operaService.operaPerId(idOpera);
-		if (o != null) {
+		if(o!=null) {
 			model.addAttribute("opera", o);
 		}
+		
+		logger.debug("=============================================================================== OPERA: " + o);
 		return "opera";
 	}
 

@@ -5,9 +5,9 @@
 	<body>
 		<header th:replace="fragments/base.html :: intestazione"></header>
 		<section>
-			<h1>Accedi</h1>
+			<h1 class="titolo_centrato">Accedi</h1>
 			<form th:action="@{/login}" method="post">
-				<table>
+				<table class="table_dati">
 					<tr>
 						<td>Username:</td>
 						<td><input name="username" type="text" placeholder="Username" required/></td>
@@ -17,6 +17,7 @@
 						<td><input name="password" type="password" placeholder="Password" required/></td>
 					</tr>
 					<tr>
+						<td></td>
 						<td><input type="submit" value="Accedi"/></td>
 					</tr>
 				</table>
