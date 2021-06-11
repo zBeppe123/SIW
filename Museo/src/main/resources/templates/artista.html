@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head
-	th:replace="fragments/base.html :: headerfiles(title='Artista',filecss='')">
+	th:replace="fragments/base.html :: headerfiles(title='Artista',filecss='artista.css')">
 </head>
 <body>
 	<header th:replace="fragments/base_utente.html :: intestazione">
 	</header>
 		<section>
-			<h1 th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</h1>
+			<h1 class="titolo_centrato" th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</h1>
 			<strong th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</strong>
 			 e' nato a <a th:href="@{'https://it.wikipedia.org/wiki/' + ${artista.cittaNascita}}" th:text="${artista.cittaNascita}">Zundert (Paesi Bassi)</a> nel <em th:text="${artista.dataNascita}">30 marzo 1853</em>
 			 <span th:if="${artista.dataMorte}">
@@ -23,11 +23,25 @@
 			</section>
 			<h2>Opere</h2>
 			Le opere di <span th:text="|${artista.nome} ${artista.cognome}|">sono</span>  sono:<br>
-			<ul th:unless=${#lists.isEmpty(artista.opere)}>
-				<li th:each="opera : ${artista.opere}"><a
-				th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}">Notte
-					stellata </a>
-			</ul>
+			<div id="elenco_opere" th:unless=${#lists.isEmpty(artista.opere)}>
+				<div class="opera" th:each="opera,iterStat : ${artista.opere}">
+					<img th:src="@{'/images/opere/' + ${opera.img}}"/><div>
+				<a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}">Notte
+					stellata </a><br th:if="${iterStat.index%4==0}">
+					</div>
+				</div>
+			</div>
+
+			
+			
+			<div >
+				<img> <titolo_opera>
+			</div>
+			
+			
+			
+			
+			
 			<span th:if=${#lists.isEmpty(artista.opere)}>Nessun opera disponibile per questo artista</span>
 		</section>
 	</body>

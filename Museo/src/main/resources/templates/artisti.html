@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Artisti', filecss='')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Artisti', filecss='artisti.css')"> </head>
 	<body>
 		<header th:replace="fragments/base_utente.html :: intestazione"></header>
 		<section>
-			<h1>Tornei</h1>
+			<h1 class="titolo_centrato">Artisti</h1>
 			Qui c'&egrave; l'elenco di tutti di gli artisti ordinati per il cognome: <br>
 			<ul th:unelss=${#lists.isEmpty(artisti)}>
 				<li th:each="artista : ${artisti}">

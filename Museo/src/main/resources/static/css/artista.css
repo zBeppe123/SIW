@@ -1,23 +1,22 @@
-body {
-	margin: 0px;
-	background-color: lightblue;
-}
-
-header {
-	border-bottom: 3px solid green;
-	background-color: lightgreen;
-	font-size: 12pt;
-}
-
-h1 {
-	text-align: center;
-	font-size: 25pt;
-}
-
 h2 {
 	font-size: 20pt;
 }
 
-.biografia{
-	width:100%
+#elenco_opere{
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	width:100%;
+	}
+	
+.opera{
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width:50%;
+	height:100%;
+}
+
+img{
+	width:50%;
 }
