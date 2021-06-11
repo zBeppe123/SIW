@@ -46,4 +46,8 @@ public class ArtistaService {
 		
 		return res.size()>0;
 	}
+	@Transactional
+	public List<Artista> getArtistiOrdinatiPerCognome() {
+		return (List<Artista>) artistaRepository.findAllByOrderByCognome();
+	}
 }

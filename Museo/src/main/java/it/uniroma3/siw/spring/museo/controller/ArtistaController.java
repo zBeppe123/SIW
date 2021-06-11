@@ -55,4 +55,10 @@ public class ArtistaController {
 		}
 		return "artista";
 	}
+	
+	@RequestMapping(value = "/artisti", method = RequestMethod.GET)
+	public String apriArtisti(Model model){
+		model.addAttribute("artisti",artistaService.getArtistiOrdinatiPerCognome());
+		return "artisti";
+	}
 }
