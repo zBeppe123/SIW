@@ -7,11 +7,11 @@
 	<header th:replace="fragments/base_utente.html :: intestazione">
 	</header>
 	<section>
-		<h1 th:text="${collezione.nome}">Nome collezione</h1>
+		<h1 class="titolo_centrato" th:text="${collezione.nome}">Nome collezione</h1>
 		Questa collezione del museo viene gestita da <strong
 			th:text="|${collezione.curatore.nome} ${collezione.curatore.cognome}">Giovanni
-			Belli</strong>. Le opere presenti qui sono: <br>
-		<ul>
+			Belli</strong>. <br> <h2 > Opere della collezione: </h2>
+		<ul th:unelss=${#lists.isEmpty(collezioni)}>
 			<li th:each="opera : ${opere}"><a
 				th:href="@{'/opera' + '/' + ${opera.id}" th:text="${opera.nome}">Notte
 					stellata </a> di <a
@@ -19,6 +19,7 @@
 				th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent
 					van Gogh</a>.
 		</ul>
+		<div th:if=${#lists.isEmpty(collezioni)}>Non ci sono opere in questa collezione</div>
 	</section>
 </body>
 </html>

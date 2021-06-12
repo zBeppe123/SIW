@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.spring.museo.model.Artista;
 import it.uniroma3.siw.spring.museo.model.Collezione;
 import it.uniroma3.siw.spring.museo.repository.CollezioneRepository;
 @Service
@@ -32,5 +33,11 @@ public class CollezioneService {
 
 	public List<Collezione> tutti() {
 		return (List<Collezione>) this.collezioneRepository.findAll();
+	}
+
+	public boolean alreadyExists(Collezione c) {
+		List<Collezione> res = (List<Collezione>)this.collezioneRepository.findByNome(c.getNome());
+
+		return res.size()>0;
 	}
 }
