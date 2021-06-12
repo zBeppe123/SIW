@@ -10,14 +10,16 @@
 		<h1 class="titolo_centrato" th:text="${collezione.nome}">Nome collezione</h1>
 		Questa collezione del museo viene gestita da <strong
 			th:text="|${collezione.curatore.nome} ${collezione.curatore.cognome}">Giovanni
-			Belli</strong>. <br> <h2 > Opere della collezione: </h2>
+			Belli</strong>. <br> 
+		<h2>Opere della collezione: </h2>
 		<ul th:unelss=${#lists.isEmpty(collezioni)}>
-			<li th:each="opera : ${opere}"><a
-				th:href="@{'/opera' + '/' + ${opera.id}" th:text="${opera.nome}">Notte
-					stellata </a> di <a
-				th:href="@{'/opera.artista' + '/' + ${opera.artista.id}"
-				th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent
-					van Gogh</a>.
+			<li th:each="opera : ${opere}">
+				<a th:href="@{'/opera' + '/' + ${opera.id}" 
+				   th:text="${opera.nome}">Nottestellata </a> 
+				di 
+				<a th:href="@{'/artista' + '/' + ${opera.artista.id}"
+				   th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent van Gogh</a>.
+			</li>
 		</ul>
 		<div th:if=${#lists.isEmpty(collezioni)}>Non ci sono opere in questa collezione</div>
 	</section>
