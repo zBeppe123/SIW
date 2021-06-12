@@ -12,16 +12,16 @@
 			th:text="|${collezione.curatore.nome} ${collezione.curatore.cognome}">Giovanni
 			Belli</strong>. <br> 
 		<h2>Opere della collezione: </h2>
-		<ul th:unelss=${#lists.isEmpty(collezioni)}>
+		<ul th:unelss=${#lists.isEmpty(opere)}>
 			<li th:each="opera : ${opere}">
-				<a th:href="@{'/opera' + '/' + ${opera.id}" 
-				   th:text="${opera.nome}">Nottestellata </a> 
+				<a th:href="@{'/opera' + '/' + ${opera.id}}" 
+				   th:text="${opera.titolo}">Nottestellata </a> 
 				di 
-				<a th:href="@{'/artista' + '/' + ${opera.artista.id}"
+				<a th:href="@{'/artista' + '/' + ${opera.artista.id}}"
 				   th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent van Gogh</a>.
 			</li>
 		</ul>
-		<div th:if=${#lists.isEmpty(collezioni)}>Non ci sono opere in questa collezione</div>
+		<div th:if=${#lists.isEmpty(opere)}>Non ci sono opere in questa collezione</div>
 	</section>
 </body>
 </html>

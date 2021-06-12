@@ -93,9 +93,9 @@ public class CollezioneController {
 	public String getCollezione(@PathVariable("id") Long idCollezione, Model model) {
 		Collezione c=this.collezioneService.collezionePerId(idCollezione);
 		
-		model.addAttribute("collezione", c);
 		if(c!=null) {
-			model.addAttribute("opere",c.getOpereEsposte());
+			model.addAttribute("collezione", c);
+			model.addAttribute("opere", this.collezioneService.getOpereDellaCollezione(idCollezione));
 		}
 		return "collezione";
 	}
