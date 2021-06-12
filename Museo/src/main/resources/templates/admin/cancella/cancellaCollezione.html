@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Scelta collezione da cancellare', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Scelta collezione da cancellare</h1>
+			Ecco la lista di tutte le collezioni del museo. <br>
+			Scegli una collezione tra queste elencate per cancellarla dal database:<br>
+			ATTENZIONE: questa operazione non pu&ograve; essere modificata!
+			<div th:unless=${#lists.isEmpty(collezioni)}>
+			<form th:action="@{/admin/cancellaCollezione}" method="post">
+				<table class="table_radio">
+					<tr th:each="collezione : ${collezioni}">
+						<td><input type="radio" name="collezioneSelezionata" th:value="${collezione.id}" required/></td>
+						<td>
+							<strong th:text="${collezione.nome}">Nome-collezione</strong>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Cancella"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(collezioni)}><h2>Nessuna collezione disponibile per la cancellazione</h2></div>
+		</section>
+	</body>
+</html>

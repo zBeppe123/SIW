@@ -27,6 +27,9 @@ section {
 	margin-right: auto;
 }
 
+.table_radio{
+	margin:10px 0px;
+}
 .evidenziato {
 	background-color: yellow;
 }

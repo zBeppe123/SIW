@@ -81,4 +81,16 @@ public class OperaController {
 		model.addAttribute("artisti", artistaService.tutti());
 		return "admin/registrazione/registraOpera";
 	}
+	
+	@RequestMapping(value = "/admin/cancellaOpera", method=RequestMethod.GET)
+	public String apriCancellaOpera(Model model) {
+		model.addAttribute("opere", operaService.tutti());
+		return "admin/cancella/cancellaOpera";
+	}
+	
+	@RequestMapping(value = "/admin/cancellaOpera", method=RequestMethod.POST)
+	public String CancellaOpera(@RequestParam("operaSelezionata") Long idOpera, Model model) {
+		this.operaService.eliminaOperaById(idOpera);
+		return "admin/cancella/cancellaOperaCompletata";
+	}
 }

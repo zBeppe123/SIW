@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.spring.museo.model.Artista;
+
 import it.uniroma3.siw.spring.museo.model.Collezione;
 import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.repository.CollezioneRepository;
@@ -52,4 +52,10 @@ public class CollezioneService {
 
 		return res.size()>0;
 	}
+
+	public void eliminaCollezioneById(Long idCollezione) {
+		collezioneRepository.deleteById(idCollezione);
+	}
+
+
 }

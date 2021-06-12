@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.museo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -38,5 +39,17 @@ public class OperaService {
 	@Transactional
 	public Object getOpereNonInseriteAdUnaCollezione() {
 		return this.operaRepository.findTutteOpereNonInseriteAdUnaCollezione();
+	}
+	@Transactional
+	public List<Opera> tutti() {
+		return (List<Opera>) operaRepository.findAll();
+	}
+	@Transactional
+	public void eliminaOperaById(Long idOpera) {
+		operaRepository.deleteById(idOpera);
+	}
+	public void inserisciOpere(List<Opera> opere) {
+		operaRepository.saveAll(opere);
+		
 	}
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.museo.controller.validator.CollezioneValidator;
 import it.uniroma3.siw.spring.museo.model.Collezione;
-import it.uniroma3.siw.spring.museo.model.Curatore;
 import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
 import it.uniroma3.siw.spring.museo.service.CuratoreService;
@@ -104,5 +103,22 @@ public class CollezioneController {
 	public String apriCollezioni(Model model){
 		model.addAttribute("collezioni", collezioneService.getCollezioniOrdinatePerNome());
 		return "collezioni";
+	}
+	
+	@RequestMapping(value = "/admin/cancellaCollezione", method=RequestMethod.GET)
+	public String apriCancellaCollezione(Model model) {
+		model.addAttribute("collezioni", collezioneService.tutti());
+		return "admin/cancella/cancellaCollezione";
+	}
+	
+	@RequestMapping(value = "/admin/cancellaCollezione", method=RequestMethod.POST)
+	public String CancellaCollezione(@RequestParam("collezioneSelezionata") Long idCollezione, Model model) {
+		List<Opera> opere=collezioneService.getOpereDellaCollezione(idCollezione);
+		for(Opera o:opere) {
+			o.setCollezione(null);
+		}
+		this.operaService.inserisciOpere(opere);
+ 		this.collezioneService.eliminaCollezioneById(idCollezione);
+		return "admin/cancella/cancellaCollezioneCompletata";
 	}
 }
