@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.museo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.spring.museo.controller.validator.CollezioneValidator;
 import it.uniroma3.siw.spring.museo.model.Collezione;
 import it.uniroma3.siw.spring.museo.model.Curatore;
+import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
 import it.uniroma3.siw.spring.museo.service.CuratoreService;
 import it.uniroma3.siw.spring.museo.service.OperaService;
@@ -60,6 +63,29 @@ public class CollezioneController {
 	public String sceltoLaCollezionePerInserireLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
 		model.addAttribute("idCollezione", idCollezione);
 		model.addAttribute("opereInseribili", this.operaService.getOpereNonInseriteAdUnaCollezione());
+		model.addAttribute("opereNonSelezionate", "false");
+		return "admin/inserimento/inserisciOpereACollezione.html";
+	}
+	
+	@RequestMapping(value = "/admin/inserisciOpereACollezione", method = RequestMethod.POST)
+	public String inserisciOpereAllaCollezione(@RequestParam("id_collezione") Long idCollezione, 
+											   @RequestParam(name="opereSelezionate", required=false) List<Long> idOpere,
+											   Model model) {
+		if(idOpere != null) {
+			Collezione collezione = this.collezioneService.collezionePerId(idCollezione);
+			for(Long idOpera : idOpere) {
+				Opera o = this.operaService.operaPerId(idOpera);
+				o.setCollezione(collezione);
+				this.operaService.inserisci(o);
+			}
+			
+			model.addAttribute("collezione", collezione);
+			return "admin/inserimento/inserisciOpereACollezioneCompletata.html";
+		}
+		
+		model.addAttribute("idCollezione", idCollezione);
+		model.addAttribute("opereInseribili", this.operaService.getOpereNonInseriteAdUnaCollezione());
+		model.addAttribute("opereNonSelezionate", "true");
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
 	

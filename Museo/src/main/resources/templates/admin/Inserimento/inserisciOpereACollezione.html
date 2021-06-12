@@ -11,12 +11,15 @@
 			Elenco delle opere disponbili da inserire:<br>
 			<div th:unless=${#lists.isEmpty(opereInseribili)}>
 				<form th:action="@{/admin/inserisciOpereACollezione}" method="post">
+					<div th:if="${opereNonSelezionate == 'true'}">
+						<span class="evidenziato">Nessuna opera selezionata.</span>
+					</div>
 					<table>
 						<tr>
 							<td><input type="hidden" name="id_collezione" th:value="${idCollezione}"/></td>
 						</tr>
 						<tr th:each="opera : ${opereInseribili}">
-							<td><input type="checkbox" name="operaSelezionato" th:value="${opera.id}"/></td>
+							<td><input type="checkbox" name="opereSelezionate" th:value="${opera.id}"/></td>
 							<td>
 								Opera: <a th:href="@{'/opera/' + ${opera.id}}" 
 										  th:text="${opera.titolo}">nome-opera</a>
