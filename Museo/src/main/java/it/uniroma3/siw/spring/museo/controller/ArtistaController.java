@@ -26,7 +26,13 @@ public class ArtistaController {
 		model.addAttribute("artista", new Artista());
 		return "admin/registrazione/registraArtista";
 	}
-	
+	/**
+	 * 
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/registraArtista", method = RequestMethod.POST)
 	public String registraNuovoArtista(Model model, @ModelAttribute("artista") Artista artista, BindingResult bindingResult) {
 		this.artistaValidator.validate(artista, bindingResult);

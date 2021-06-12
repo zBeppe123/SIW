@@ -19,4 +19,6 @@ h2 {
 
 img{
 	width:50%;
+	border: 10px solid 	lightblue;
+	border-style: ridge;
 }
