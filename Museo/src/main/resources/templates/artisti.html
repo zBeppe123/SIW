@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Artisti', filecss='artisti.css')"> </head>
+	<head th:replace="fragments/base.html :: headerfiles(title='Artisti', filecss='')"> </head>
 	<body>
 		<header th:replace="fragments/base_utente.html :: intestazione"></header>
 		<section>
@@ -11,7 +11,7 @@
 					<a th:href="@{'/artista' + '/' + ${artista.id}}" th:text="|${artista.cognome} ${artista.nome} data di nascita: ${artista.dataNascita}|">cognome-nome-artista</a>
 				</li>
 			</ul>
-			<div th:if=${#lists.isEmpty(artisti)}>nessun artista disponibile per la visualizzazione</div>
+			<div th:if=${#lists.isEmpty(artisti)}>Nessun artista disponibile per la visualizzazione.</div>
 		</section>
 	</body>
 	<footer th:replace="fragments/base_utente.html :: fondo"></footer>

@@ -10,14 +10,14 @@
 			Ecco la lista di tutte le collezioni del museo. <br>
 			Scegli uno tra questi elencati per inserire le opere nella collezione:<br>
 			<div th:unless=${#lists.isEmpty(collezioni)}>
-			<form th:action="@{/admin/sceltaCollezionePerInserimentoOpere}" method="post">
+			<form th:action="@{/admin/sceltaCollezionePerInserireOpere}" method="post">
 				<table>
 					<tr th:each="collezione : ${collezioni}">
 						<td><input type="radio" name="collezioneSelezionato" th:value="${collezione.id}" required/></td>
 						<td>
 							Collezione: <a th:href="@{'/collezione/' + ${collezione.id}}" 
 										   th:text="${collezione.nome}">nome-collezione</a> <br>
-							Curatore: <a th:href="@{'/curatore/' + ${curatore.id}}"
+							Curatore: <a th:href="@{'/curatore/' + ${collezione.curatore.id}}"
 										 th:text="|${collezione.curatore.cognome} ${collezione.curatore.nome}|">cognome-nome curatore</a>
 						</td>
 					</tr>

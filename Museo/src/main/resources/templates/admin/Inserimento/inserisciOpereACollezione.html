@@ -13,13 +13,13 @@
 				<form th:action="@{/admin/inserisciOpereACollezione}" method="post">
 					<table>
 						<tr>
-							<td><input type="hidden" name="idCollezione" th:value="${collezione.id}"/></td>
+							<td><input type="hidden" name="id_collezione" th:value="${idCollezione}"/></td>
 						</tr>
 						<tr th:each="opera : ${opereInseribili}">
-							<td><input type="checkbox" name="operaSelezionato" th:value="${opera.id}" required/></td>
+							<td><input type="checkbox" name="operaSelezionato" th:value="${opera.id}"/></td>
 							<td>
 								Opera: <a th:href="@{'/opera/' + ${opera.id}}" 
-										  th:text="${opera.nome}">nome-opera</a>
+										  th:text="${opera.titolo}">nome-opera</a>
 							</td>
 						</tr>
 						<tr>

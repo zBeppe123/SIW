@@ -35,6 +35,10 @@ section {
 	font-size: 20pt;
 }
 
+li {
+	margin: 5px 0px;
+}
+
 #corpo {
 	margin: 0px 3px;
 	display: flex;

@@ -35,6 +35,8 @@ public class OperaService {
 		
 	}
 	
-	
-
+	@Transactional
+	public Object getOpereNonInseriteAdUnaCollezione() {
+		return this.operaRepository.findTutteOpereNonInseriteAdUnaCollezione();
+	}
 }

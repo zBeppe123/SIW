@@ -15,6 +15,7 @@ import it.uniroma3.siw.spring.museo.model.Collezione;
 import it.uniroma3.siw.spring.museo.model.Curatore;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
 import it.uniroma3.siw.spring.museo.service.CuratoreService;
+import it.uniroma3.siw.spring.museo.service.OperaService;
 
 @Controller
 public class CollezioneController {
@@ -24,6 +25,8 @@ public class CollezioneController {
 	private CollezioneValidator collezioneValidator;
 	@Autowired
 	private CuratoreService curatoreService;
+	@Autowired
+	private OperaService operaService;
 	
 	@RequestMapping(value = "/admin/registraCollezione", method =RequestMethod.GET)
 	public String apriRegistraCollezione(Model model) {
@@ -47,6 +50,19 @@ public class CollezioneController {
 		return "admin/registrazione/registraCollezione";
 	}
 	
+	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.GET)
+	public String apriSceltaCollezionePerInserimentoOpere(Model model) {
+		model.addAttribute("collezioni", this.collezioneService.tutti());
+		return "admin/inserimento/sceltaCollezionePerInserimentoOpere.html";
+	}
+	
+	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.POST)
+	public String sceltoLaCollezionePerInserireLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
+		model.addAttribute("idCollezione", idCollezione);
+		model.addAttribute("opereInseribili", this.operaService.getOpereNonInseriteAdUnaCollezione());
+		return "admin/inserimento/inserisciOpereACollezione.html";
+	}
+	
 	@RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
 	public String getCollezione(@PathVariable("id") Long idCollezione, Model model) {
 		Collezione c=this.collezioneService.collezionePerId(idCollezione);
@@ -58,7 +74,7 @@ public class CollezioneController {
 	
 	@RequestMapping(value = "/collezioni", method = RequestMethod.GET)
 	public String apriCollezioni(Model model){
-		model.addAttribute("collezione",collezioneService.getCollezioniOrdinatePerNome());
+		model.addAttribute("collezioni", collezioneService.getCollezioniOrdinatePerNome());
 		return "collezioni";
 	}
 }

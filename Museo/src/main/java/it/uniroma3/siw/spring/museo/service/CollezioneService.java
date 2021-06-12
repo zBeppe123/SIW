@@ -29,6 +29,8 @@ public class CollezioneService {
 	public void saveCollezione(Collezione collezione) {
 		this.collezioneRepository.save(collezione);
 	}
-	
-	
+
+	public List<Collezione> tutti() {
+		return (List<Collezione>) this.collezioneRepository.findAll();
+	}
 }
