@@ -20,14 +20,20 @@ public class ArtistaController {
 	
 	@Autowired
 	private ArtistaValidator artistaValidator;
-	
+	/**
+	 * Questa funzione apre la pagina html registra artista
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return stringa con riferimento alla pagina
+	 */
 	@RequestMapping(value = "/admin/registraArtista", method = RequestMethod.GET)
 	public String apriRegistraArtista(Model model) {
 		model.addAttribute("artista", new Artista());
 		return "admin/registrazione/registraArtista";
 	}
 	/**
-	 * 
+	 * Questa funzione registra un nuovo artista nel database
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
@@ -61,7 +67,14 @@ public class ArtistaController {
 		}
 		return "artista";
 	}
-	
+	/**
+	 * Questa pagina serve ad aprire la pagina con tuttti gli artisti ordinati per cognome
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return stringa per pagina artisti.html
+	 */
+
 	@RequestMapping(value = "/artisti", method = RequestMethod.GET)
 	public String apriArtisti(Model model){
 		model.addAttribute("artisti",artistaService.getArtistiOrdinatiPerCognome());
