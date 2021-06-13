@@ -29,14 +29,28 @@ public class CollezioneController {
 	private CuratoreService curatoreService;
 	@Autowired
 	private OperaService operaService;
-	
+	/**
+	 * Questa funzione apre la pagina RegistraCollezione.html
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return la string ariferita alla pagina registra collezione.html
+	 */
+
 	@RequestMapping(value = "/admin/registraCollezione", method =RequestMethod.GET)
 	public String apriRegistraCollezione(Model model) {
 		model.addAttribute("curatori", curatoreService.tutti());
 		model.addAttribute("collezione", new Collezione());
 		return "admin/registrazione/registraCollezione";
 	}
-	
+         /**
+	 * Questa funzione registra la Collezione inserita dall'utente  nel database
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return la stringa riferita alla pagina registraCollezioneCompletata se la registrazione è andata a buon fine altrimenti la  stringa registraCollezione
+	 */
+
 	@RequestMapping(value = "/admin/registraCollezione", method = RequestMethod.POST)
 	public String registraNuovaCollezione(Model model, @ModelAttribute("collezione") Collezione collezione,@RequestParam("curatr") Long idCuratore, BindingResult bindingResult) {
 		this.collezioneValidator.validate(collezione, bindingResult);
@@ -51,13 +65,27 @@ public class CollezioneController {
 		
 		return "admin/registrazione/registraCollezione";
 	}
-	
+
+	/**
+	 * questa funzione apre la pagina SeceltaCollezionePerInserimentoOpere che serve per selezionare la collezione alla quale bisogna salvare delle opere all'interno
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return stringa riferita alla pagina sceltaCollezionePerInserimentoOpere
+	 */
+
 	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.GET)
 	public String apriSceltaCollezionePerInserimentoOpere(Model model) {
 		model.addAttribute("collezioni", this.collezioneService.tutti());
 		return "admin/inserimento/sceltaCollezionePerInserimentoOpere.html";
 	}
-	
+	/**
+	 * questa funzione apre la pagina inserisciOpereACollezione che serve per selezionare le opere da inserire in una collezione scelta nella pagina precedente
+	 * @param model
+	 * @param artista
+	 * @param bindingResult
+	 * @return stringa riferita alla pagina inserisciOpereACollezione
+	 */
 	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.POST)
 	public String sceltoLaCollezionePerInserireLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
 		model.addAttribute("idCollezione", idCollezione);
