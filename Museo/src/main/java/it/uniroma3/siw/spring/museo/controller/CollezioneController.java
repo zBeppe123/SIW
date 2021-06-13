@@ -93,7 +93,13 @@ public class CollezioneController {
 		model.addAttribute("opereNonSelezionate", "false");
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
-	
+	/**
+	 * Questa funzione inserisce le opere nella collezione
+	 * @param idCollezione
+	 * @param idOpere
+	 * @param model
+	 * @return stringa riferita alla pagina inserisciOpereACollezioneCompletata.html se sono state scelte opere altrimenti inserisciOpereACollezione.html
+	 */
 	@RequestMapping(value = "/admin/inserisciOpereACollezione", method = RequestMethod.POST)
 	public String inserisciOpereAllaCollezione(@RequestParam("id_collezione") Long idCollezione, 
 											   @RequestParam(name="opereSelezionate", required=false) List<Long> idOpere,
@@ -115,7 +121,12 @@ public class CollezioneController {
 		model.addAttribute("opereNonSelezionate", "true");
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
-	
+	/**
+	 * Questra funzione apre la pagina collezione/id ovvero apre la pagina della collezione selezionata nella pagina precedente
+	 * @param idCollezione
+	 * @param model
+	 * @return stringa riferita alla pagina collezione
+	 */
 	@RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
 	public String getCollezione(@PathVariable("id") Long idCollezione, Model model) {
 		Collezione c=this.collezioneService.collezionePerId(idCollezione);
@@ -127,18 +138,33 @@ public class CollezioneController {
 		return "collezione";
 	}
 	
+	/**
+	 * Questa funzione apre la pagina collezioni.html
+	 * @param model
+	 * @return stringa riferita alla pagina collezioni.html
+	 */
 	@RequestMapping(value = "/collezioni", method = RequestMethod.GET)
 	public String apriCollezioni(Model model){
 		model.addAttribute("collezioni", collezioneService.getCollezioniOrdinatePerNome());
 		return "collezioni";
 	}
 	
+	/**
+	 * Questa funzione apre la pagina cancellaCollezione.html
+	 * @param model
+	 * @return stringa riferita alla pagina cancellaCollezione
+	 */
 	@RequestMapping(value = "/admin/cancellaCollezione", method=RequestMethod.GET)
 	public String apriCancellaCollezione(Model model) {
 		model.addAttribute("collezioni", collezioneService.tutti());
 		return "admin/cancella/cancellaCollezione";
 	}
-	
+	/**
+	 * Questa funzione cancella la collezione selezionata 
+	 * @param idCollezione
+	 * @param model
+	 * @return stringa riferita alla pagina cancellaCollezioneCompletata.html
+	 */
 	@RequestMapping(value = "/admin/cancellaCollezione", method=RequestMethod.POST)
 	public String CancellaCollezione(@RequestParam("collezioneSelezionata") Long idCollezione, Model model) {
 		List<Opera> opere=collezioneService.getOpereDellaCollezione(idCollezione);

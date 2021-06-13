@@ -16,7 +16,9 @@ public class CollezioneValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Collezione.class.equals(clazz);
 	}
-
+	/**
+	 * funzione validate per Collezione, il controllo principale è vedere se non esiste già una collezione con lo stesso nome
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		Collezione c= (Collezione) target;

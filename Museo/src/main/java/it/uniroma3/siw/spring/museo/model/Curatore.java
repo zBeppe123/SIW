@@ -7,7 +7,10 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+/**
+ * entità curatore, un curatore è composto da Long id, String nome, String cognome, LocalDate dataNascita, String email, 
+ * String numeroTelefono, Long matricola, String cittaNascita, List<Collezione> collezioniGestite.
+ */
 @Entity
 public class Curatore {
 	@Id

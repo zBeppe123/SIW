@@ -15,7 +15,10 @@ import it.uniroma3.siw.spring.museo.repository.ArtistaRepository;
 public class ArtistaService {
 	@Autowired
 	private ArtistaRepository artistaRepository;
-	
+	/**
+	 * Salva l'artista nel DB
+	 * @param artista
+	 */
 	@Transactional
 	public void saveArtista(Artista artista) {
 		this.artistaRepository.save(artista);
@@ -31,11 +34,19 @@ public class ArtistaService {
 		Optional<Artista> result=artistaRepository.findById(idArtista);
 		return result.orElse(null);
 	}
+	/**
+	 * Cerca una lista di artisti nel db
+	 * @return lista di artisti
+	 */
 	@Transactional
 	public List<Artista> tutti() {
 		return (List<Artista>) this.artistaRepository.findAll();
 	}
- 	
+ 	/**
+ 	 * Controlla se l'artista è già presente nel DB
+ 	 * @param artista
+ 	 * @return true se la grandezza della lista di artisti trovata è > 0, altrimenti false
+ 	 */
 	@Transactional
 	public boolean alreadyExists(Artista artista) {
 		List<Artista> res = (List<Artista>)this.artistaRepository.findByCognomeAndNomeAndNazionalitaAndDataNascitaAndCittaNascita(artista.getCognome(),
@@ -46,6 +57,10 @@ public class ArtistaService {
 		
 		return res.size()>0;
 	}
+	/**
+	 * Prende tutti gli artisti ordinati per Cognome
+	 * @return la lista di Artisti ordinata per cognome
+	 */
 	@Transactional
 	public List<Artista> getArtistiOrdinatiPerCognome() {
 		return (List<Artista>) artistaRepository.findAllByOrderByCognome();

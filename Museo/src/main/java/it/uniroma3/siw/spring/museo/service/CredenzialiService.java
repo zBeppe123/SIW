@@ -18,7 +18,10 @@ public class CredenzialiService {
 	
 	@Autowired
 	private CredenzialiRepository credenzialiRepository;
-	
+	/**
+	 * salva le credenziali nel db
+	 * @param credenziali
+	 */
 	@Transactional
 	public void saveCredenziali(Credenziali credenziali) {
 		credenziali.setRole(Credenziali.DEFAULT_ROLE);
@@ -26,7 +29,11 @@ public class CredenzialiService {
 		
 		this.credenzialiRepository.save(credenziali);
 	}
-	
+	/**
+	 * prende le credenziali di un utente dal db
+	 * @param username
+	 * @return Credenziali o null
+	 */
 	@Transactional
 	public Credenziali getCredenziali(String username) {
 		Optional<Credenziali> result = this.credenzialiRepository.findByUsername(username);

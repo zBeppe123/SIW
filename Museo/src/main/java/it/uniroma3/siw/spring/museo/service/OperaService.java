@@ -35,7 +35,10 @@ public class OperaService {
 		return operaRepository.save(opera);
 		
 	}
-	
+	/**
+	 * Cerca tutte le opere non inserite in una collezione
+	 * @return lista di opere non inserite nella collezione
+	 */
 	@Transactional
 	public Object getOpereNonInseriteAdUnaCollezione() {
 		return this.operaRepository.findTutteOpereNonInseriteAdUnaCollezione();
@@ -44,10 +47,18 @@ public class OperaService {
 	public List<Opera> tutti() {
 		return (List<Opera>) operaRepository.findAll();
 	}
+	/**
+	 * elimina un opera
+	 * @param idOpera
+	 */
 	@Transactional
 	public void eliminaOperaById(Long idOpera) {
 		operaRepository.deleteById(idOpera);
 	}
+	/**
+	 * aggiorna le opere nel db, cambiandone il riferimento alla collezione
+	 * @param opere inserite nella collezione
+	 */
 	public void inserisciOpere(List<Opera> opere) {
 		operaRepository.saveAll(opere);
 		

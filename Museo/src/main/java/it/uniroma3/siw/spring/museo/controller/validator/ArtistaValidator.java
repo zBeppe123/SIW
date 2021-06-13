@@ -12,7 +12,9 @@ import it.uniroma3.siw.spring.museo.service.ArtistaService;
 public class ArtistaValidator implements Validator {
 	@Autowired
 	private ArtistaService artistaService;
-
+	/**
+	 * funzione validate per Artista, il controllo principale è vedere se l'artista non è già stato inserito
+	 */
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Artista artista = (Artista) obj;

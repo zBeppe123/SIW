@@ -14,7 +14,9 @@ public class OperaValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Opera.class.equals(clazz);
 	}
-
+	/**
+	 * validate per opera, controllo su data per non inserire date non ancora passate 
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		Opera opera=(Opera) target;

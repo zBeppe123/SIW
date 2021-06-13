@@ -7,7 +7,10 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+/**
+ * entità artista, un artista è composto da Long id, String nome, String cognome, String nazionalita, LocalDate dataNascita,
+	String cittaNascita, LocalDate dataMorte, String cittaMorte, String biografia, List<Opera> opere;
+ */
 @Entity
 public class Artista {
 	@Id

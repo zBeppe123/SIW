@@ -8,7 +8,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.web.multipart.MultipartFile;
-
+/**
+ * questa classe si occupa principalmente della gestione delle immagini delle opere nel database
+ */
 public class FileUploadUtil {
 	
 	 public static void saveFile(String uploadDir, String fileName,

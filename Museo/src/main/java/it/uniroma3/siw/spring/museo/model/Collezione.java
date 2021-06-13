@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-
+/**
+ * entità collezione, una collezione è composta da Long id, String nome, String descrizione, Curatore curatore, 
+ * List<Opera> opereEsposte;
+ */
 @Entity
 public class Collezione {
 	@Id

@@ -1,7 +1,10 @@
 package it.uniroma3.siw.spring.museo.model;
 
 import javax.persistence.*;
-
+/**
+ * entità opera, un opera è composta da Long id, String titolo, Integer anno, String descrizione, String img, Artista artista, 
+ * Collezione collezione;
+ */
 @Entity
 public class Opera {
 	@Id

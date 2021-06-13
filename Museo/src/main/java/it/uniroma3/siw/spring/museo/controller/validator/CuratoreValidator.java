@@ -18,7 +18,9 @@ public class CuratoreValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Curatore.class.equals(clazz);
 	}
-
+	/**
+	 * validate per Curatore, controllo sulla matricola per non inserire duplicati
+	 */
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Curatore curatore = (Curatore) obj;

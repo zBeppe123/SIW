@@ -16,20 +16,22 @@ public class CredenzialiValidator implements Validator {
 	
 	@Autowired
 	private CredenzialiService credenzialiSerive;
-	
+	/**
+	 * funzione validate per Credential
+	 */
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Credenziali credenziali = (Credenziali) obj;
 		
 		if(credenziali.getUsername().length()<MIN_USERNAME_LENGTH ||
-				credenziali.getUsername().length()>MAX_USERNAME_ACCETTABILI) {
+				credenziali.getUsername().length()>MAX_USERNAME_ACCETTABILI) {//controllo della lunghezza minima e massima per username
 			errors.rejectValue("username", "size");
 		}
-		if(credenziali.getPassword().length()<MIN_PASSWORD_LENGTH) {
+		if(credenziali.getPassword().length()<MIN_PASSWORD_LENGTH) {//controllo della lunghezza minima e massima per password
 			errors.rejectValue("password", "size");
 		}
 		
-		if(this.credenzialiSerive.getCredenziali(credenziali.getUsername()) != null) {
+		if(this.credenzialiSerive.getCredenziali(credenziali.getUsername()) != null) {//controllo per vedere se non esiste un duplicato nel db
 			errors.rejectValue("username", "duplicato");
 		}
 	}

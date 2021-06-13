@@ -20,12 +20,24 @@ public class CuratoreController {
 	@Autowired
 	private CuratoreValidator curatoreValidator;
 	
+	/**
+	 * questa funzione apre la pagina registraCuratore
+	 * @param model
+	 * @return stringa riferita alla pagina registaCuratore
+	 */
 	@RequestMapping(value = "/admin/registraCuratore", method = RequestMethod.GET)
 	public String apriRegistraCuratore(Model model) {
 		model.addAttribute("curatore", new Curatore());
 		return "admin/registrazione/registraCuratore";
 	}
 	
+	/**
+	 * Questa funzione registra un nuovo curatore nel database
+	 * @param model
+	 * @param curatore
+	 * @param bindingResult
+	 * @return stringa riferita alla pagina registraCuratoreCompletata.html se tutto è andato a buon fine altrimenti registraCuratore.html
+	 */
 	@RequestMapping(value = "/admin/registraCuratore", method = RequestMethod.POST)
 	public String registraNuovoCuratore(Model model, @ModelAttribute("curatore") Curatore curatore, BindingResult bindingResult) {
 		this.curatoreValidator.validate(curatore, bindingResult);

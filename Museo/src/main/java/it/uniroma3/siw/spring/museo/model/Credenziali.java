@@ -4,7 +4,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Column;
-
+/**
+ * entità credenziali, le credenzili sono composte da Long id, String username, String password, String role;
+ */
 @Entity
 public class Credenziali {
 	public static final String DEFAULT_ROLE = "DEFAULT";
