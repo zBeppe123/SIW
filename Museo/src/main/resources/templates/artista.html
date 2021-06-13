@@ -27,21 +27,10 @@
 				<div class="opera" th:each="opera,iterStat : ${artista.opere}">
 					<img th:src="@{'/images/opere/' + ${opera.img}}"/><div>
 				<a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}">Notte
-					stellata </a><br th:if="${iterStat.index%4==0}">
+					stellata </a>
 					</div>
 				</div>
 			</div>
-
-			
-			
-			<div >
-				<img> <titolo_opera>
-			</div>
-			
-			
-			
-			
-			
 			<span th:if=${#lists.isEmpty(artista.opere)}>Nessun opera disponibile per questo artista</span>
 		</section>
 	</body>

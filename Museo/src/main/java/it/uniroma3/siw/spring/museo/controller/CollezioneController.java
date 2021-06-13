@@ -34,7 +34,7 @@ public class CollezioneController {
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
-	 * @return la string ariferita alla pagina registra collezione.html
+	 * @return la string riferita alla pagina registra collezione.html
 	 */
 
 	@RequestMapping(value = "/admin/registraCollezione", method =RequestMethod.GET)
@@ -48,7 +48,7 @@ public class CollezioneController {
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
-	 * @return la stringa riferita alla pagina registraCollezioneCompletata se la registrazione è andata a buon fine altrimenti la  stringa registraCollezione
+	 * @return la stringa riferita alla pagina registraCollezioneCompletata se la registrazione è andata a buon fine, altrimenti la  stringa registraCollezione.
 	 */
 
 	@RequestMapping(value = "/admin/registraCollezione", method = RequestMethod.POST)
@@ -67,7 +67,7 @@ public class CollezioneController {
 	}
 
 	/**
-	 * questa funzione apre la pagina SeceltaCollezionePerInserimentoOpere che serve per selezionare la collezione alla quale bisogna salvare delle opere all'interno
+	 * Questa funzione apre la pagina sceltaCollezionePerInserimentoOpere che serve per selezionare una collezione alla quale si vuole inserire delle opere.
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
@@ -80,7 +80,8 @@ public class CollezioneController {
 		return "admin/inserimento/sceltaCollezionePerInserimentoOpere.html";
 	}
 	/**
-	 * questa funzione apre la pagina inserisciOpereACollezione che serve per selezionare le opere da inserire in una collezione scelta nella pagina precedente
+	 * Questa funzione apre la pagina inserisciOpereACollezione che serve per selezionare le opere da inserire 
+	 * in una collezione scelta nella pagina precedente (sceltaCollezionePerInserimentoOpere.html).
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
@@ -98,13 +99,15 @@ public class CollezioneController {
 	 * @param idCollezione
 	 * @param idOpere
 	 * @param model
-	 * @return stringa riferita alla pagina inserisciOpereACollezioneCompletata.html se sono state scelte opere altrimenti inserisciOpereACollezione.html
+	 * @return stringa riferita alla pagina inserisciOpereACollezioneCompletata.html se sono state scelte opere, altrimenti inserisciOpereACollezione.html
 	 */
 	@RequestMapping(value = "/admin/inserisciOpereACollezione", method = RequestMethod.POST)
 	public String inserisciOpereAllaCollezione(@RequestParam("id_collezione") Long idCollezione, 
 											   @RequestParam(name="opereSelezionate", required=false) List<Long> idOpere,
 											   Model model) {
+		//E' stato seleionato nella pagina almeno un'opera?
 		if(idOpere != null) {
+			//Inserisco ogni opera alla collezione.
 			Collezione collezione = this.collezioneService.collezionePerId(idCollezione);
 			for(Long idOpera : idOpere) {
 				Opera o = this.operaService.operaPerId(idOpera);
@@ -122,7 +125,7 @@ public class CollezioneController {
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
 	/**
-	 * Questra funzione apre la pagina collezione/id ovvero apre la pagina della collezione selezionata nella pagina precedente
+	 * Questa funzione apre la pagina collezione/id ovvero apre la pagina della collezione selezionata nella pagina precedente.
 	 * @param idCollezione
 	 * @param model
 	 * @return stringa riferita alla pagina collezione

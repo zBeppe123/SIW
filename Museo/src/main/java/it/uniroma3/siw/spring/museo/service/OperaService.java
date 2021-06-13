@@ -36,8 +36,8 @@ public class OperaService {
 		
 	}
 	/**
-	 * Cerca tutte le opere non inserite in una collezione
-	 * @return lista di opere non inserite nella collezione
+	 * Cerca tutte le opere non inserite in nessuna collezione
+	 * @return lista di opere non inserite in nessuna collezione
 	 */
 	@Transactional
 	public Object getOpereNonInseriteAdUnaCollezione() {

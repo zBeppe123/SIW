@@ -26,7 +26,7 @@ public class CollezioneService {
 		return result.orElse(null);
 	}
 	/**
-	 * cerca una lista di colleizoni ordinate per il nome
+	 * cerca una lista di collezioni ordinate per il nome
 	 * @return la lista di collezioni
 	 */
 	@Transactional
@@ -34,7 +34,7 @@ public class CollezioneService {
 		return (List<Collezione>) collezioneRepository.findAllByOrderByNome();
 	}
 	/**
-	 * ritrona una lista di opere appartenenti alla colleizone avente id:idCollezione
+	 * ritorna una lista di opere appartenenti alla colleizone avente id:idCollezione
 	 * @param idCollezione
 	 * @return la lista di opere della collezione
 	 */

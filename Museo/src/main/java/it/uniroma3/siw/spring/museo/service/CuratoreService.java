@@ -33,9 +33,9 @@ public class CuratoreService {
 		return res.size()>0;
 	}
 	/**
-	 * cerca un curatore nel DB
+	 * cerca un curatore nel DB tramite l'id
 	 * @param idCuratore
-	 * @return curatore cercato oppure null
+	 * @return curatore cercato oppure null se non esiste
 	 */
 	@Transactional
 	public Curatore curatorePerId(Long idCuratore) {

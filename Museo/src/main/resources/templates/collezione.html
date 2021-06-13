@@ -18,7 +18,7 @@
 				   th:text="${opera.titolo}">Nottestellata </a> 
 				di 
 				<a th:href="@{'/artista' + '/' + ${opera.artista.id}}"
-				   th:text="|${opera.artista.nome} + ${opera.artista.cognome}|">Vincent van Gogh</a>.
+				   th:text="|${opera.artista.nome} ${opera.artista.cognome}|">Vincent van Gogh</a>.
 			</li>
 		</ul>
 		<div th:if=${#lists.isEmpty(opere)}>Non ci sono opere in questa collezione</div>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 	/**
-	 * questa funzione serve per aprire l'index
+	 * Questa funzione serve per aprire l'index
 	 * @param model
 	 * @return stringa index.html
 	 */
@@ -18,7 +18,7 @@ public class MainController {
 	}
 	
 	/**
-	 * questa pagina apre la pagina informazioni.html
+	 * Questa pagina apre la pagina informazioni.html
 	 * @param model
 	 * @return stringa riferita alla pagina informazioni.html
 	 */

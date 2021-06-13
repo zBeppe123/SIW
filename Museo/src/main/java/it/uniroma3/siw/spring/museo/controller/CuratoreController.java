@@ -21,7 +21,7 @@ public class CuratoreController {
 	private CuratoreValidator curatoreValidator;
 	
 	/**
-	 * questa funzione apre la pagina registraCuratore
+	 * Questa funzione apre la pagina registraCuratore
 	 * @param model
 	 * @return stringa riferita alla pagina registaCuratore
 	 */

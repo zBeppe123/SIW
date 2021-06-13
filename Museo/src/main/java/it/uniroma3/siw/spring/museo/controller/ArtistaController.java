@@ -37,7 +37,8 @@ public class ArtistaController {
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
-	 * @return
+	 * @return strigna riferita a registraArtistaCompletata.html se la registrazione dell'artista e' andata a buon fine,
+	 * 			altrimenti a registraArtista se ci degli errori.
 	 */
 	@RequestMapping(value = "/admin/registraArtista", method = RequestMethod.POST)
 	public String registraNuovoArtista(Model model, @ModelAttribute("artista") Artista artista, BindingResult bindingResult) {
@@ -68,7 +69,7 @@ public class ArtistaController {
 		return "artista";
 	}
 	/**
-	 * Questa pagina serve ad aprire la pagina con tuttti gli artisti ordinati per cognome
+	 * Questa pagina serve ad aprire la pagina con tutti gli artisti ordinati per cognome
 	 * @param model
 	 * @param artista
 	 * @param bindingResult

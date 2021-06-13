@@ -27,14 +27,14 @@ public class AuthenticationController {
 	public String apriPaginaLogin(Model model) {
 		return "login.html";
 	}
+	
 	/**
-	 * questa pagina fa tornare l'utente all'index dopo aver premuto il tasto logout
+	 * Questa pagina fa tornare l'utente all'index dopo aver premuto il tasto logout
 	 * @param model
 	 * @param artista
 	 * @param bindingResult
 	 * @return stringa riferita a index.html
 	 */
-
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
 		return "index.html";
