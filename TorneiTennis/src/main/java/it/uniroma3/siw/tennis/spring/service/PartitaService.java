@@ -30,7 +30,7 @@ public class PartitaService {
 		return (List<Partita>) partitaRepository.findByTennista1EqualsIdOrTennista2EqualsId(id);
 	}
 	@Transactional
-	public List<Partita> getPartiteByToreno(Long idTorneo) {
+	public List<Partita> getPartiteByTorneo(Long idTorneo) {
 		return (List<Partita>) partitaRepository.findByTorneoId(idTorneo);
 	}
 	@Transactional

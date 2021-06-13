@@ -1,0 +1,11 @@
+section {
+	margin: 2px;
+	text-align: center;
+}
+
+img {
+	margin-top: 2px;
+	border: 10px solid 	#7fffd4;
+	border-style: ridge;
+}
+

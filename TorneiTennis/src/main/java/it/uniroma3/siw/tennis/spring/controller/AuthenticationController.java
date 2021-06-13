@@ -1,7 +1,5 @@
 package it.uniroma3.siw.tennis.spring.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +33,10 @@ public class AuthenticationController {
 	@Autowired
 	private CredentialsValidator credentialsValidator;
 	
+	/** Apre la pagina per la registrazione di un nuovo tennista.
+	 * @param model
+	 * @return Stringa riferita a registraTennista.html
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 
 	public String showRegisterForm (Model model) {
 		model.addAttribute("tennista", new Tennista());
@@ -42,20 +44,32 @@ public class AuthenticationController {
 		return "registraTennista";
 	}
 	
+	/** Apre la pagina di login
+	 * @param model
+	 * @return Stringa riferita a loginForm.html
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
 		return "loginForm";
 	}
 	
+	/** Effettua il logout dell'utente che ha fatto l'accesso.
+	 * @param model
+	 * @return Stringa riferita a index.html
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
 		return "index";
 	}
 	
+	/** Apre la pagina home dell'utente acceduto.
+	 * @param model
+	 * @return Stringa riferita a "/utente/home.html" se l'utente che accede e' una tennista,
+	 * 			altrimenti a "/admin/home" quando accede l'admin. 
+	 */
     @RequestMapping(value = "/default", method = RequestMethod.GET)
-    public String defaultAfterLogin(Model model,HttpSession sessione) {
+    public String defaultAfterLogin(Model model) {
     	Credentials credentials = utili.getCredentials();
-    	sessione.setAttribute("tennistaCorrente", credentials.getTennista());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
@@ -65,6 +79,15 @@ public class AuthenticationController {
         return "/utente/home";
     }
 	
+    /** Effettua la registra di un nuovo tennista
+     * @param tennista
+     * @param tennistaBindingResult
+     * @param credentials
+     * @param credentialsBindingResult
+     * @param model
+     * @return Stringa riferita a registrationSuccessful se la registrazione e' andata a buon fine,
+     * 			altrimenti a registraTennista.html
+     */
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("tennista") Tennista tennista,
                  BindingResult tennistaBindingResult,
@@ -84,6 +107,7 @@ public class AuthenticationController {
             
             return "registrationSuccessful";
         }
+        
         return "registraTennista";
     }
     

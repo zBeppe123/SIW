@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Registrazione', filecss='')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+    	<h1>Registrazione</h1>
+	<form th:action="@{/register}" method="POST">
+    <table class="form_dati">
+        <tr>
+            <td>Username</td>
+            <td><input type="text" placeholder="Username" required
+                       th:field="${credentials.username}"/></td>
+            <td th:if="${#fields.hasErrors('credentials.username')}"
+                th:errors="${credentials.username}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" placeholder="********" required
+                       th:field="${credentials.password}"/></td>
+            <td th:if="${#fields.hasErrors('credentials.password')}"
+                th:errors="${credentials.password}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Nome</td>
+            <td><input type="text" placeholder="nome" required
+                       th:field="${tennista.nome}"/></td>
+            <td th:if="${#fields.hasErrors('tennista.nome')}"
+                th:errors="${tennista.nome}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Cognome</td>
+            <td><input type="text" placeholder="cognome" required
+                       th:field="${tennista.cognome}"/></td>
+            <td th:if="${#fields.hasErrors('tennista.cognome')}"
+                th:errors="${tennista.cognome}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" placeholder="prova@prova.it" required
+                       th:field="${tennista.email}"/></td>
+            <td th:if="${#fields.hasErrors('tennista.email')}"
+                th:errors="${tennista.email}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Nazionalit&agrave;</td>
+            <td><input type="text" placeholder="nazionalita" required
+                       th:field="${tennista.nazionalita}"/></td>
+            <td th:if="${#fields.hasErrors('tennista.nazionalita')}"
+                th:errors="${tennista.nazionalita}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Telefono</td>
+            <td><input type="number" placeholder="numero di telefono" required
+                       th:field="${tennista.telefono}"/></td>
+            <td th:if="${#fields.hasErrors('tennista.telefono')}"
+                th:errors="${tennista.telefono}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td></td><td>
+                <button type="submit">Registra</button>
+            </td>
+        </tr>
+    </table>
+	</form>
+	</div>
+</body>
+</html>

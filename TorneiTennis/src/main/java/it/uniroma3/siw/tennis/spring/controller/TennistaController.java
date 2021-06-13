@@ -23,6 +23,11 @@ public class TennistaController {
 	@Autowired
 	Utili utili;
 	
+	/** Apre la pagina dove mostra i dati di un tennista.
+	 * @param idTennista
+	 * @param model
+	 * @return Stringa riferita a tennista.html
+	 */
 	@RequestMapping(value = "/tennista/{id}", method = RequestMethod.GET)
 	public String getTennista(@PathVariable("id") Long idTennista, Model model) {
 		Tennista t = this.tennistaService.tennistaPerId(idTennista);
@@ -30,6 +35,7 @@ public class TennistaController {
 			model.addAttribute("tennista", this.tennistaService.tennistaPerId(idTennista));
 			model.addAttribute("partite", this.partitaService.getPartiteByTennista(t.getId()));
 		}
+		
 		try {
 			String s=utili.getCredentials().getRole();
 			

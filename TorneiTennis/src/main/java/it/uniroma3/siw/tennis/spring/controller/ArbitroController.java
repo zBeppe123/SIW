@@ -38,12 +38,24 @@ public class ArbitroController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ArbitroController.class);
 	
+	/** Apre la pagina registraArbitro.html per registrare un nuovo arbitro.
+	 * @param model
+	 * @return Stringa riferfita alla pagina registraArbitro.html
+	 */
 	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.GET)
 	public String apriRegistraArbitro(Model model) {
 		model.addAttribute("arbitro", new Arbitro());
 		return "admin/registra/registraArbitro";
 	}
 	
+	
+	/** Registra un nuovo arbitro inserito dall'admin.
+	 * @param arbitro
+	 * @param model
+	 * @param bindingResult
+	 * @return Stringa riferita a registraArbitroCompletata.html se viene registrato correttamente il nuovo arbitro inserito,
+	 * 			altriment a registraArbitro.html
+	 */
 	@RequestMapping(value = "/admin/registraArbitro", method = RequestMethod.POST)
 	public String registraNuovoArbitro(@ModelAttribute("arbitro") Arbitro arbitro, Model model, BindingResult bindingResult) {
 		logger.debug("registrazione nuovo arbitro.");
@@ -61,12 +73,21 @@ public class ArbitroController {
 		return "admin/registra/registraArbitro";
 	}
 	
+	/** Apre la pagina dove l'admin puo' scegliere un arbitro per modificare i suoi dati.
+	 * @param model
+	 * @return Stringa riferita alla pagina sceltaArbitroPerModifica.html
+	 */
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.GET)
 	public String apriSceltaArbitroPerModifica(Model model) {
 		model.addAttribute("arbitri", this.arbitroService.tutti());
 		return "admin/modifica/sceltaArbitroPerModifica.html";
 	}
 	
+	/** Apre la pagina dove l'admin puo' modificare i dati del arbitro selezionato.
+	 * @param idArbitro
+	 * @param model
+	 * @return Stringa riferita a modificaArbitro.html
+	 */
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.POST)
 	public String sceltoArbitroPerModifica(@RequestParam("arbitroSelezionato") Long idArbitro, Model model) {
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
@@ -74,6 +95,13 @@ public class ArbitroController {
 		return "/admin/modifica/modificaArbitro";
 	}
 	
+	/** Modifica i dati dell'arbitro selezionato.
+	 * @param arbitroModificato
+	 * @param model
+	 * @param bindingResult
+	 * @return Stringa riferita a modficaArbitroCompletata.html se la modifica e' andata a buon fine,
+	 * 			altrimenti a modifica.html
+	 */
 	@RequestMapping(value = "/admin/modificaArbitro", method = RequestMethod.POST)
 	public String modificaDatiArbitro(@ModelAttribute("arbitro") Arbitro arbitroModificato, Model model, BindingResult bindingResult) {
 		this.arbitroModificatoValidator.validate(arbitroModificato, bindingResult);
@@ -87,6 +115,11 @@ public class ArbitroController {
 		return "/admin/modifica/modificaArbitro";
 	}
 	
+	/** Apre una pagina contenente i dati di un arbitro.
+	 * @param idArbitro
+	 * @param model
+	 * @return Stringa riferita a arbitro.html
+	 */
 	@RequestMapping(value = "/arbitro/{id}", method = RequestMethod.GET)
 	public String getArbitro(@PathVariable("id") Long idArbitro, Model model) {
 		logger.debug("Lettura arbitro.");
@@ -113,12 +146,22 @@ public class ArbitroController {
 		return "arbitro.html";
 	}
 	
+	/** Apre la pagina per la cancellazione di un arbitro.
+	 * @param model
+	 * @return Stringa riferita a cancellaArbitro.
+	 */
 	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.GET)
 	public String apriCancellaArbitro(Model model) {
 		model.addAttribute("arbitri",this.arbitroService.arbitriNonImpegnati());
 		return "admin/cancella/cancellaArbitro";
 	}
 	
+	/** Cancella un arbitro selezionato dall'admin.
+	 * @param idArbitro
+	 * @param model
+	 * @param sessione
+	 * @return Stringa riferita a cancellazioneArbitroCompletata.html
+	 */
 	@RequestMapping(value="/admin/cancellaArbitro", method=RequestMethod.POST)
 	public String cancellaArbitro(@RequestParam("arbitroSelezionato") Long idArbitro,Model model,HttpSession sessione) {
 		this.arbitroService.cancellaArbitro(idArbitro);

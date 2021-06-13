@@ -1,0 +1,46 @@
+body {
+	background-color: mediumturquoise;
+	margin: 0px;
+}
+
+header {
+	background-color: silver;
+	border-bottom: 3px solid #808080;
+}
+
+section {
+	margin: 5px;
+}
+
+#testa {
+	display: flex;
+	justify-content: space-between;
+}
+
+#sinistra {
+	display: flex;
+	justify-content: flex-start;
+}
+
+#destra {
+	display: flex;
+	justify-content: flex-end;
+}
+
+h1{
+	text-align: center;
+	font-size: 25pt;
+}
+
+.form_dati {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.evidenziato {
+	background-color: yellow;
+}
+
+.centrato {
+	text-align: center;
+}

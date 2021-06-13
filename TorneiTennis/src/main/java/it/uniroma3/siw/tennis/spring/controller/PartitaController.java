@@ -30,13 +30,21 @@ public class PartitaController {
 	@Autowired
 	private PartitaValidator partitaValidator;
 	
-	
-	
+	/** Apre la pagina per scegliere il torneo per la registrazione di una partita.
+	 * @param model
+	 * @return Stringa riferita a selezionaTorneoPerRPartita.html
+	 */
 	@RequestMapping(value = "/admin/selezionaTorneoPerRPartita", method = RequestMethod.GET)
-    public String apriSelezionaTorenoPerRPartita(Model model) {
+    public String apriSelezionaTorneoPerRPartita(Model model) {
     	model.addAttribute("tornei", torneoService.getTorneiDisponibili());
     	return "/admin/registra/selezionaTorneoPerRPartita";
     }
+	
+	/** L'admin sceglie il torneo e apre la pagina per la registrazione di una partita.
+	 * @param idTorneo
+	 * @param model
+	 * @return Stringa riferita a registraPartita.html
+	 */
 	@RequestMapping(value = "/admin/selezionaTorneoPerRPartita", method = RequestMethod.POST)
     public String apriSelezionaTorenoPerRPartita(@RequestParam("torneoSelezionato") Long idTorneo, Model model) {
 		model.addAttribute("idTorneo",idTorneo);
@@ -45,6 +53,16 @@ public class PartitaController {
     	return "/admin/registra/registraPartita";
     }
     
+	/** Registra una partita finita del torneo selezionato.
+	 * @param partita
+	 * @param idTorneo
+	 * @param idTennista1
+	 * @param idTennista2
+	 * @param model
+	 * @param bindingResult
+	 * @return Stringa rifertita a registrazionePartitaCompletata.html se la registrazione e' andata a buon fine,
+	 * 			altrimenti a registraPartita.html
+	 */
     @RequestMapping(value = "/admin/registraPartita", method = RequestMethod.POST)
     public String registraNuovaPartita(@ModelAttribute("partita") Partita partita,@RequestParam("torn") Long idTorneo, @RequestParam("gioc1") Long idTennista1,
     		@RequestParam("gioc2") Long idTennista2, Model model, BindingResult bindingResult) {
@@ -67,18 +85,31 @@ public class PartitaController {
     	return "admin/registra/registraPartita";
     }
     
-    
+    /** Apre la pagina dove viene elencato tutti i tornei dove si vuole cancellare un partita del torneo.
+     * @param model
+     * @return Stringa riferita a selezionaTorneoPerCPartita.html
+     */
     @RequestMapping(value = "/admin/selezionaTorneoPerCPartita", method = RequestMethod.GET)
-    public String apriSelezionaTorenoPerCPartita(Model model) {
+    public String apriSelezionaTorneoPerCPartita(Model model) {
     	model.addAttribute("tornei", torneoService.getTorneiDisponibiliEFiniti());
     	return "admin/cancella/selezionaTorneoPerCPartita";
     }
+    
+    /** L'admin sceglie un torneo da cancellare e viene aperta la pagina dove mostra tutte le partite svolte.
+     * @param idTorneo
+     * @param model
+     * @return Stringa riferita a cancellaPartita.html
+     */
 	@RequestMapping(value = "/admin/selezionaTorneoPerCPartita", method = RequestMethod.POST)
     public String apriSelezionaTorenoPerCPartita(@RequestParam("torneoSelezionato") Long idTorneo, Model model) {
-		model.addAttribute("partite",partitaService.getPartiteByToreno(idTorneo));
+		model.addAttribute("partite",partitaService.getPartiteByTorneo(idTorneo));
     	return "admin/cancella/cancellaPartita";
     }
     
+	/** Cancella una partita di un torneo scelto dall'admin.
+	 * @param idPartita
+	 * @return Stringa riferita a cancellazionePartitaCompletata.html
+	 */
     @RequestMapping(value = "/admin/cancellaPartita", method = RequestMethod.POST)
     public String cancellaPartita(@ModelAttribute("partitaSel") Long idPartita) {
     	this.partitaService.eliminaPartita(idPartita);
