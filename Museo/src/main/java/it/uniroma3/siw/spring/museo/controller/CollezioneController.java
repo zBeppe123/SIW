@@ -2,6 +2,8 @@ package it.uniroma3.siw.spring.museo.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.museo.controller.validator.CollezioneValidator;
 import it.uniroma3.siw.spring.museo.model.Collezione;
+import it.uniroma3.siw.spring.museo.model.Curatore;
 import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
 import it.uniroma3.siw.spring.museo.service.CuratoreService;
@@ -29,6 +32,8 @@ public class CollezioneController {
 	private CuratoreService curatoreService;
 	@Autowired
 	private OperaService operaService;
+
+	private static final Logger logger = LoggerFactory.getLogger(CollezioneController.class);
 	//registra Collezione
 	/**
 	 * Questa funzione apre la pagina RegistraCollezione.html
@@ -230,5 +235,51 @@ public class CollezioneController {
 		this.operaService.inserisciOpere(opere);
  		this.collezioneService.eliminaCollezioneById(idCollezione);
 		return "admin/cancella/cancellaCollezioneCompletata";
+	}
+	//modifica collezione
+
+	/**
+	 * apre la pagina sceltaCollezionePerModifica
+	 * @param model
+	 * @return stringa riferita alla pagina sceltaCollezionePerModifica
+	 */
+	@RequestMapping(value = "/admin/sceltaCollezionePerModifica", method = RequestMethod.GET)
+	public String apriSceltaCollezionePerModifica(Model model) {
+		model.addAttribute("collezioni", this.collezioneService.tutti());
+		return "admin/modifica/sceltaCollezionePerModifica";
+	}
+	
+	/**
+	 * apre la pagina modifcaCollezione
+	 * @param idCollezione
+	 * @param model
+	 * @return stringa riferita alla pagina modifcaCollezione
+	 */
+	@RequestMapping(value = "/admin/sceltaCollezionePerModifica", method = RequestMethod.POST)
+	public String sceltaCollezionePerModifica(@RequestParam("collezioneSelezionata") Long idCollezione, Model model) {
+		Collezione collezione = this.collezioneService.collezionePerId(idCollezione);
+		model.addAttribute("collezione", collezione);
+		model.addAttribute("curatori", curatoreService.tutti());
+		return "/admin/modifica/modificaCollezione";
+	}
+	
+	/**
+	 * questa funzione modifca una collezione
+	 * @param collezioneModificata
+	 * @param model
+	 * @param bindingResult
+	 * @return stringa riferita alla pagina modificaCollezioneCompletata se tutto è andato a buon fine, modificaCollezione altrimenti
+	 */
+	@RequestMapping(value = "/admin/modificaCollezione", method = RequestMethod.POST)
+	public String modificaDatiCollezione(@ModelAttribute("collezione") Collezione collezioneModificata,@RequestParam("curator") Long idCuratore, Model model, BindingResult bindingResult) {
+		this.collezioneValidator.validateModifica(collezioneModificata, bindingResult);
+		collezioneModificata.setCuratore(curatoreService.curatorePerId(idCuratore));
+		if(!bindingResult.hasErrors()) {
+
+			collezioneService.saveCollezione(collezioneModificata);
+			return "/admin/modifica/modificaCollezioneCompletata";
+		}
+		model.addAttribute("curatori", curatoreService.tutti());
+		return "/admin/modifica/modificaCollezione";
 	}
 }

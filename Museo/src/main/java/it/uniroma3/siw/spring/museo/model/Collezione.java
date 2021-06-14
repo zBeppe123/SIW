@@ -14,7 +14,7 @@ public class Collezione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String nome;
 	
 	@Column(nullable = false, length = 2000)

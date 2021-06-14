@@ -27,5 +27,13 @@ public class CollezioneValidator implements Validator{
 		}
 		
 	}
+	
+	public void validateModifica(Object target, Errors errors) {
+		Collezione c= (Collezione) target;
+		Collezione cv=collezioneService.collezionePerId(c.getId());
+		if(!c.getNome().equals(cv.getNome())) {
+			this.validate(c, errors);
+		}
+	}
 
 }
