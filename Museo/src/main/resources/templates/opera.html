@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:if="${opera}" th:replace="fragments/base_utente.html :: headerfiles(title='Opera', filecss='opera.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_utente.html :: intestazione">
+		</header>
+		<section>
+			<div th:if="${opera}">
+				<h1 class="titolo_centrato" th:text="${opera.titolo}">Notte stellata</h1>
+				<div id="opera">
+					<div id="immagine_opera">
+						<img th:src="@{'/images/opere/' + ${opera.img}}"/> <br>
+					</div>
+					<div id="info_opera">
+						<strong>Titolo opera:</strong> <span th:text="${opera.titolo}">Notte stellata</span> <br>
+						<strong>Autore:</strong> <a th:href="@{'/artista/' + ${opera.artista.id}}"
+													th:text="|${opera.artista.cognome} ${opera.artista.nome}|">Vincent van Gogh</a> <br>
+						<strong>Descrizione:</strong> <span th:text="${opera.descrizione}">descrizione dell'opera.</span><br>
+					</div>
+				</div>
+			</div>
+			<div th:unless="${opera}">
+				<h1 class="titolo_centrato">Opera inesistente</h1>
+				<div class="messaggio_errore testo_centrato">L'opera &egrave; inesistente.</div>
+			</div>
+		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo">
+		</footer>
+	</body>
+</html>

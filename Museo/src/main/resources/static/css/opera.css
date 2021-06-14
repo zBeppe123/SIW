@@ -1,0 +1,18 @@
+#opera {
+	display: flex;
+}
+
+#immagine_opera {
+	width: 50%;
+}
+
+#info_opera {
+	width: 50%;
+}
+
+img {
+	margin: 5px;
+	border: 8px solid lightblue;
+	border-style: ridge;
+	width: 80%;
+}

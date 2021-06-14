@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Scelta opera da cancellare', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Scelta opera da cancellare</h1>
+			Ecco la lista di tutte le opere del museo. <br>
+			Scegli un'opera tra queste elencate per cancellarla dal database:<br>
+			ATTENZIONE: questa operazione non pu&ograve; essere modificata!
+			<div th:unless=${#lists.isEmpty(opere)}>
+			<form th:action="@{/admin/cancellaOpera}" method="post">
+				<table class="table_radio">
+					<tr th:each="opera : ${opere}">
+						<td><input type="radio" name="operaSelezionata" th:value="${opera.id}" required/></td>
+						<td>
+							<a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}">Notte
+					stellata </a><br>
+					anno: <span th:text="${opera.anno}">anno</span><br>
+							autore: <a th:href="@{'/artista' + '/' + ${opera.artista.id}}" th:text="|${opera.artista.nome} ${opera.artista.cognome}|">nome</a>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Cancella"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(opere)}><h2>Nessuna collezione disponibile per la cancellazione</h2></div>
+		</section>
+	</body>
+	<footer th:replace="fragments/base_admin.html :: fondo">
+</html>

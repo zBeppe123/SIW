@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Modifica dati collezione', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1>Modifica dati di una collezione</h1>
+			<div class="centrato">
+			Nei campi sono presenti i dati della collezione selezionata, <br>
+			puoi modificare un o pi&ugrave; campi per modificare uno o pi&ugrave;  dati corrispondenti della collezione, <br>
+			poi per confermare la modifica premi il pulsate "Modifica".
+			</div>
+			<form th:action="@{/admin/modificaCollezione}" method="post" th:object="${collezione}">
+				<div class="centrato" th:if="${#fields.hasGlobalErrors()}">
+	  				<p> <span th:each="err : ${#fields.globalErrors()}"> <span class="evidenziato"  th:text="${err}">errori</span><br>
+	  				</span>
+	  				</p>
+				</div>
+				<table class="form_dati">
+					<tr>
+						<td><input type="hidden" th:field="*{id}" th:value="*{id}"/></td>
+					</tr>
+					<tr>
+						<td>Nome:</td>
+						<td><input type="text" placeholder="Nome" th:field="*{nome}" th:value="*{nome}" required/></td>
+					</tr>
+					<tr>
+						<td>curatore:</td>
+						<td>
+							<select name="curator" required>
+								<option th:each="curatore : ${curatori}" th:if="${collezione.curatore.id == curatore.id}" th:value="${curatore.id}" th:text="|${curatore.cognome} ${curatore.nome} ${curatore.matricola}|" selected>cognome-matricola cruatore</option>
+								<option th:each="curatore : ${curatori}" th:unless="${collezione.curatore.id == curatore.id}" th:value="${curatore.id}" th:text="|${curatore.cognome} ${curatore.nome} ${curatore.matricola}|">cognome-nome-matricola curatore</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Descrizione:</td>
+						<td>
+							<textarea placeholder="Nome" th:field="*{descrizione}" th:value="*{descrizione}"
+									  rows="10" cols="30" required>
+							</textarea>
+						</td>
+					</tr>
+					<tr><td></td><td>
+				<input type="submit" value="Modifica"/>
+				</td>
+					</table>
+			</form>
+		</section>
+	</body>
+</html>

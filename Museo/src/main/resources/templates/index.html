@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Museo delle belle arti', filecss='index.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<h1 th:text="#{museo.nome}">Museo</h1>
+			Tre opere delle tante esposte nel museo:
+			<div id="opere_esposte">
+				<div id="prima_opera">
+					<strong>Notte stellata (Vincent van Gogh)</strong> 
+					<div class="opera"> <img src="images/opere/van_gogh_notte_stellata.jpg"/> </div>
+				</div>
+				<div id="seconda_opera">
+					<strong>La camera di Vincent ad Arles (Vincent van Gogh)</strong>
+					<div class="opera"> <img src="images/opere/van_gogh_la_camera_di_Vincent_ad_Arles.jpg"/> </div>
+				</div>
+				<div id="terza_opera">
+					<strong>Guernica (Pablo Picasso)</strong>
+					<div class="opera"> <img src="images/opere/pablo_picasso_guernica.jpg"/> </div>
+				</div>
+			</div>
+		</section>
+		<footer th:replace="fragments/base.html :: fondo"></footer>
+	</body>
+</html>
