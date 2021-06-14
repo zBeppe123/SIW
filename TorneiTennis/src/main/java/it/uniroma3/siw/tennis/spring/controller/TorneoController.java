@@ -118,12 +118,13 @@ public class TorneoController {
 	 * 			altrimenti a modificaTorneo.html
 	 */
 	@RequestMapping(value = "/admin/modificaTorneo", method = RequestMethod.POST)
-	public String modificaDatiArbitro(@RequestParam("arbtr") Long idArbitro, @ModelAttribute("torneo") Torneo torneoModificato, 
+	public String modificaDatiTorneo(@RequestParam("arbtr") Long idArbitro, @ModelAttribute("torneo") Torneo torneoModificato, 
 									  Model model, BindingResult bindingResult) {
 		this.torneoModificatoValidator.validate(torneoModificato, bindingResult);
 		
+		torneoModificato.setArbitro(this.arbitroService.arbitroPerId(idArbitro));
+		
 		if(!bindingResult.hasErrors()) {
-			torneoModificato.setArbitro(this.arbitroService.arbitroPerId(idArbitro));
 			torneoModificato.setNumeroPartecipanti(this.torneoService.getTorneoPerId(torneoModificato.getId()).getNumeroPartecipanti());
 			
 			this.torneoService.modificaDatiDiTorneo(torneoModificato);
@@ -131,6 +132,7 @@ public class TorneoController {
 			return "/admin/modifica/modificaTorneoCompletata";
 		}
 		
+		model.addAttribute("arbitri", this.arbitroService.tutti());
 		return "/admin/modifica/modificaTorneo";
 	}
     
