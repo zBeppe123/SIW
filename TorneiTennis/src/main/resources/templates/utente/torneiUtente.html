@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Tornei da utente', filecss='tornei.css', filecss='')"> </head>
+	<body>
+		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<section>
+			<h1>Tornei</h1>
+			Qui c'&egrave; l'elenco di tutti di tornei di ABCTennis: <br>
+			<ul th:unelss=${#lists.isEmpty(tornei)}>
+				<li th:each="torneo : ${tornei}">
+					<a href="torneo.html" th:href="@{'/torneo' + '/' + ${torneo.id}}" th:text="|${torneo.nome}|">nome-torneo</a>
+					<p>
+						<div th:text="|Periodo dell'evento: ${torneo.mese} ${torneo.anno}|">Periodo dell'evento: mese anno</div>
+						<div th:text="|Premio della vincinta: &euro; ${torneo.premioInDenaro}|">Premio della vincita: &euro; premio</div>
+					</p>
+				</li>
+			</ul>
+			<div th:if=${#lists.isEmpty(tornei)}>nessun torneo disponibile per la visualizzazione</div>
+		</section>
+	</body>
+</html>

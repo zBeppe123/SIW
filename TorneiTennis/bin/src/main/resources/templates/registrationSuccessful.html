@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html ::  headerfiles(title='ABCTennis', filecss='')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<section>
+		<h1>Congratulazioni ti sei registrato!</h1>
+		<div class="centrato">
+			Clicca <a th:href="@{/login}">qui</a> per fare il login, 
+			oppure <a th:href="@{/index}">qui</a> per tornare alla pagina iniziale.
+		</div>
+	</section>
+</body>
+</html>

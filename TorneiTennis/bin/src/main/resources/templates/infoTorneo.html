@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli torneo', filecss='')"> </head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione"></header>
+		<section>
+			<div>
+	    	<h1>Dettagli torneo</h1>
+	    	<div th:if="${torneo}">
+				<strong th:text="${torneo.nome}">Nome-torneo</strong>
+				<p>
+					Numero massimo di partecipanti: <span th:text="${torneo.numeroMaxDiPartecipanti}">numero</span><br>
+					Periodo dell'evento: <span th:text="${torneo.mese}">mese</span> <span th:text="${torneo.anno}">anno</span><br>
+					Premio in denaro: &euro;<span th:text="${torneo.premioInDenaro}">premio</span><br>
+					Arbitro: <a th:href="@{'/arbitro' + '/' + ${torneo.arbitro.id}}" 
+							  th:text="|${torneo.arbitro.nome} ${torneo.arbitro.cognome}|">Paolo Rossi</a>
+				</p>
+	   		</div>
+	   		<h2>Partite svolte:</h2>
+	   		<div th:unless=${#lists.isEmpty(partite)}>
+	   			<ul>
+				<li th:each="partita : ${partite}">
+					<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista1.id}}" th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}|">nome cognome</a>
+						:<span th:text="|${partita.punteggioG1} - ${partita.punteggioG2} ">: punteggio1 - punteggio2 :</span>:
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista2.id}}" th:text="|${partita.tennista2.nome} ${partita.tennista2.cognome}|">nome cognome</a></li>
+			</ul>
+	    </div>
+	    	<div th:if=${#lists.isEmpty(partite)}>Nessuna partita fatta.</div>
+	    </div>
+	    <div th:unless="${torneo}">Toreno non esistente.</div>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Cancellazione partita completata.', filecss='')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin :: intestazione"></header>
+		<section>
+			<h1>Partita cancellata con successo</h1>
+			<div class="centrato">
+			Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
+			</div>
+		</section>
+	</body>
+</html>

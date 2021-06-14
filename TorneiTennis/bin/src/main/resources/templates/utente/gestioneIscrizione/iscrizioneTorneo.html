@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Iscrizione torneo', filecss='tableRadio.css')"></head>
+	<body>
+		<header th:replace="fragments/baseUtente.html :: intestazione"></header>
+		<section>
+			<h1>Iscrizione ad un torneo</h1>
+			<div>Scegli tra uno di questi tornei disponibili:</div>
+			<div th:unless=${#lists.isEmpty(torneiDisponibili)}>
+			<form th:action="@{/iscrizioneTorneo}" method="post">
+				<table>
+					<tr th:each="torneoDisponibile : ${torneiDisponibili}">
+						<td><input id="rad" type="radio" name="torneoSelezionato" th:value="${torneoDisponibile.id}" required></td>
+						<td>
+						<strong><span th:text="${torneoDisponibile.nome}">nome</span></strong> <br>
+							Premio: <span th:text="${torneoDisponibile.premioInDenaro}">premio</span><br>
+							Periodo dell'evento: <span th:text="|${torneoDisponibile.mese} ${torneoDisponibile.anno}|">data</span><br>
+							Posti disponibili: <span th:text="${torneoDisponibile.numeroMaxDiPartecipanti-torneoDisponibile.numeroPartecipanti}">numero</span>/<span th:text="${torneoDisponibile.numeroMaxDiPartecipanti}">numero partecipanti</span><br>
+						</td>
+					</tr>
+				</table>
+				<input type="submit" value="Registra"/>
+			</form>
+			</div>
+			<div th:if=${#lists.isEmpty(torneiDisponibili)}><h2>Nessun torneo disponibile</h2></div>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head
+		th:replace="fragments/baseAdmin.html :: headerfiles(title='Registra arbitro', filecss='')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		<section>
+			<h1>Registra arbitro</h1>
+			<div class="centrato">Inserisci i dati dell'arbitro:</div>
+			<form th:action="@{/admin/registraArbitro}" method="post" th:object="${arbitro}">
+				<div class="centrato" th:if="${#fields.hasGlobalErrors()}">
+				<p>
+					<span th:each="err : ${#fields.globalErrors()}">
+						<span class="evidenziato" 
+							  th:text="${err}">errori</span> <br>
+					</span>
+				</p>
+			</div>
+				<table class="form_dati">
+					<tr><td>
+						Cognome: </td><td><input type="text" th:field="*{cognome}" /></td>
+					</tr>
+					<tr><td>
+						Nome: </td><td><input type="text" th:field="*{nome}"></td>
+					</tr>
+					<tr><td>
+						Numero di telefono: </td><td><input type="text" th:field="*{telefono}" /></td>
+					</tr>
+					<tr><td>
+						Nazionalit&agrave: </td><td><input type="text" th:field="*{nazionalita}" /></td>
+					</tr>
+				<tr><td></td><td>
+					<input type="submit" value="Registra" /></td>
+				</table>
+				<div class="centrato">
+					<div><span class="evidenziato" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}">errore-su-cognome</span></div>
+					<div><span class="evidenziato" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">errore-su-nome</span></div>
+					<div><span class="evidenziato" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">errore-su-telefono</span></div>
+					<div><span class="evidenziato" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}">errore-su-nazionalita</span></div>
+				</div>
+			</form>
+		</section>
+	</body>
+</html>

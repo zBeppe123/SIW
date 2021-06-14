@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Login', filecss='')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+		<h1>Login</h1>
+	</div>
+	<form th:action="@{/login}" method="post">
+		<table class="form_dati">
+			<tr>
+				<td>Username:</td>
+				<td><input name="username" type="text" placeholder="username" required /></td>
+			</tr>		
+			<tr>
+				<td>Password:</td>
+				<td><input name="password" type="password" placeholder="********" required /></td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit">Login</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
