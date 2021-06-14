@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 
+/** Validator per Torneo. */
 @Component
 public class TorneoValidator implements Validator {
 	@Autowired
@@ -20,6 +21,10 @@ public class TorneoValidator implements Validator {
 	
     private static final Logger logger = LoggerFactory.getLogger(TorneoValidator.class);
 
+    /** Valida la corretteza del torneo.
+     * Verifica sulla base di se icampi sono vuoti o meno, se siste gia' un torneo con lo stesso nome e che non sia o no inserita
+     * il mese e o l'anno non validi.
+     */
     @Override
 	public void validate(Object o, Errors errors) {
     	logger.debug("Controllo dei dati del torneo immessi.");
@@ -54,6 +59,7 @@ public class TorneoValidator implements Validator {
 		
 	}
     
+    /** Verifica se l'arbitro e' stato selezionto o meno. */
     public void controllaCampoIdArbitro(String idArbitro, Errors errors) {
     	if(idArbitro.isEmpty()) {
     		errors.reject("registra_torneo_errors_arbitroNonSelezionato");

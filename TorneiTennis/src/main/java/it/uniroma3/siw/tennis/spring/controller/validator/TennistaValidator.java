@@ -17,6 +17,11 @@ public class TennistaValidator implements Validator {
     final Integer MIN_NAME_LENGTH = 2;
     final Integer MIN_TELEFONO_LENGTH = 10;
 
+    /* Valida la corretteza del tennista.
+     * Verifica sulla base che i campi sono vuoti o meno e
+     * nome, cognome e telefono rispettino la lunghezza minima dei caratteri e
+     * nome, cognome rispettino la lunghezza massima dei caratteri.
+     */
     @Override
     public void validate(Object o, Errors errors) {
         Tennista tennista = (Tennista) o;

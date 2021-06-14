@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 import it.uniroma3.siw.tennis.spring.model.Arbitro;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 
+/** Validator per Arbitro. */
 @Component
 public class ArbitroValidator implements Validator {
 	private static final Logger logger = LoggerFactory.getLogger(ArbitroValidator.class);
@@ -19,6 +20,10 @@ public class ArbitroValidator implements Validator {
 	@Autowired
 	private ArbitroService arbitroService;
 	
+	/** Valida la correttezza dell'arbitro.
+	 * Verifica sulla base se campi sono vuoti o meni, se esiste gia' un arbitro con lo stesso nome e se sia inserito
+	 * numero telefonico che abbia il minino di cifre prestabilite.
+	 */
 	@Override
 	public void validate(Object o, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "registra_arbitro_errors");

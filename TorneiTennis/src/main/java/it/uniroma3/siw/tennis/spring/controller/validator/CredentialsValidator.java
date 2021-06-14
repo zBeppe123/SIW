@@ -22,6 +22,10 @@ public class CredentialsValidator implements Validator {
     final Integer MAX_PASSWORD_LENGTH = 20;
     final Integer MIN_PASSWORD_LENGTH = 6;
 
+    /** Valida la corretteza di Credentials.
+     * Verifica sulla base di: se username e password rispettano le lunghezze dei caratteri prestabiliti
+     * e se esiste gia' un username uguale 
+     */
     @Override
     public void validate(Object o, Errors errors) {
         Credentials credentials = (Credentials) o;

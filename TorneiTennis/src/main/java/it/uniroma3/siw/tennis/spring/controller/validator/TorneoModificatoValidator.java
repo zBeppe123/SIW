@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 import it.uniroma3.siw.tennis.spring.model.Torneo;
 import it.uniroma3.siw.tennis.spring.service.TorneoService;
 
+/** Validatoe per Torneo modificato. */
 @Component
 public class TorneoModificatoValidator implements Validator {
 	@Autowired
@@ -20,6 +21,9 @@ public class TorneoModificatoValidator implements Validator {
 		return Torneo.class.equals(clazz);
 	}
 
+	/** Valida la correttenza dei dati di Torneo modificato. 
+	 * Verifica sulla base di: se non esiste gia' un torneo con lo stesso nome e se mese e anno inseriti
+	 * sono validi. */
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Torneo torneo = (Torneo) obj;

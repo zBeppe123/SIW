@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 import it.uniroma3.siw.tennis.spring.model.Arbitro;
 import it.uniroma3.siw.tennis.spring.service.ArbitroService;
 
+/** Validator per Arbitro modificato. */
 @Component
 public class ArbitroModificatoValidator implements Validator {
 	private final int MIN_CIFRE_TELEFONO = 10;
@@ -20,6 +21,10 @@ public class ArbitroModificatoValidator implements Validator {
 		return Arbitro.class.equals(clazz);
 	}
 
+	/** Valida la correttezza dei dati dell'arbitro modificato.
+	 * Verifica sulla base di: se non esiste un arbitro con lo stesso nome e che il telefono
+	 * abbia almeno il numero di cifre richieste.
+	 */
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Arbitro arbitro = (Arbitro) obj;

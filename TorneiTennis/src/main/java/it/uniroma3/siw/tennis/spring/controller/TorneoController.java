@@ -257,7 +257,7 @@ public class TorneoController {
      */
     @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.POST)
     public String CancellaToreno(@RequestParam("torenoSelezionato") Long idTorneo) {
-    	this.torneoService.eliminaTroeno(idTorneo);
+    	this.torneoService.eliminaTorneo(idTorneo);
     	return "/admin/cancella/cancellazioneTorneoCompletata";
     }
 }
