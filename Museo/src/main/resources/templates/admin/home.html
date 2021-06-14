@@ -16,9 +16,20 @@
 				<li> <a th:href="@{/admin/registraCuratore}">Registra un nuovo curatore</a>.
 				<li> <a th:href="@{/admin/registraCollezione}">Registra una nuova collezione</a>.
 			</ul>
-			<h2>Inserimento</h2>
+			<h2>Inserimento:</h2>
 			<ul>
 				<li> <a th:href="@{/admin/sceltaCollezionePerInserireOpere}">Inserisci una o pi&ugrave; opere in una collezione</a>.
+				<li> <a th:href="@{/admin/sceltaCollezionePerRimuovereOpere}">Rimuovi una o pi&ugrave; opere da una collezione</a>.
+			</ul>
+			<h2>Cancellazione:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/cancellaOpera}">Cancella una opera</a>.
+				<li> <a th:href="@{/admin/cancellaCollezione}">Cancella una collezione</a>.
+			</ul>
+			<h2>Modifica:</h2>
+			<ul>
+				<li> <a th:href="@{/admin/selezioneOperaDaModificare}">modifica una opera</a>.
+				<li> <a th:href="@{/admin/selezioneCollezioneDaModificare}">modifica una collezione</a>.
 			</ul>
 		</section>
 		<footer th:replace="fragments/base_admin.html :: fondo">

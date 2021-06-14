@@ -29,28 +29,27 @@ public class CollezioneController {
 	private CuratoreService curatoreService;
 	@Autowired
 	private OperaService operaService;
+	//registra Collezione
 	/**
 	 * Questa funzione apre la pagina RegistraCollezione.html
 	 * @param model
-	 * @param artista
-	 * @param bindingResult
-	 * @return la string riferita alla pagina registra collezione.html
+	 * @return la string ariferita alla pagina registra collezione.html
 	 */
-
 	@RequestMapping(value = "/admin/registraCollezione", method =RequestMethod.GET)
 	public String apriRegistraCollezione(Model model) {
 		model.addAttribute("curatori", curatoreService.tutti());
 		model.addAttribute("collezione", new Collezione());
 		return "admin/registrazione/registraCollezione";
 	}
-         /**
+	
+     /**
 	 * Questa funzione registra la Collezione inserita dall'utente  nel database
 	 * @param model
-	 * @param artista
+	 * @param collezione
+	 * @param idCuratore
 	 * @param bindingResult
 	 * @return la stringa riferita alla pagina registraCollezioneCompletata se la registrazione è andata a buon fine, altrimenti la  stringa registraCollezione.
 	 */
-
 	@RequestMapping(value = "/admin/registraCollezione", method = RequestMethod.POST)
 	public String registraNuovaCollezione(Model model, @ModelAttribute("collezione") Collezione collezione,@RequestParam("curatr") Long idCuratore, BindingResult bindingResult) {
 		this.collezioneValidator.validate(collezione, bindingResult);
@@ -65,35 +64,33 @@ public class CollezioneController {
 		
 		return "admin/registrazione/registraCollezione";
 	}
-
+	//inserimento opere
 	/**
 	 * Questa funzione apre la pagina sceltaCollezionePerInserimentoOpere che serve per selezionare una collezione alla quale si vuole inserire delle opere.
 	 * @param model
-	 * @param artista
-	 * @param bindingResult
 	 * @return stringa riferita alla pagina sceltaCollezionePerInserimentoOpere
 	 */
-
 	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.GET)
 	public String apriSceltaCollezionePerInserimentoOpere(Model model) {
 		model.addAttribute("collezioni", this.collezioneService.tutti());
 		return "admin/inserimento/sceltaCollezionePerInserimentoOpere.html";
 	}
+	
 	/**
 	 * Questa funzione apre la pagina inserisciOpereACollezione che serve per selezionare le opere da inserire 
 	 * in una collezione scelta nella pagina precedente (sceltaCollezionePerInserimentoOpere.html).
 	 * @param model
-	 * @param artista
-	 * @param bindingResult
+	 * @param idCollezione
 	 * @return stringa riferita alla pagina inserisciOpereACollezione
 	 */
 	@RequestMapping(value = "/admin/sceltaCollezionePerInserireOpere", method = RequestMethod.POST)
-	public String sceltoLaCollezionePerInserireLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
+	public String sceltaLaCollezionePerInserireLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
 		model.addAttribute("idCollezione", idCollezione);
 		model.addAttribute("opereInseribili", this.operaService.getOpereNonInseriteAdUnaCollezione());
 		model.addAttribute("opereNonSelezionate", "false");
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
+	
 	/**
 	 * Questa funzione inserisce le opere nella collezione
 	 * @param idCollezione
@@ -124,6 +121,61 @@ public class CollezioneController {
 		model.addAttribute("opereNonSelezionate", "true");
 		return "admin/inserimento/inserisciOpereACollezione.html";
 	}
+	//rimozione opere
+	/**
+	 * questa funzione apre la pagina SeceltaCollezionePerRimozioneOpere che serve per selezionare la collezione alla quale bisogna rimuovere delle opere all'interno
+	 * @param model
+	 * @return stringa riferita alla pagina sceltaCollezionePerRimozioneOpere
+	 */
+	@RequestMapping(value = "/admin/sceltaCollezionePerRimuovereOpere", method = RequestMethod.GET)
+	public String apriSceltaCollezionePerRimozioneOpere(Model model) {
+		model.addAttribute("collezioni", this.collezioneService.tutti());
+		return "admin/inserimento/sceltaCollezionePerRimozioneOpere.html";
+	}
+	
+	/**
+	 * Questa funzione apre la pagina rimuoviOpereACollezione che serve pre la selzione delle opere
+	 * @param idCollezione
+	 * @param model
+	 * @return stringa riferita alla pagina rimuoviOpereACollezione.html
+	 */
+	@RequestMapping(value = "/admin/sceltaCollezionePerRimuovereOpere", method = RequestMethod.POST)
+	public String sceltaLaCollezionePerRimuovereLeOpere(@RequestParam("collezioneSelezionato") Long idCollezione, Model model) {
+		model.addAttribute("idCollezione", idCollezione);
+		model.addAttribute("opere", this.collezioneService.getOpereDellaCollezione(idCollezione));
+		model.addAttribute("opereNonSelezionate", "false");
+		return "admin/inserimento/rimuoviOpereACollezione.html";
+	}
+	
+	/**
+	 * Questa funzione inserisce le opere nella collezione
+	 * @param idCollezione
+	 * @param idOpere
+	 * @param model
+	 * @return stringa riferita alla pagina inserisciOpereACollezioneCompletata.html se sono state scelte opere altrimenti inserisciOpereACollezione.html
+	 */
+	@RequestMapping(value = "/admin/rimuoviOpereACollezione", method = RequestMethod.POST)
+	public String rimuoviOpereAllaCollezione(@RequestParam("id_collezione") Long idCollezione, 
+											   @RequestParam(name="opereSelezionate", required=false) List<Long> idOpere,
+											   Model model) {
+		if(idOpere != null) {
+			Collezione collezione = this.collezioneService.collezionePerId(idCollezione);
+			for(Long idOpera : idOpere) {
+				Opera o = this.operaService.operaPerId(idOpera);
+				o.setCollezione(null);
+				this.operaService.inserisci(o);
+			}
+			
+			model.addAttribute("collezione", collezione);
+			return "admin/inserimento/rimuoviOpereACollezioneCompletata.html";
+		}
+		
+		model.addAttribute("idCollezione", idCollezione);
+		model.addAttribute("opere", this.operaService.getOpereNonInseriteAdUnaCollezione());
+		model.addAttribute("opereNonSelezionate", "true");
+		return "admin/inserimento/rimuoviOpereACollezione.html";
+	}
+	//controller pagine controller
 	/**
 	 * Questa funzione apre la pagina collezione/id ovvero apre la pagina della collezione selezionata nella pagina precedente.
 	 * @param idCollezione
@@ -151,7 +203,7 @@ public class CollezioneController {
 		model.addAttribute("collezioni", collezioneService.getCollezioniOrdinatePerNome());
 		return "collezioni";
 	}
-	
+	//cancella collezione
 	/**
 	 * Questa funzione apre la pagina cancellaCollezione.html
 	 * @param model
@@ -162,6 +214,7 @@ public class CollezioneController {
 		model.addAttribute("collezioni", collezioneService.tutti());
 		return "admin/cancella/cancellaCollezione";
 	}
+	
 	/**
 	 * Questa funzione cancella la collezione selezionata 
 	 * @param idCollezione
