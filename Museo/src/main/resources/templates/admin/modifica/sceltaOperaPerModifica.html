@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title='Scelta opera da modificare', filecss='')">
+	<head th:replace="fragments/base_admin.html :: headerfiles(title='Scelta opera da modificare', filecss='')">
 	</head>
 	<body>
 		<header th:replace="fragments/base_admin.html :: intestazione">
@@ -29,5 +29,6 @@
 				<strong class="messaggio_errore">Nessuna collezione disponibile per la modifica</strong>
 			</div>
 		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo"></footer>
 	</body>
 </html>

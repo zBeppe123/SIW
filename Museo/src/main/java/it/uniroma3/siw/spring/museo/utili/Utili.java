@@ -2,6 +2,8 @@ package it.uniroma3.siw.spring.museo.utili;
 
 import java.io.IOException;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,5 +30,18 @@ public class Utili {
 	 */
 	public static void cancellaImmagine(String nomeFile) throws IOException {
 		FileManagerUtils.deleteFile(PATH_SAVE_IMAGES, nomeFile);
+	}
+	
+	public static String getTipologiaUtente() {
+		String tipoUtente;
+		
+		try{
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			tipoUtente = "admin";
+		}
+		catch(ClassCastException e){
+			tipoUtente= "utenteGenerico";
+		}
+		return tipoUtente;
 	}
 }

@@ -42,6 +42,6 @@ public class FileManagerUtils {
 	 public static void deleteFile(String pathOfFile, String fileName) throws IOException {
 		 Path path = Paths.get(pathOfFile);
 
-		 Files.delete(path.resolve(fileName));   
+		 Files.deleteIfExists(path.resolve(fileName));   
 	 }
 }

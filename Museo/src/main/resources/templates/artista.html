@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head
-	th:replace="fragments/base.html :: headerfiles(title='Artista',filecss='artista.css')">
+	th:replace="fragments/base_utente.html :: headerfiles(title='Artista',filecss='artista.css')">
 </head>
 <body>
 	<header th:replace="fragments/base_utente.html :: intestazione">
@@ -11,7 +11,7 @@
 			<strong th:text="|${artista.nome} ${artista.cognome}|">Vincent van Gogh</strong>
 			 e' nato a <a th:href="@{'https://it.wikipedia.org/wiki/' + ${artista.cittaNascita}}" th:text="${artista.cittaNascita}">Zundert (Paesi Bassi)</a> nel <em th:text="${artista.dataNascita}">30 marzo 1853</em>
 			 <span th:if="${artista.dataMorte}">
-			 ed e' morto a <a th:href="https://it.wikipedia.org/wiki/|${artista.cittaMorte}|" th:text="${artista.cittaMorte}">Auvers-sur-Oise</a> nel <em th:text="${artista.dataMorte}">29 luglio 1890</em>
+			 ed e' morto a <a th:href="@{'https://it.wikipedia.org/wiki/' + ${artista.cittaMorte}}" th:text="${artista.cittaMorte}">Auvers-sur-Oise</a> nel <em th:text="${artista.dataMorte}">29 luglio 1890</em>
 			 </span>
 			<h2>Biografia</h2>
 			<section>
@@ -33,6 +33,7 @@
 			</div>
 			<span th:if=${#lists.isEmpty(artista.opere)}>Nessun opera disponibile per questo artista</span>
 		</section>
+		<footer th:replace="fragments/base_utente.html :: fondo"></footer>
 	</body>
-	<footer th:replace="fragments/base_utente.html :: fondo"></footer>
+	
 </html>

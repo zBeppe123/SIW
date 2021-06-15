@@ -159,7 +159,6 @@ public class OperaController {
 			else {
 				opera.setImg(operaVecchia.getImg());
 			}
-			
 			this.operaService.inserisci(opera);
 			
 			return "/admin/modifica/modificaOperaCompletata";
