@@ -109,9 +109,11 @@ public class OperaController {
 	 * @param idOpera
 	 * @param model
 	 * @return stringa riferita a cencellaOperaCompletata per visualizzare che l'opera e' cancellata correttamente.
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/admin/cancellaOpera", method=RequestMethod.POST)
-	public String CancellaOpera(@RequestParam("operaSelezionata") Long idOpera, Model model) {
+	public String CancellaOpera(@RequestParam("operaSelezionata") Long idOpera, Model model) throws IOException {
+		Utili.cancellaImmagine(operaService.operaPerId(idOpera).getImg());
 		this.operaService.eliminaOperaById(idOpera);
 		return "admin/cancella/cancellaOperaCompletata";
 	}
