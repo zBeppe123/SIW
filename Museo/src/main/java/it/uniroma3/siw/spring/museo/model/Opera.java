@@ -14,6 +14,7 @@ public class Opera {
 	@Column(nullable = false)
 	private String titolo;
 	
+	@Column(nullable = false)
 	private Integer anno;
 	
 	@Column(length = 5000)

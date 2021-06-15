@@ -44,7 +44,7 @@ public class OperaController {
 	 * @return pagina dell'opera
 	 */
 	@RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
-	public String getArtista(@PathVariable("id") Long idOpera, Model model) {
+	public String getOpera(@PathVariable("id") Long idOpera, Model model) {
 		Opera o = this.operaService.operaPerId(idOpera);
 		if(o!=null) {
 			model.addAttribute("opera", o);
@@ -82,10 +82,13 @@ public class OperaController {
 		
 		if (!bindingResult.hasErrors()) {
 			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-			String uploadDir = PATH_SAVE_IMAGES;// + opera.getId();
+			String uploadDir = PATH_SAVE_IMAGES;
 	        FileUploadUtil.saveFile(uploadDir, fileName, img);
+	        
 			opera.setArtista(artistaService.artistaPerId(idArtista));
+			opera.setImg(fileName);
 			this.operaService.inserisci(opera);
+			
 			model.addAttribute("opera", opera);
 			return "/admin/registrazione/registraOperaCompletata";
 		}
@@ -112,5 +115,46 @@ public class OperaController {
 	public String CancellaOpera(@RequestParam("operaSelezionata") Long idOpera, Model model) {
 		this.operaService.eliminaOperaById(idOpera);
 		return "admin/cancella/cancellaOperaCompletata";
+	}
+	
+	/** Apre la pagina per la scelta dell'opera da modificare.
+	 * @param model
+	 * @return Stringa riferita a sceltaOperaPerModifica.html
+	 */
+	@RequestMapping(value = "/admin/sceltaOperaPerModifica", method = RequestMethod.GET)
+	public String sceltaOperaPerModifica(Model model) {
+		model.addAttribute("opere", this.operaService.tutti());
+		return "admin/modifica/sceltaOperaPerModifica";
+	}
+	
+	/** Viene scelto l'opera da modificare dall'admin e apre la pagina per la modifica dell'opera.
+	 * @param idOpera
+	 * @param model
+	 * @return Stringa riferita a modificaOpera.html
+	 */
+	@RequestMapping(value = "/admin/sceltaOperaPerModifica", method = RequestMethod.POST)
+	public String scegliOperaDaModificare(@RequestParam("operaSelezionata") Long idOpera, Model model) {
+		model.addAttribute("opera", this.operaService.operaPerId(idOpera));
+		return "admin/modifica/modificaOpera";
+	}
+	
+	public String modificaOpera(@RequestParam(name = "immagine", required = false) MultipartFile img,
+								@RequestParam("opera") Opera opera,Model model) {
+this.operaValidator.validate(opera, bindingResult);
+		
+		if (!bindingResult.hasErrors()) {
+			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
+			String uploadDir = PATH_SAVE_IMAGES;
+	        FileUploadUtil.saveFile(uploadDir, fileName, img);
+	        
+			opera.setArtista(artistaService.artistaPerId(idArtista));
+			opera.setImg(fileName);
+			this.operaService.inserisci(opera);
+			
+			model.addAttribute("opera", opera);
+			return "/admin/registrazione/registraOperaCompletata";
+		}
+		model.addAttribute("artisti", artistaService.tutti());
+		return "admin/registrazione/registraOpera";
 	}
 }
