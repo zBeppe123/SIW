@@ -67,7 +67,8 @@ public class ArtistaController {
 		if(a!=null) {
 			model.addAttribute("artista",a);
 		}
-		model.addAttribute("utente",Utili.getTipologiaUtente());
+		model.addAttribute("utente", Utili.getTipologiaUtente());
+		
 		return "artista";
 	}
 	/**
@@ -81,7 +82,7 @@ public class ArtistaController {
 	@RequestMapping(value = "/artisti", method = RequestMethod.GET)
 	public String apriArtisti(Model model){
 		model.addAttribute("artisti",artistaService.getArtistiOrdinatiPerCognome());
-		model.addAttribute("utente",Utili.getTipologiaUtente());
+		model.addAttribute("utente", Utili.getTipologiaUtente());
 		return "artisti";
 	}
 }

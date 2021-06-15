@@ -11,7 +11,7 @@
 				<a th:href="@{/artisti}">Artisti</a>
 				<a th:href="@{/collezioni}">Collezioni</a>
 			</div>
-			<div id="corpo" th:if="${utente =='admin'}">
+			<div id="corpo" th:if="${utente == 'admin'}">
 				<div id="parte_sinistra">
 					<a th:href="@{/artisti}">Artisti</a>
 					<a th:href="@{/collezioni}">Collezioni</a>
@@ -23,9 +23,8 @@
 		</header>
 		<section>Corpo della pagina</section>
 		<footer th:fragment = "fondo">
-			<a th:if="${utente == 'utenteGenerico'}" href="@{/}">Home</a>
-			<a th:if="${utente =='admin'}" th:href="@{/default}">Home</a>
+			<a th:if="${utente == 'utenteGenerico'}" th:href="@{/}">Home</a>
+			<a th:if="${utente == 'admin'}" th:href="@{/default}">Home</a>
 		</footer>
-		
 	</body>
 </html>

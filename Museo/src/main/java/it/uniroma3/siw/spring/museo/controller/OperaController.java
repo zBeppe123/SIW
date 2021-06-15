@@ -50,7 +50,8 @@ public class OperaController {
 		if(o!=null) {
 			model.addAttribute("opera", o);
 		}
-		model.addAttribute("utente",Utili.getTipologiaUtente());
+		model.addAttribute("utente", Utili.getTipologiaUtente());
+		
 		return "opera";
 	}
 
