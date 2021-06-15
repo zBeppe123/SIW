@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import it.uniroma3.siw.spring.museo.controller.validator.ArtistaValidator;
 import it.uniroma3.siw.spring.museo.model.Artista;
 import it.uniroma3.siw.spring.museo.service.ArtistaService;
+import it.uniroma3.siw.spring.museo.utili.Utili;
 
 @Controller
 public class ArtistaController {
@@ -66,6 +67,7 @@ public class ArtistaController {
 		if(a!=null) {
 			model.addAttribute("artista",a);
 		}
+		model.addAttribute("utente",Utili.getTipologiaUtente());
 		return "artista";
 	}
 	/**
@@ -79,6 +81,7 @@ public class ArtistaController {
 	@RequestMapping(value = "/artisti", method = RequestMethod.GET)
 	public String apriArtisti(Model model){
 		model.addAttribute("artisti",artistaService.getArtistiOrdinatiPerCognome());
+		model.addAttribute("utente",Utili.getTipologiaUtente());
 		return "artisti";
 	}
 }

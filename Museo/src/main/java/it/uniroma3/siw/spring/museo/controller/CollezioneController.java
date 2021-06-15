@@ -21,6 +21,7 @@ import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.service.CollezioneService;
 import it.uniroma3.siw.spring.museo.service.CuratoreService;
 import it.uniroma3.siw.spring.museo.service.OperaService;
+import it.uniroma3.siw.spring.museo.utili.Utili;
 
 @Controller
 public class CollezioneController {
@@ -195,6 +196,7 @@ public class CollezioneController {
 			model.addAttribute("collezione", c);
 			model.addAttribute("opere", this.collezioneService.getOpereDellaCollezione(idCollezione));
 		}
+		model.addAttribute("utente",Utili.getTipologiaUtente());
 		return "collezione";
 	}
 	
@@ -206,6 +208,7 @@ public class CollezioneController {
 	@RequestMapping(value = "/collezioni", method = RequestMethod.GET)
 	public String apriCollezioni(Model model){
 		model.addAttribute("collezioni", collezioneService.getCollezioniOrdinatePerNome());
+		model.addAttribute("utente",Utili.getTipologiaUtente());
 		return "collezioni";
 	}
 	//cancella collezione
