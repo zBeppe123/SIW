@@ -25,4 +25,7 @@ public class OperaValidator implements Validator{
 		}
 	}
 
+	public void validateModificaOpera(Object target, Errors errors) {
+		validate(target, errors);
+	}
 }

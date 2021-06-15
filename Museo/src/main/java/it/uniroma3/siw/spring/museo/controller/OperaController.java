@@ -21,11 +21,12 @@ import it.uniroma3.siw.spring.museo.controller.validator.OperaValidator;
 import it.uniroma3.siw.spring.museo.model.Opera;
 import it.uniroma3.siw.spring.museo.service.ArtistaService;
 import it.uniroma3.siw.spring.museo.service.OperaService;
+import it.uniroma3.siw.spring.museo.utili.FileManagerUtils;
+import it.uniroma3.siw.spring.museo.utili.Utili;
 
 @Controller
 public class OperaController {
 	private static final Logger logger = LoggerFactory.getLogger(OperaController.class);
-	private final String PATH_SAVE_IMAGES = "src/main/resources/static/images/opere/";
 	
 	@Autowired
 	private OperaService operaService;
@@ -81,9 +82,7 @@ public class OperaController {
 		this.operaValidator.validate(opera, bindingResult);
 		
 		if (!bindingResult.hasErrors()) {
-			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-			String uploadDir = PATH_SAVE_IMAGES;
-	        FileUploadUtil.saveFile(uploadDir, fileName, img);
+			String fileName = Utili.salvaImmagine(img);
 	        
 			opera.setArtista(artistaService.artistaPerId(idArtista));
 			opera.setImg(fileName);
@@ -139,13 +138,12 @@ public class OperaController {
 	}
 	
 	public String modificaOpera(@RequestParam(name = "immagine", required = false) MultipartFile img,
-								@RequestParam("opera") Opera opera,Model model) {
-this.operaValidator.validate(opera, bindingResult);
+								@RequestParam("autor") Long idArtista, @RequestParam("opera") Opera opera,
+								BindingResult bindingResult, Model model) throws IOException {
+		this.operaValidator.validateModificaOpera(opera, bindingResult);
 		
 		if (!bindingResult.hasErrors()) {
-			String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-			String uploadDir = PATH_SAVE_IMAGES;
-	        FileUploadUtil.saveFile(uploadDir, fileName, img);
+			String fileName = Utili.salvaImmagine(img);
 	        
 			opera.setArtista(artistaService.artistaPerId(idArtista));
 			opera.setImg(fileName);

@@ -31,10 +31,11 @@
 							<select name="autor" required>
 								<option th:each="artista : ${artisti}" th:if="{opera.artista.id = artista.id}"
 										th:value="${artista.id}" 
-										th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|">
+										th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|"
+										selected>
 											nome-cognome-data-cittaNascita Artista
 								</option>
-								<option th:each="artista : ${artisti}" th:if="{opera.artista.id = artista.id}"
+								<option th:each="artista : ${artisti}" th:unless="{opera.artista.id = artista.id}"
 										th:value="${artista.id}" 
 										th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|">
 											nome-cognome-data-cittaNascita Artista
