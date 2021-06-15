@@ -134,25 +134,36 @@ public class OperaController {
 	@RequestMapping(value = "/admin/sceltaOperaPerModifica", method = RequestMethod.POST)
 	public String scegliOperaDaModificare(@RequestParam("operaSelezionata") Long idOpera, Model model) {
 		model.addAttribute("opera", this.operaService.operaPerId(idOpera));
+		model.addAttribute("artisti", this.artistaService.tutti());
 		return "admin/modifica/modificaOpera";
 	}
 	
-	public String modificaOpera(@RequestParam(name = "immagine", required = false) MultipartFile img,
-								@RequestParam("autor") Long idArtista, @RequestParam("opera") Opera opera,
+	@RequestMapping(value = "/admin/modificaOpera", method = RequestMethod.POST)
+	public String modificaOpera(@RequestParam("immagine") MultipartFile img,
+								@RequestParam("autor") Long idArtista, @ModelAttribute("opera") Opera opera,
 								BindingResult bindingResult, Model model) throws IOException {
 		this.operaValidator.validateModificaOpera(opera, bindingResult);
 		
+		opera.setArtista(this.artistaService.artistaPerId(idArtista));
+		
 		if (!bindingResult.hasErrors()) {
-			String fileName = Utili.salvaImmagine(img);
-	        
-			opera.setArtista(artistaService.artistaPerId(idArtista));
-			opera.setImg(fileName);
+			Opera operaVecchia = this.operaService.operaPerId(opera.getId());
+			
+			if(!img.isEmpty()) {
+				Utili.cancellaImmagine(operaVecchia.getImg());
+				String fileName = Utili.salvaImmagine(img);
+				opera.setImg(fileName);
+			}
+			else {
+				opera.setImg(operaVecchia.getImg());
+			}
+			
 			this.operaService.inserisci(opera);
 			
-			model.addAttribute("opera", opera);
-			return "/admin/registrazione/registraOperaCompletata";
+			return "/admin/modifica/modificaOperaCompletata";
 		}
+		
 		model.addAttribute("artisti", artistaService.tutti());
-		return "admin/registrazione/registraOpera";
+		return "admin/modifica/modificaOpera";
 	}
 }

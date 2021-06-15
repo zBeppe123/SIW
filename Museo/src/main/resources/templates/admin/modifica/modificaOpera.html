@@ -12,30 +12,37 @@
 				puoi modificare uno o pi&ugrave; campi per modificare uno o pi&ugrave;  dati corrispondenti dell'opera, <br>
 				poi per confermare la modifica premi il pulsate "Modifica".
 			</div>
-			<form th:action="@{/admin/modificaOpera}" method="post" th:object="${opera}">
+			<form th:action="@{/admin/modificaOpera}" method="post" th:object="${opera}" enctype="multipart/form-data">
+				<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
+					<p>
+						<span th:each="err:${#fields.globalErrors()}">
+							<span class="evidenziato" th:text="${err}">errori</span><br>
+						</span>
+					</p>
+				</div>
 				<table class="table_dati">
 					<tr>
-						<td><input type="hidden" th:value="*{id}"/>
+						<td><input type="hidden" th:field="*{id}" th:value="*{id}"/>
 					</tr>
 					<tr>
 						<td>Titolo</td>
-						<td><input type="text" th:value="*{titolo}" required/></td>
+						<td><input type="text" th:field="*{titolo}" th:value="*{titolo}" required/></td>
 					</tr>
 					<tr>
 						<td>Anno:</td>
-						<td><input type="number" th:value="*{anno}" required/></td>
+						<td><input type="number" th:field="*{anno}" th:value="*{anno}" required/></td>
 					</tr>
 					<tr>
 						<td>Autore:</td>
 						<td>
 							<select name="autor" required>
-								<option th:each="artista : ${artisti}" th:if="{opera.artista.id = artista.id}"
+								<option th:each="artista : ${artisti}" th:if="${opera.artista.id == artista.id}"
 										th:value="${artista.id}" 
 										th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|"
 										selected>
 											nome-cognome-data-cittaNascita Artista
 								</option>
-								<option th:each="artista : ${artisti}" th:unless="{opera.artista.id = artista.id}"
+								<option th:each="artista : ${artisti}" th:unless="${opera.artista.id == artista.id}"
 										th:value="${artista.id}" 
 										th:text="|${artista.nome} ${artista.cognome} ${artista.dataNascita} ${artista.cittaNascita}|">
 											nome-cognome-data-cittaNascita Artista

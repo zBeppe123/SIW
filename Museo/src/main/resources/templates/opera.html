@@ -16,6 +16,7 @@
 						<strong>Titolo opera:</strong> <span th:text="${opera.titolo}">Notte stellata</span> <br>
 						<strong>Autore:</strong> <a th:href="@{'/artista/' + ${opera.artista.id}}"
 													th:text="|${opera.artista.cognome} ${opera.artista.nome}|">Vincent van Gogh</a> <br>
+						<strong>Anno:</strong> <span th:text="${opera.anno}">anno</span> <br>
 						<strong>Descrizione:</strong> <span th:text="${opera.descrizione}">descrizione dell'opera.</span><br>
 					</div>
 				</div>
