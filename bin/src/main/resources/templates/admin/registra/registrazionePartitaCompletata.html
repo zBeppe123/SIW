@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Registrazione partita completata.', filecss='')"></head>
+	<body>
+		<header th:replace="fragments/baseAdmin :: intestazione"></header>
+		<section>
+			<h1>Registrazione partita completata.</h1>
+			<div class="centrato">
+				Registrazione della partita completata. <br>
+				Clicca <a th:href="@{/default}">qui</a> per ritornare nella home.
+			</div>
+		</section>
+	</body>
+</html>

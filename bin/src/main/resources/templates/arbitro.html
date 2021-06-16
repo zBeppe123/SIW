@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli arbitro', filecss='')"> </head>
+	<body>
+		<div th:if="${utente == 'admin'}">
+			<header  th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		</div>
+		<div th:if="${utente == 'tennista'}">
+			<header  th:replace="fragments/baseUtente.html :: intestazione"></header>
+		</div>
+		<div th:if="${utente == 'anonimo'}">
+			<header  th:replace="fragments/base.html :: intestazione"></header>
+		</div>
+		<section>
+			<div>
+	    	<h1>Dettagli arbitro</h1>
+	    	<div th:if="${arbitro}">
+	    		<h3>Ecco le informazioni dell'arbitro selezionato:</h3>
+	    		<p>
+	    			Arbitro: <span th:text="${arbitro.cognome}">cognome</span> <span th:text="${arbitro.nome}">nome</span> <br>
+	    			Nazionalit&agrave;: <span th:text="${arbitro.nazionalita}">nazionalita'</span> <br>
+	    			<span th:if="${utente == 'admin'}">
+	    				Telefono: <span th:text="${arbitro.telefono}">telefono</span>
+	    			</span>
+	    		</p>
+    			<h3>Elenco di tutti i tornei che ha arbitrato e che arbitrer&agrave;:</h3>
+    			<div th:unless="${#lists.isEmpty(tornei)}"></div>
+	    			<ul>
+	    				<li th:each="torneo : ${tornei}"> 
+	    					Torneo: <a th:href="@{'/torneo/' + ${torneo.id}}" th:text="${torneo.nome}">Nome-torneo</a> <br>
+	    					Periodo dell'evento <span th:text="|${torneo.mese}/${torneo.anno}|">09/2022</span>
+	    				</li>
+	    			</ul>
+	    		<div th:if="${#lists.isEmpty(tornei)}">
+	    			<ul>
+	    				<li>Nessun torneo</li>
+	    			</ul>
+	    		</div>
+	   		</div>
+	    	<div th:unless="${arbitro}">Nessun arbitro selezionato o arbitro non esistente.</div>
+	    </div>
+		</section>
+	</body>
+</html>

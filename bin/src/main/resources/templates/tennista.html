@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Dettagli tennista', filecss='')"> </head>
+	<body>
+		<div th:if="${utente == 'admin'}">
+			<header  th:replace="fragments/baseAdmin.html :: intestazione"></header>
+		</div>
+		<div th:if="${utente == 'tennista'}">
+			<header  th:replace="fragments/baseUtente.html :: intestazione"></header>
+		</div>
+		<div th:if="${utente == 'anonimo'}">
+			<header  th:replace="fragments/base.html :: intestazione"></header>
+		</div>
+		<section>
+			<div>
+	    	<h1>Dettagli Tennista</h1>
+	    	<div th:if="${tennista}">
+	    		<h3>Ecco le informazioni dell'tennista selezionato:</h3>
+	    		<p>
+	    			Tennista: <span th:text="${tennista.cognome}">cognome</span> <span th:text="${tennista.nome}">nome</span> <br>
+	    			Nazionalit&agrave;: <span th:text="${tennista.nazionalita}">nazionalita'</span> <br>
+	    			<span th:if="${utente == 'admin'}">
+	    			Email: <span th:text="${tennista.email}">email</span> <br>
+	    			Telefono: <span th:text="${tennista.telefono}">telefono</span>
+	    			</span>
+	    		</p>
+	   		</div>
+	    	<div th:unless="${tennista}">Nessun tennista selezionato o tennista non esistente.</div>
+	    </div>
+	    <h2>Partite fatte: </h2>
+	   		<div th:unless=${#lists.isEmpty(partite)}>
+	   			<ul>
+				<li th:each="partita : ${partite}">
+					<a th:href="@{'/torneo' + '/' + ${partita.torneo.id}}" th:text="|${partita.torneo.nome}|">nome-torneo</a> <br>
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista1.id}}" th:text="|${partita.tennista1.nome} ${partita.tennista1.cognome}|">nome cognome</a>
+						:<span th:text="|${partita.punteggioG1} - ${partita.punteggioG2} ">: punteggio1 - punteggio2 :</span>:
+						<a th:href="@{'/tennista' + '/' + ${partita.tennista2.id}}" th:text="|${partita.tennista2.nome} ${partita.tennista2.cognome}|">nome cognome</a>
+				</li>
+			</ul>
+	    </div>
+	    <div th:if=${#lists.isEmpty(partite)}>Nessuna partita svolta in alcun torneo.</div>
+		</section>
+	</body>
+</html>
