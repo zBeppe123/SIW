@@ -60,12 +60,12 @@ public class AuthenticationController {
         return "home.html";
     }
 	
-	/*@RequestMapping(value = "/register", method = RequestMethod.GET)
+	/**/@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registraAdmin(Model model) {
 		Credenziali c = new Credenziali();
 		c.setUsername("admin");
 		c.setPassword("123456");
 		credenzialiService.saveCredenziali(c);
 		return "index";
-	}*/
+	}/**/
 }
