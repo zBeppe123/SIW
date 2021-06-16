@@ -47,11 +47,11 @@ public class TorneoValidator implements Validator {
     		}
     		
     		//Mese e anno sono corretti?
-    		LocalDate dataOdierna = LocalDate.now();
-    		if((torneo.getMese()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
-    				torneo.getAnno()<dataOdierna.getYear()) {
-    			errors.reject("registra_torneo_errors_dataErrata");
-    		}
+//    		LocalDate dataOdierna = LocalDate.now();
+//    		if((torneo.getMese()<=dataOdierna.getMonthValue() && torneo.getAnno().intValue()==dataOdierna.getYear()) ||
+//    				torneo.getAnno()<dataOdierna.getYear()) {
+//    			errors.reject("registra_torneo_errors_dataErrata");
+//    		}
     		
     		//Numero partecipanti > 8?
     		if(torneo.getNumeroMaxDiPartecipanti()<4) {
