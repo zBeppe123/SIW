@@ -76,7 +76,7 @@ public class AuthenticationController {
     	Tennista tennista=credentials.getTennista();
     	model.addAttribute("tennista",tennista);
     	model.addAttribute("partite",partitaService.getPartiteByTennista(tennista.getId()));
-        return "/utente/home";
+        return "utente/home";
     }
 	
     /** Effettua la registra di un nuovo tennista
