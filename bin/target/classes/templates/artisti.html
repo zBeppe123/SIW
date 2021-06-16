@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base_utente.html :: headerfiles(title='Artisti', filecss='')"> </head>
+	<body>
+		<header th:replace="fragments/base_utente.html :: intestazione"></header>
+		<section>
+			<h1 class="titolo_centrato">Artisti</h1>
+			Qui c'&egrave; l'elenco di tutti di gli artisti ordinati per il cognome: <br>
+			<ul th:unelss=${#lists.isEmpty(artisti)}>
+				<li th:each="artista : ${artisti}">
+					<a th:href="@{'/artista' + '/' + ${artista.id}}" th:text="|${artista.cognome} ${artista.nome} data di nascita: ${artista.dataNascita}|">cognome-nome-artista</a>
+				</li>
+			</ul>
+			<div th:if=${#lists.isEmpty(artisti)}>Nessun artista disponibile per la visualizzazione.</div>
+		</section>
+		<footer th:replace="fragments/base_utente.html :: fondo"></footer>
+	</body>
+</html>

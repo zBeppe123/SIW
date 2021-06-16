@@ -1,26 +1,12 @@
-body {
-	margin: 0px;
-	background-color: lightblue;
-}
-
-header {
-	background-color: lightgreen;
-	border-bottom: 3px solid green;
-	font-size: 12pt;
-}
-
-section {
-	margin: 5pt;
-}
-
 h1 {
 	text-align: center;
-	font-size: 25pt;
+	font-size: 28pt;
 }
 
 img {
 	margin-top: 15px;
-	border: 2px solid black;
+	border: 8px solid lightblue;
+	border-style: ridge;
 	width: 75%;
 }
 

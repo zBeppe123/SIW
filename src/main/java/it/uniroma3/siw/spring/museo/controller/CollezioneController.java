@@ -263,7 +263,7 @@ public class CollezioneController {
 		Collezione collezione = this.collezioneService.collezionePerId(idCollezione);
 		model.addAttribute("collezione", collezione);
 		model.addAttribute("curatori", curatoreService.tutti());
-		return "/admin/modifica/modificaCollezione";
+		return "admin/modifica/modificaCollezione";
 	}
 	
 	/**
@@ -280,9 +280,9 @@ public class CollezioneController {
 		if(!bindingResult.hasErrors()) {
 
 			collezioneService.saveCollezione(collezioneModificata);
-			return "/admin/modifica/modificaCollezioneCompletata";
+			return "admin/modifica/modificaCollezioneCompletata";
 		}
 		model.addAttribute("curatori", curatoreService.tutti());
-		return "/admin/modifica/modificaCollezione";
+		return "admin/modifica/modificaCollezione";
 	}
 }

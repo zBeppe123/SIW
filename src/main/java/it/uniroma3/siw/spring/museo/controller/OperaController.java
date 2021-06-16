@@ -89,7 +89,7 @@ public class OperaController {
 			this.operaService.inserisci(opera);
 			
 			model.addAttribute("opera", opera);
-			return "/admin/registrazione/registraOperaCompletata";
+			return "admin/registrazione/registraOperaCompletata";
 		}
 		model.addAttribute("artisti", artistaService.tutti());
 		return "admin/registrazione/registraOpera";
@@ -161,7 +161,7 @@ public class OperaController {
 			}
 			this.operaService.inserisci(opera);
 			
-			return "/admin/modifica/modificaOperaCompletata";
+			return "admin/modifica/modificaOperaCompletata";
 		}
 		
 		model.addAttribute("artisti", artistaService.tutti());

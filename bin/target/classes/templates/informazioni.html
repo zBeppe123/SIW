@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='Informazioni', filecss='informazioni.css')">
+	</head>
+	<body>
+		<header th:replace="fragments/base.html :: intestazione">
+		</header>
+		<section>
+			<h1 class="titolo_centrato">Informazioni sul museo</h1>
+			<div id="corpo_info_museo">
+				<div id="immagine_museo">
+					<img src="/images/museo.png"/>
+				</div>
+				<div id="info_museo">
+					<div><strong id="nome_museo" th:text="#{museo.nome}">Museo</strong></div>
+					<div><strong>Residenza:</strong> <span th:text="#{museo.residenza}">citta'</span></div>
+					<div><strong>Indirizzo:</strong> <span th:text="#{museo.indirizzo}">indirizzo</span></div>
+					<div><strong>Telefono:</strong> <span th:text="#{museo.telefono}">telefono</span></div>
+				</div>
+			</div>
+		</section>
+		<footer th:replace="fragments/base.html :: fondo">
+		</footer>
+	</body>
+</html>

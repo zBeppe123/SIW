@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base_admin.html :: headerfiles(title='Scelta collezione per rimozione opere', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1 class="titolo_centrato">Scelta collezione per rimozione opere</h1>
+			Ecco la lista di tutte le collezioni del museo. <br>
+			Scegli uno tra questi elencati per rimuovere le opere dalla collezione:<br>
+			<div th:unless=${#lists.isEmpty(collezioni)}>
+			<form th:action="@{/admin/sceltaCollezionePerRimuovereOpere}" method="post">
+				<table>
+					<tr th:each="collezione : ${collezioni}">
+						<td><input type="radio" name="collezioneSelezionato" th:value="${collezione.id}" required/></td>
+						<td>
+							Collezione: <a th:href="@{'/collezione/' + ${collezione.id}}" 
+										   th:text="${collezione.nome}">nome-collezione</a> <br>
+							Curatore: <a th:href="@{'/curatore/' + ${collezione.curatore.id}}"
+										 th:text="|${collezione.curatore.cognome} ${collezione.curatore.nome}|">cognome-nome curatore</a>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Scegli"/></td>
+					</tr>
+				</table>
+			</form>
+			</div>
+			<div class="messaggio_errore" th:if=${#lists.isEmpty(collezioni)}>
+				<strong>Nessuna collezione disponibile per la rimozione delle opere.</strong>
+			</div>
+		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo">
+		</footer>
+	</body>
+</html>

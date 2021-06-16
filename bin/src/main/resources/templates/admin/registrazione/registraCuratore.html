@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base_admin.html :: headerfiles(title='Registra nuovo curatore', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1 class="titolo_centrato">Registra nuovo curatore</h1>
+			<div class="testo_centrato"> Inserisci i dati del nuovo curatore:</div>
+			<form th:action="@{/admin/registraCuratore}" method="post" th:object="${curatore}">
+				<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
+					<p>
+						<span th:each="err : ${#fields.globalErrors()}">
+							<span class="evidenziato" th:text="${err}">errore</span> <br>
+						</span>
+					</p>
+				</div>
+				<table class="table_dati">
+					<tr>
+						<td>Cognome:</td>
+						<td><input type="text" placeholder="Cognome" th:field="*{cognome}" required/></td>
+					</tr>
+					<tr>
+						<td>Nome:</td>
+						<td><input type="text" placeholder="Nome" th:field="*{nome}" required/></td>
+					</tr>
+					<tr>
+						<td>Data di nascita:</td>
+						<td><input type="date" th:field="*{dataNascita}"required/></td>
+					</tr>
+					<tr>
+						<td>Citt&agrave; di nascita:</td>
+						<td><input type="text" placeholder="Citta' di nascita" th:field="*{cittaNascita}" required/></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type="email" placeholder="prova@prova.prova" th:field="*{email}" required/></td>
+					</tr>
+					<tr>
+						<td>Numero di telefono:</td>
+						<td><input type="number" placeholder="Telefono" th:field="*{numeroTelefono}" required/></td>
+					</tr>
+					<tr>
+						<td>Matricola:</td>
+						<td><input type="number" placeholder="Matricola" th:field="*{matricola}" required/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Registra"/></td>
+					</tr>
+				</table>
+			</form>
+		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo"></footer>
+	</body>
+</html>

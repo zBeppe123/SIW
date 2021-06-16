@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base_admin.html :: headerfiles(title='Registra nuova collezione', filecss='')">
+	</head>
+	<body>
+		<header th:replace="fragments/base_admin.html :: intestazione">
+		</header>
+		<section>
+			<h1 class="titolo_centrato">Registra nuova collezione</h1>
+			<div class="testo_centrato"> Inserisci i dati della nuova collezione:</div>
+			<form th:action="@{/admin/registraCollezione}" method="post" th:object="${collezione}">
+				<div class="testo_centrato" th:if="${#fields.hasGlobalErrors()}">
+					<p>
+						<span th:each="err : ${#fields.globalErrors()}">
+							<span class="evidenziato" th:text="${err}">errore</span> <br>
+						</span>
+					</p>
+				</div>
+				<table class="table_dati">
+					<tr>
+						<td>Nome della collezione:</td>
+						<td><input type="text" placeholder="Nome collezione" th:field="*{nome}" required/></td>
+					</tr>
+					<tr>
+						<td>Curatore:</td>
+						<td>
+							<select name="curatr" required>
+								<option value=""></option>
+								<option th:each="curatore : ${curatori}" th:value="${curatore.id}"
+										th:text="|${curatore.cognome} ${curatore.nome}|">nome-cognome curatore</option>
+								</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Descrizione:</td>
+						<td>
+							<textarea placeholder="Nome" th:field="*{descrizione}" 
+									  rows="10" cols="30" required>
+							</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Registra"/></td>
+					</tr>
+				</table>
+			</form>
+		</section>
+		<footer th:replace="fragments/base_admin.html :: fondo"></footer>
+	</body>
+</html>
