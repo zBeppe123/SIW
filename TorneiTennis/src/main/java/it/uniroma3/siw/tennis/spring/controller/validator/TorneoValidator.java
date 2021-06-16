@@ -52,6 +52,12 @@ public class TorneoValidator implements Validator {
     				torneo.getAnno()<dataOdierna.getYear()) {
     			errors.reject("registra_torneo_errors_dataErrata");
     		}
+    		
+    		//Numero partecipanti > 8?
+    		if(torneo.getNumeroMaxDiPartecipanti()<4) {
+    			errors.reject("registra_torneo_errors_numeroMinimoDiPartecipanti");
+    		}
+    		
     	}
     	else {
     		logger.debug("C'e' almeno un campo vuoto in registraTorneo.html");
