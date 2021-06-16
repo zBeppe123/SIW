@@ -37,7 +37,7 @@ public class PartitaController {
 	@RequestMapping(value = "/admin/selezionaTorneoPerRPartita", method = RequestMethod.GET)
     public String apriSelezionaTorneoPerRPartita(Model model) {
     	model.addAttribute("tornei", torneoService.getTorneiDisponibili());
-    	return "/admin/registra/selezionaTorneoPerRPartita";
+    	return "admin/registra/selezionaTorneoPerRPartita";
     }
 	
 	/** L'admin sceglie il torneo e apre la pagina per la registrazione di una partita.
@@ -50,7 +50,7 @@ public class PartitaController {
 		model.addAttribute("idTorneo",idTorneo);
 		model.addAttribute("tennisti",torneoService.getTorneoPerId(idTorneo).getTennistiIscritti());
 		model.addAttribute("partita",new Partita());
-    	return "/admin/registra/registraPartita";
+    	return "admin/registra/registraPartita";
     }
     
 	/** Registra una partita finita del torneo selezionato.
