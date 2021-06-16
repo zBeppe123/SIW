@@ -80,7 +80,7 @@ public class ArbitroController {
 	@RequestMapping(value = "/admin/sceltaArbitroPerModifica", method = RequestMethod.GET)
 	public String apriSceltaArbitroPerModifica(Model model) {
 		model.addAttribute("arbitri", this.arbitroService.tutti());
-		return "admin/modifica/sceltaArbitroPerModifica.html";
+		return "admin/modifica/sceltaArbitroPerModifica";
 	}
 	
 	/** Apre la pagina dove l'admin puo' modificare i dati del arbitro selezionato.
@@ -92,7 +92,7 @@ public class ArbitroController {
 	public String sceltoArbitroPerModifica(@RequestParam("arbitroSelezionato") Long idArbitro, Model model) {
 		Arbitro arbitro = this.arbitroService.arbitroPerId(idArbitro);
 		model.addAttribute("arbitro", arbitro);
-		return "/admin/modifica/modificaArbitro";
+		return "admin/modifica/modificaArbitro";
 	}
 	
 	/** Modifica i dati dell'arbitro selezionato.
@@ -109,10 +109,10 @@ public class ArbitroController {
 		if(!bindingResult.hasErrors()) {
 			this.arbitroService.modificaDatiDiArbitro(arbitroModificato);
 			
-			return "/admin/modifica/modificaArbitroCompletata";
+			return "admin/modifica/modificaArbitroCompletata";
 		}
 		
-		return "/admin/modifica/modificaArbitro";
+		return "admin/modifica/modificaArbitro";
 	}
 	
 	/** Apre una pagina contenente i dati di un arbitro.
@@ -143,7 +143,7 @@ public class ArbitroController {
 			model.addAttribute("utente", "anonimo");
 		}
 		
-		return "arbitro.html";
+		return "arbitro";
 	}
 	
 	/** Apre la pagina per la cancellazione di un arbitro.

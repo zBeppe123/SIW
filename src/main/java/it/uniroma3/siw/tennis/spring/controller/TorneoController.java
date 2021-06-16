@@ -77,12 +77,12 @@ public class TorneoController {
     		logger.debug("Registrazione nuovo torneo effettuata.");
     		
     		model.addAttribute("torneo", torneo);
-    		return "/admin/registra/registrazioneTorneoCompletata";
+    		return "admin/registra/registrazioneTorneoCompletata";
     	}
     	
     	logger.debug("Uno o piu' campi di torneo vuoti");
     	model.addAttribute("arbitri", this.arbitroService.tutti());
-    	return "/admin/registra/registraTorneo";
+    	return "admin/registra/registraTorneo";
     }
     
     /** Apre la pagina dove mostra l'elenco di tutti tornei per la modifica dati.
@@ -106,7 +106,7 @@ public class TorneoController {
 		
 		model.addAttribute("torneo", torneo);
 		model.addAttribute("arbitri", this.arbitroService.tutti());
-		return "/admin/modifica/modificaTorneo";
+		return "admin/modifica/modificaTorneo";
 	}
 	
 	/** Modifica i dati del torneo selezionato.
@@ -129,11 +129,11 @@ public class TorneoController {
 			
 			this.torneoService.modificaDatiDiTorneo(torneoModificato);
 			
-			return "/admin/modifica/modificaTorneoCompletata";
+			return "admin/modifica/modificaTorneoCompletata";
 		}
 		
 		model.addAttribute("arbitri", this.arbitroService.tutti());
-		return "/admin/modifica/modificaTorneo";
+		return "admin/modifica/modificaTorneo";
 	}
     
 	/** Apre la pagina dove mostra l'elenco di tutti i tornei.
@@ -157,7 +157,7 @@ public class TorneoController {
     	logger.debug("Lettura di tutti i tornei");
     	
     	model.addAttribute("tornei", this.torneoService.tutti());
-        return "/utente/torneiUtente";
+        return "utente/torneiUtente";
     }
     
     /** Apre la pagina dove mostra tutti i dati di un torneo selezionato.
@@ -187,7 +187,7 @@ public class TorneoController {
     	Long idTennista=utili.getTennista().getId();
     	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(idTennista));
     	model.addAttribute("torneoSelez",new Torneo());
-    	return "/utente/gestioneIscrizione/iscrizioneTorneo";
+    	return "utente/gestioneIscrizione/iscrizioneTorneo";
     }
     
     /** Il tennista si iscrive ad un torneo che ha selezionato.
@@ -205,13 +205,13 @@ public class TorneoController {
     		torneoSelez.getTennistiIscritti().add(tennista);
     		torneoService.iscriviTennista(torneoSelez);
     		model.addAttribute("torneo", torneoSelez);
-    		return "/utente/gestioneIscrizione/iscrizioneTorneoCompletata";
+    		return "utente/gestioneIscrizione/iscrizioneTorneoCompletata";
     	}
     	else if(torneoSelez==null) {
         	model.addAttribute("torneiDisponibili",torneoService.getTorneiDisponibili(tennista.getId()));
-        	return "/utente/gestioneIscrizione/iscrizioneTorneo";
+        	return "utente/gestioneIscrizione/iscrizioneTorneo";
     	}
-    	return "/utente/home";
+    	return "utente/home";
     	
     }
     
@@ -223,7 +223,7 @@ public class TorneoController {
     public String apriCancellaIscrizioneTorneo(Model model) {
     	Long idTennista=utili.getTennista().getId();
     	model.addAttribute("tornei",torneoService.getTorneiIscrittiDaTennista(idTennista));
-    	return "/utente/gestioneIscrizione/cancellaIscrizioneTorneo";
+    	return "utente/gestioneIscrizione/cancellaIscrizioneTorneo";
     }
     
     /** Cancella l'iscrizione a cui un tennista e' iscritto ad un torneo.
@@ -240,7 +240,7 @@ public class TorneoController {
     	torneoSelez.setNumeroPartecipanti(torneoSelez.getNumeroPartecipanti()-1);
     	torneoService.inserisci(torneoSelez);
     	model.addAttribute("torneo",torneoSelez);
-    	return "/utente/gestioneIscrizione/cancellazioneIscrizioneCompletata";
+    	return "utente/gestioneIscrizione/cancellazioneIscrizioneCompletata";
     }
     
     /** Apre la pagina dove mostra tutti i torneo cancellabili.
@@ -250,7 +250,7 @@ public class TorneoController {
     @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.GET)
     public String apriCancellaToreno(Model model) {
     	model.addAttribute("tornei",torneoService.getTorneiCancellabili());
-    	return "/admin/cancella/cancellaTorneo";
+    	return "admin/cancella/cancellaTorneo";
     }
     
     /** Cancella un torneo selezionato dall'admin.
@@ -260,6 +260,6 @@ public class TorneoController {
     @RequestMapping(value="/admin/cancellaTorneo", method=RequestMethod.POST)
     public String CancellaToreno(@RequestParam("torenoSelezionato") Long idTorneo) {
     	this.torneoService.eliminaTorneo(idTorneo);
-    	return "/admin/cancella/cancellazioneTorneoCompletata";
+    	return "admin/cancella/cancellazioneTorneoCompletata";
     }
 }
