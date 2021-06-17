@@ -12,6 +12,7 @@ public interface ArbitroRepository extends CrudRepository<Arbitro,Long>{
 
 	public Optional<Arbitro> findByNomeAndCognome(String nome, String cognome);
 
+	/** Restituisce la lista di tutti gli arbitro che non hanno ancora arbitrato. */
 	@Query(value="SELECT ar FROM Arbitro as ar WHERE ar NOT IN (SELECT t.arbitro FROM Torneo as t GROUP BY(t.arbitro))")
 	public List<Arbitro> arbitriNonImpegnati();
 }

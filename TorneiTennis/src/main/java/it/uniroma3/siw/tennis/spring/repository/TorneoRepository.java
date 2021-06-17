@@ -25,15 +25,28 @@ public interface TorneoRepository extends CrudRepository<Torneo,Long>{
 //			+ "					  ON tor.id=tt.tornei_iscritti_id \r\n"
 //			+ "					  WHERE tt.tennisti_iscritti_id=2 \r\n"
 //			+ "					  GROUP BY(tor))",nativeQuery=true)
-	@Query (value="SELECT tor FROM Torneo as tor LEFT JOIN tor.tennistiIscritti WHERE tor NOT IN (SELECT t FROM Torneo as t LEFT JOIN t.tennistiIscritti as te WHERE te.id=:idTennista GROUP BY(t)) AND tor.numeroPartecipanti<tor.numeroMaxDiPartecipanti AND NOT( tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno) GROUP BY(tor)")
+	@Query (value="SELECT tor "
+			+ "FROM Torneo as tor LEFT JOIN tor.tennistiIscritti "
+			+ "WHERE tor NOT IN (SELECT t "
+								+ "FROM Torneo as t LEFT JOIN t.tennistiIscritti as te "
+								+ "WHERE te.id=:idTennista "
+								+ "GROUP BY(t)) "
+			+ "AND tor.numeroPartecipanti<tor.numeroMaxDiPartecipanti AND NOT(tor.mese<=:mese AND tor.anno=:anno OR tor.anno<:anno) "
+			+ "GROUP BY(tor)")
 	public List<Torneo> findTorneiDisponibili(Long idTennista, Integer mese, Integer anno);
 
+	/** Restituisce la lista di tutti i tornei non ancora iniziati alla quale un tennista e' iscritto.
+	 * Utilizzato per la cancellazione di un'iscrizione. */
 	@Query (value="SELECT tor FROM Torneo as tor LEFT JOIN tor.tennistiIscritti as te WHERE te.id=:idTennista AND NOT(tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno)")
 	public List<Torneo> findTorneiIscritti(Long idTennista,Integer mese,Integer anno);
 	
+	/** Restituisce tutti i tornei non ancora svolti che possono essere cancellati. */
 	@Query (value="SELECT tor FROM Torneo as tor WHERE NOT( tor.mese<=:mese AND tor.anno=:anno  OR  tor.anno<:anno)")
 	public List<Torneo> findTorneiCancellabili(Integer mese,Integer anno);
 	
+	/** Restituisce la lista dei tornei del corrente mese.
+	 * Utilizzato per inserimento delle partita per un torneo.
+	 */
 	@Query	(value="SELECT tor FROM Torneo as tor WHERE ( tor.mese=:mese AND tor.anno=:anno)")
 	public List<Torneo> findTorneiDisponibiliAttuali(Integer mese, Integer anno);
 	
